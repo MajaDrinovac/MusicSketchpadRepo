@@ -1,0 +1,33 @@
+#play {
+  background-color: #000000;
+  color: #FFFFFF;
+  display: block;
+}
+#canv{
+  float:left;
+  /*border: 1px solid black;*/
+}
+#editMode{
+  float: right;
+}
+#controls{
+  width: 10vw;
+  position: absolute;
+  margin-left: 45vw;
+  margin-top: 10vh;
+}
+.btn{
+  width: 7vw;
+  height: 4vh;
+  margin-top: 5vh;
+  border: 1px solid black;
+  box-shadow: none;
+}
+.btn:hover{
+  cursor: pointer;
+}
+#convert{
+  background-color: #000000;
+  color: white;
+  display: block;
+}

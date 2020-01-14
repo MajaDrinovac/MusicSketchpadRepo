@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tensorflow/1.2.8/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@^1.0.0/es6/core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.12.0/es6/music_rnn.js"></script>
+    <script src="model.js"></script>
+    <script src="sketch.js"></script>
+    <script src="editSketch.js"></script>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<div id="canv"></div>
+<div id="editMode"></div>
+<div id="controls">
+    <button class="btn" id="play">Play</button>
+    <button class="btn"  id="delete">Delete</button>
+    <button class="btn"  id="continue">Continue</button>
+    <button class="btn"  id="convert">Convert</button>
+    <canvas id="vis"></canvas>
+</div>
+</body>
