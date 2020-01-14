@@ -2,6 +2,10 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.20.
 
+##Prototyp
+start with node server
+runs on localhost:3000
+
 ##Get node_modules 
 Run npm install
 
