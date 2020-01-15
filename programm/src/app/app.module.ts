@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {MatSidenavModule} from '@angular/material/sidenav'
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {MatSidenavModule} from '@angular/material/sidenav'
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatSidenavModule
+    MatSidenavModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
