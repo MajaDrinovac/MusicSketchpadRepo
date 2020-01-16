@@ -1,7 +1,7 @@
 .nav{
     height: 100%;
     width: 100%;
-    background: #3F3F3F;
+    background: #d6d6d6;
 }
 
 .content{
@@ -20,6 +20,14 @@
     
 }
 
-mat-icon{
-    background: red;
+section.naveintraege {
+    border-bottom: 1px solid black;
+}
+
+section.naveintraege mat-icon {
+    vertical-align: middle;
+}
+
+p.eintraege {
+    border-left: 1px solid black;
 }
