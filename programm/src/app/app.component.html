@@ -1,15 +1,16 @@
 
 <mat-grid-list cols="10"  class="grid" rowHeight="fit">
     <mat-grid-tile rows="3" class="nav" colspan="2"> 
-    <!--  <button id="b" mat-button><mat-icon>view_quilt</mat-icon></button>Dashboard<br><br>
-      <button id="b" mat-button><mat-icon>brush</mat-icon></button>Neue Melodie<br>
-      <button id="b" mat-button><mat-icon>folder</mat-icon></button>Bibliothek<br>-->
 
-      <mat-drawer class="nav" height="fit" width="fit" mode="side" opened>
-        <button id="b" mat-button><mat-icon>view_quilt</mat-icon></button>Dashboard<br><br>
-      <button id="b" mat-button><mat-icon>brush</mat-icon></button>Neue Melodie<br>
-      <button id="b" mat-button><mat-icon>folder</mat-icon></button>Bibliothek<br>
-      </mat-drawer>
+      <mat-sidenav-container class="nav" height="fit" width="fit">
+        <mat-sidenav>Start</mat-sidenav>
+        <mat-sidenav position="end">End</mat-sidenav>
+        <section><mat-icon>view_quilt</mat-icon>Dashboard</section>
+        <section><mat-icon>brush</mat-icon>Neue Melodie</section>
+        <section><mat-icon>folder</mat-icon>Bibliothek</section>
+        <section><mat-icon>person</mat-icon>Profil</section>
+      </mat-sidenav-container>
+   
     </mat-grid-tile>
 
     <mat-grid-tile class="content" colspan="8">content</mat-grid-tile>
