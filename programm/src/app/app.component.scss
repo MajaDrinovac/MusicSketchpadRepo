@@ -1,7 +1,9 @@
+
 .nav{
     height: 100%;
     width: 100%;
-    background: #d6d6d6;
+    background: #0F021F;
+   
 }
 
 .content{
@@ -19,6 +21,89 @@
     border-radius: 100%;
     
 }
+section.naveintraege {
+    border-bottom: 1px solid white;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    color: #d6d6d6;
+}
+
+section.naveintraege mat-icon {
+    vertical-align: middle;
+    font-size: 7vh;
+    margin-right: 20%;
+    color: #d6d6d6;
+}
+
+p.eintraege {
+    border-left: 1px solid black;
+    
+}
 
 
-
+section.naveintraege {
+    &:before, &:after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #a657c5;
+      content: '';
+      opacity: 0;
+      transition: transform 0.15s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
+      z-index: -1;
+      transform: translate(100%, -25%) translate3d(0, 0, 0);
+    }
+    &:hover {
+      &:before, &:after {
+        opacity: 0.15;
+        transition: transform 0.2s cubic-bezier(0.02, 0.01, 0.47, 1), opacity 0.2s cubic-bezier(0.02, 0.01, 0.47, 1);
+      }
+      &:before {
+        transform: translate3d(50%, 0, 0) scale(0.9);
+      }
+      &:after {
+        transform: translate(50%, 0) scale(1.1);
+      } 
+    }
+  }
+  section.naveintraege {
+    position: relative;
+    margin: 0;
+    height: 60px;
+    width: 100%;
+    outline: none;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: transparent;
+    border-bottom: 1px solid white;
+    color: white;
+    font-weight: 400;
+    font-size: 20px;
+    font-family: inherit;
+    z-index: 0;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+    span {
+      color: transparent;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.7px;
+    }
+    &:hover {
+      animation: rotate 0.7s ease-in-out both;
+      span {
+        animation: storm 0.7s ease-in-out both;
+        animation-delay: 0.06s;
+      }
+    }
+  }
+  
+  
+  
