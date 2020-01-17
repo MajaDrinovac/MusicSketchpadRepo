@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SketchpadComponent } from './sketchpad/sketchpad.component'
+import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule}from '@angular/material/grid-list';
+import {MatIconModule}from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { SketchpadComponent } from './sketchpad/sketchpad.component'
     BrowserModule,
     AppRoutingModule,
     MatSidenavModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

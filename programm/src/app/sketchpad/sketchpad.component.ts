@@ -6,7 +6,7 @@ import { MusicRNN } from '@magenta/music/es6'
 declare let ml5:any
 
 @Component({
-  selector: 'app-sketchpad',
+  selector: 'sketchpad',
   templateUrl: './sketchpad.component.html',
   styleUrls: ['./sketchpad.component.scss']
 })
