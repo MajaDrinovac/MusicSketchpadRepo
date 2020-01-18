@@ -10,6 +10,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule}from '@angular/material/grid-list';
 import {MatIconModule}from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {FormsModule} from '@angular/forms'
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatGridListModule,
     MatIconModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

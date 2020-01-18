@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
-import { MusicRNN } from '@magenta/music/es6'
+import { MusicRNN, Player } from '@magenta/music/es6'
 declare let ml5:any
 
 @Component({
@@ -14,8 +14,8 @@ export class SketchpadComponent implements OnInit {
   private drawp5:p5
   private editp5:p5
   private model
-  private state = "prediction"
-  private targetLabel
+  public state:String= "chooseColor"
+  private targetLabel:String
   private resultArray = []
   private sequence
   private noten_midi = {
@@ -27,6 +27,10 @@ export class SketchpadComponent implements OnInit {
     A: 69,
     B: 71
   }
+  private fillColor = [0, 0, 0]
+  public color = "#000000"
+  public melodyCreated:Boolean = false
+  private player:Player
 
   constructor() { 
     let options = {
@@ -37,6 +41,7 @@ export class SketchpadComponent implements OnInit {
     this.model = ml5.neuralNetwork(options)
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
+    this.player = new mm.Player()
   }
 
   ngOnInit() {
@@ -55,8 +60,10 @@ export class SketchpadComponent implements OnInit {
 
   private sketch = (s) =>{
     s.setup = () =>{
-      let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth*2/5, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canv"))
-      s.background(208, 208, 208)
+      let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("drawCanv").parent(document.getElementById("canv"))
+      //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth*2/5, document.getElementsByClassName("content")[0].clientHeight*2/3).id("drawCanv").parent(document.getElementById("canv"))
+      //s.background(208, 208, 208)
+      s.background(255, 255, 255)
     }
 
     s.mouseDragged = ()=>{
@@ -110,7 +117,9 @@ export class SketchpadComponent implements OnInit {
     }
     s.mouseReleased = () =>{
       //this.isDrawed = true
-      this.createINoteSequence()
+      if(this.state == "prediction"){
+        this.createINoteSequence()
+      }
       //console.log(this.resultArray)
     } 
   }
@@ -124,8 +133,9 @@ export class SketchpadComponent implements OnInit {
       console.log(err)
       return
     }
+    console.log(this.color)
     this.drawp5.strokeWeight(20)
-    //fill(255, 0, 167)
+    this.drawp5.stroke(this.fillColor[0], this.fillColor[1], this.fillColor[2])
     this.drawp5.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
     this.resultArray.push(results[0].label);
   }
@@ -138,10 +148,11 @@ export class SketchpadComponent implements OnInit {
   }
 
   private createINoteSequence(){
-    console.log(this.resultArray.length)
+    console.log("resultArray length: " + this.resultArray.length)
     let countNotes = 0
     let lastNumber = 0
     let notes = 0
+    delete this.sequence
     this.sequence = {
         notes: [],
         totalTime: 0
@@ -161,7 +172,29 @@ export class SketchpadComponent implements OnInit {
             }
         }
     }
+    this.melodyCreated = true
+    this.state = "controls"
     console.log("total Time: " + this.sequence.totalTime)
   }
 
+  public convertHex2Rgb(){
+    this.melodyCreated = false
+    let value = this.color.replace('#','');
+    let r = parseInt(value.substring(0,2), 16);
+    let g = parseInt(value.substring(2,4), 16);
+    let b = parseInt(value.substring(4,6), 16);
+    this.fillColor = [r, g, b]
+    this.state = "prediction"
+  }
+
+  public disableControls(){
+    console.log(this.melodyCreated)
+    this.melodyCreated = false
+  }
+
+  public playMelody(){
+    let quantizedSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
+    this.player.start(quantizedSequence)
+    console.log(quantizedSequence)
+  }
 }
