@@ -3,6 +3,7 @@ import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
 import { MusicRNN, Player } from '@magenta/music/es6'
+import { core } from '@angular/compiler';
 declare let ml5:any
 
 @Component({
@@ -27,6 +28,7 @@ export class SketchpadComponent implements OnInit {
     A: 69,
     B: 71
   }
+  private y_notes = {}
   private fillColor = [0, 0, 0]
   public color = "#000000"
   public melodyCreated:Boolean = false
@@ -118,7 +120,9 @@ export class SketchpadComponent implements OnInit {
     s.mouseReleased = () =>{
       //this.isDrawed = true
       if(this.state == "prediction"){
-        this.createINoteSequence()
+        //this.createINoteSequence()
+        this.melodyCreated = true
+        this.state = "controls"
       }
       //console.log(this.resultArray)
     } 
@@ -142,9 +146,66 @@ export class SketchpadComponent implements OnInit {
 
   private editSketch = (s) =>{
     s.setup = () =>{
-      let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
-      s.background(208, 208, 208)
+      let canvElement = document.getElementById("canvEditMode")
+      //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
+      let canv = s.createCanvas(canvElement.clientWidth-1, canvElement.clientHeight-1).id("editCanv").parent(canvElement)
+      s.background(0, 0, 0)
+      this.createDictionary(canvElement.clientHeight)
+      //this.createGrid(canvElement.clientWidth,canvElement.clientHeight)
+      /*let offset = Math.round(canvElement.clientHeight/7)
+      for(let i = 1; i < 7; i++){
+        s.strokeWeight(1)
+        s.stroke(200)
+        s.line(0, i*offset, canvElement.clientWidth, i*offset)
+      }*/
+      //alert(canvElement.clientHeight + ", " + Math.floor(canvElement.clientHeight/7))
     }
+  }
+
+  private displayMelody(seq){
+    let durPrev = 0;
+    let displaySequence = []
+    let qSequence
+
+    console.log(mm.sequences.isQuantizedSequence(seq))
+    if(mm.sequences.isQuantizedSequence(this.sequence) == true){
+      qSequence = this.sequence
+    }else{
+      qSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
+    }
+    displaySequence = qSequence.notes
+
+    let anz = displaySequence.length
+    let getSteps = displaySequence[anz-1].quantizedEndStep
+    console.log("steps: " + getSteps + " res: " + Math.floor(document.getElementById("canvEditMode").clientWidth/getSteps))
+    let res = Math.floor(document.getElementById("canvEditMode").clientWidth/getSteps)
+    for(let i = 0; i < displaySequence.length; i++){
+      let pitch = displaySequence[i].pitch
+      let dur = displaySequence[i].quantizedEndStep - displaySequence[i].quantizedStartStep
+
+      this.editp5.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
+      //durPrev is offset for the next rect
+      durPrev += dur
+  }
+  }
+
+  private createGrid(width, height){
+    let offset = Math.round(height/7)
+    for(let i = 1; i < 7; i++){
+      this.editp5.strokeWeight(1)
+      this.editp5.stroke(200)
+      this.editp5.line(0, i*offset, width, i*offset)
+    }
+  }
+
+  private createDictionary(height){
+    let off = Math.round(height/7);
+    let count = 1
+    for(let note in this.noten_midi){
+      this.y_notes[this.noten_midi[note]] = off*count
+      count++
+    }
+    console.log(this.y_notes)
   }
 
   private createINoteSequence(){
@@ -173,7 +234,6 @@ export class SketchpadComponent implements OnInit {
         }
     }
     this.melodyCreated = true
-    this.state = "controls"
     console.log("total Time: " + this.sequence.totalTime)
   }
 
@@ -193,8 +253,17 @@ export class SketchpadComponent implements OnInit {
   }
 
   public playMelody(){
+    this.createINoteSequence()
     let quantizedSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
     this.player.start(quantizedSequence)
     console.log(quantizedSequence)
+  }
+
+  public convertToEditMode(){
+    this.editp5 = new p5(this.editSketch)
+    this.createINoteSequence()
+    let el = document.getElementById("canvEditMode")
+    this.createGrid(el.clientWidth, el.clientHeight)
+    this.displayMelody(this.sequence)
   }
 }
