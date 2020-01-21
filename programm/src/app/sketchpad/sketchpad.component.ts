@@ -266,4 +266,8 @@ export class SketchpadComponent implements OnInit {
     this.createGrid(el.clientWidth, el.clientHeight)
     this.displayMelody(this.sequence)
   }
+
+  public delete(){
+    
+  }
 }
