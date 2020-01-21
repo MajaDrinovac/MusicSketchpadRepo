@@ -1,7 +1,7 @@
 .nav{
   height: 100%;
   width: 100%;
-  background: #191f28;
+  background: #221C29;
  
 }
 
@@ -36,6 +36,13 @@ section.naveintraege mat-icon {
   height: 34px;
   margin-left: 10%;
 }
+
+section.naveintraege:hover{
+  cursor: pointer;
+  background: #372D42;
+}
+
+
 
 /*
 section.naveintraege {
