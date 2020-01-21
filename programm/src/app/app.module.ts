@@ -9,6 +9,9 @@ import { SketchpadComponent } from './sketchpad/sketchpad.component'
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule}from '@angular/material/grid-list';
 import {MatIconModule}from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {FormsModule} from '@angular/forms'
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import {MatIconModule}from '@angular/material/icon';
     BrowserAnimationsModule,
     MatGridListModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
