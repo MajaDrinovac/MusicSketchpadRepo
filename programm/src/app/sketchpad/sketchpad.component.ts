@@ -15,7 +15,7 @@ export class SketchpadComponent implements OnInit {
   private drawp5:p5
   private editp5:p5
   private model
-  public state:String= "chooseColor"
+  public state:String= "prediction"
   private targetLabel:String
   private resultArray = []
   private sequence
@@ -29,10 +29,13 @@ export class SketchpadComponent implements OnInit {
     B: 71
   }
   private y_notes = {}
-  private fillColor = [0, 0, 0]
-  public color = "#000000"
+  private fillColor = [150, 182, 255]
+  public color = "#96B6FF"
   public melodyCreated:Boolean = false
   private player:Player
+  public deleteOption:Boolean = false
+  private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn")
+  private continuedp5:p5
 
   constructor() { 
     let options = {
@@ -119,11 +122,12 @@ export class SketchpadComponent implements OnInit {
     }
     s.mouseReleased = () =>{
       //this.isDrawed = true
-      if(this.state == "prediction"){
         //this.createINoteSequence()
-        this.melodyCreated = true
-        this.state = "controls"
-      }
+        if(this.state == "prediction"){
+          this.melodyCreated = true
+          //this.state = "controls"
+          this.deleteOption = true
+        }
       //console.log(this.resultArray)
     } 
   }
@@ -148,7 +152,7 @@ export class SketchpadComponent implements OnInit {
     s.setup = () =>{
       let canvElement = document.getElementById("canvEditMode")
       //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
-      let canv = s.createCanvas(canvElement.clientWidth-1, canvElement.clientHeight-1).id("editCanv").parent(canvElement)
+      let canv = s.createCanvas(canvElement.clientWidth-1, canvElement.clientHeight-1)
       s.background(0, 0, 0)
       this.createDictionary(canvElement.clientHeight)
       //this.createGrid(canvElement.clientWidth,canvElement.clientHeight)
@@ -244,12 +248,13 @@ export class SketchpadComponent implements OnInit {
     let g = parseInt(value.substring(2,4), 16);
     let b = parseInt(value.substring(4,6), 16);
     this.fillColor = [r, g, b]
-    this.state = "prediction"
+    //this.state = "prediction"
   }
 
   public disableControls(){
     console.log(this.melodyCreated)
     this.melodyCreated = false
+    this.deleteOption = false
   }
 
   public playMelody(){
@@ -260,7 +265,7 @@ export class SketchpadComponent implements OnInit {
   }
 
   public convertToEditMode(){
-    this.editp5 = new p5(this.editSketch)
+    this.editp5 = new p5(this.editSketch, document.getElementById("canvEditMode"))
     this.createINoteSequence()
     let el = document.getElementById("canvEditMode")
     this.createGrid(el.clientWidth, el.clientHeight)
@@ -268,6 +273,28 @@ export class SketchpadComponent implements OnInit {
   }
 
   public delete(){
+    console.log(this.sequence)
     
+    this.drawp5.remove()
+    this.drawp5 = new p5(this.sketch)
+    if(this.editp5 != null){
+      this.editp5.remove()
+    }
+    if(this.continuedp5 != null){
+      this.continuedp5.remove()
+    }
+    this.sequence = {}
+    this.resultArray = []
+    console.log(this.sequence)
+    this.melodyCreated = false
+    this.state = "prediction"
+    this.deleteOption = false
+  }
+
+  public continueSeq(){
+    this.mRNN.initialize().then(()=>{
+      //this.mRNN.continueSequence()
+    })
+    this.continuedp5 = new p5(this.editSketch, document.getElementById("continuedSeq"))
   }
 }
