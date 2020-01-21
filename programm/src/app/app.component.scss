@@ -1,3 +1,7 @@
+mat-grid-list {
+  font-family: 'Montserrat', sans-serif;
+}
+
 .nav{
   height: 100%;
   width: 100%;
@@ -24,17 +28,44 @@ section.naveintraege {
   //border-bottom: 1px solid white;
   padding-top: 2vh;
   padding-bottom: 2vh;
-  color: #d6d6d6;
+  color: #c2bcbc;
   vertical-align: middle;
+  cursor: pointer;
 }
 
 section.naveintraege mat-icon {
   vertical-align: middle;
   font-size: 4vh;
   margin-right: 10%;
-  color: #d6d6d6;
+  color: #c2bcbc;
   height: 34px;
   margin-left: 10%;
+}
+
+section.profil {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  color: #c2bcbc;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-top: 5%;
+}
+
+section.profil mat-icon {
+  vertical-align: middle;
+  font-size: 4vh;
+  margin-right: 10%;
+  color: #c2bcbc;
+  height: 34px;
+  margin-left: 10%;
+}
+
+section.titel {
+  color: #c2bcbc;
+  font-size: 1.5vw;
+  margin-top: 7%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 /*
