@@ -2,7 +2,7 @@
 .nav{
     height: 100%;
     width: 100%;
-    background: #0F021F;
+    background: #191f28;
    
 }
 
@@ -22,25 +22,24 @@
     
 }
 section.naveintraege {
-    border-bottom: 1px solid white;
+    //border-bottom: 1px solid white;
     padding-top: 2vh;
     padding-bottom: 2vh;
     color: #d6d6d6;
+    vertical-align: middle;
 }
 
 section.naveintraege mat-icon {
     vertical-align: middle;
-    font-size: 7vh;
-    margin-right: 20%;
+    font-size: 4vh;
+    margin-right: 10%;
     color: #d6d6d6;
-}
-
-p.eintraege {
-    border-left: 1px solid black;
-    
+    height: 34px;
+    margin-left: 10%;
 }
 
 
+<<<<<<< Updated upstream
 section.naveintraege {
     &:before, &:after {
       position: absolute;
@@ -107,3 +106,5 @@ section.naveintraege {
   
   
   
+=======
+>>>>>>> Stashed changes
