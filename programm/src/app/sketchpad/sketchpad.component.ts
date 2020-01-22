@@ -28,6 +28,15 @@ export class SketchpadComponent implements OnInit {
     A: 69,
     B: 71
   }
+  private noten_midi_drums = {
+    C: 36,
+    D: 38,
+    E: 40,
+    F: 42,
+    G: 45,
+    A: 46,
+    B: 48
+  }
   private y_notes = {}
   private fillColor = [113, 134, 235]
   public color = "#7186EB"
@@ -197,7 +206,7 @@ export class SketchpadComponent implements OnInit {
 
   private createGrid(width, height, p5sketch){
     let offset = Math.round(height/7)
-    for(let i = 1; i < 7; i++){
+    for(let i = 1; i <= 7; i++){
       p5sketch.strokeWeight(1)
       p5sketch.stroke(200)
       p5sketch.line(0, i*offset, width, i*offset)
@@ -232,7 +241,7 @@ export class SketchpadComponent implements OnInit {
                 console.log("res: " + this.resultArray[i] + " modulo: " + (countNotes%10))
                 notes++
                 let dur = (countNotes%10)*0.1
-                let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur}
+                let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur, isDrum: true}
                 lastNumber = lastNumber + dur
                 this.sequence.notes.push(x)
                 this.sequence.totalTime = x.endTime
@@ -305,7 +314,7 @@ export class SketchpadComponent implements OnInit {
       this.createGrid(el.clientWidth, el.clientHeight, this.continuedp5)
       let qSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
       this.mRNN.initialize().then(()=>{
-        this.mRNN.continueSequence(qSequence, 30, 1.1).then((seq)=>{
+        this.mRNN.continueSequence(qSequence, 60, 1.1).then((seq)=>{
           console.log(seq + " q: " + qSequence)
           this.displayMelody(seq, this.continuedp5)
           this.continueVisible = true;
