@@ -11,6 +11,7 @@ import {MatGridListModule}from '@angular/material/grid-list';
 import {MatIconModule}from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {FormsModule} from '@angular/forms'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {FormsModule} from '@angular/forms'
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

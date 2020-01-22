@@ -46,7 +46,7 @@ export class SketchpadComponent implements OnInit {
   private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn")
   private continuedp5:p5
   private editModeVisible:Boolean = false
-  private continueVisible:Boolean = false
+  private continueVisible:String = "not"
 
   constructor() { 
     let options = {
@@ -303,12 +303,13 @@ export class SketchpadComponent implements OnInit {
     this.melodyCreated = false
     this.state = "prediction"
     this.deleteOption = false
-    this.continueVisible = false
+    this.continueVisible = "not"
     this.editModeVisible = false
   }
 
   public continueSeq(){
-    if(!this.continueVisible){
+    this.continueVisible = "loading"
+    if(this.continueVisible != "visible"){
       this.continuedp5 = new p5(this.editSketch, document.getElementById("continuedSeq"))
       let el = document.getElementById("canvEditMode")
       this.createGrid(el.clientWidth, el.clientHeight, this.continuedp5)
@@ -317,7 +318,7 @@ export class SketchpadComponent implements OnInit {
         this.mRNN.continueSequence(qSequence, 60, 1.1).then((seq)=>{
           console.log(seq + " q: " + qSequence)
           this.displayMelody(seq, this.continuedp5)
-          this.continueVisible = true;
+          this.continueVisible = "visible";
         })
       })
     }
