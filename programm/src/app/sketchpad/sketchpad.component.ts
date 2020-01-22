@@ -29,13 +29,15 @@ export class SketchpadComponent implements OnInit {
     B: 71
   }
   private y_notes = {}
-  private fillColor = [150, 182, 255]
-  public color = "#96B6FF"
+  private fillColor = [113, 134, 235]
+  public color = "#7186EB"
   public melodyCreated:Boolean = false
   private player:Player
   public deleteOption:Boolean = false
   private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn")
   private continuedp5:p5
+  private editModeVisible:Boolean = false
+  private continueVisible:Boolean = false
 
   constructor() { 
     let options = {
@@ -166,16 +168,16 @@ export class SketchpadComponent implements OnInit {
     }
   }
 
-  private displayMelody(seq){
+  private displayMelody(seq, p5sketch){
     let durPrev = 0;
     let displaySequence = []
     let qSequence
 
     console.log(mm.sequences.isQuantizedSequence(seq))
-    if(mm.sequences.isQuantizedSequence(this.sequence) == true){
-      qSequence = this.sequence
+    if(mm.sequences.isQuantizedSequence(seq) == true){
+      qSequence = seq
     }else{
-      qSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
+      qSequence = mm.sequences.quantizeNoteSequence(seq, 4)
     }
     displaySequence = qSequence.notes
 
@@ -187,18 +189,18 @@ export class SketchpadComponent implements OnInit {
       let pitch = displaySequence[i].pitch
       let dur = displaySequence[i].quantizedEndStep - displaySequence[i].quantizedStartStep
 
-      this.editp5.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
+      p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
       //durPrev is offset for the next rect
       durPrev += dur
   }
   }
 
-  private createGrid(width, height){
+  private createGrid(width, height, p5sketch){
     let offset = Math.round(height/7)
     for(let i = 1; i < 7; i++){
-      this.editp5.strokeWeight(1)
-      this.editp5.stroke(200)
-      this.editp5.line(0, i*offset, width, i*offset)
+      p5sketch.strokeWeight(1)
+      p5sketch.stroke(200)
+      p5sketch.line(0, i*offset, width, i*offset)
     }
   }
 
@@ -265,11 +267,14 @@ export class SketchpadComponent implements OnInit {
   }
 
   public convertToEditMode(){
-    this.editp5 = new p5(this.editSketch, document.getElementById("canvEditMode"))
-    this.createINoteSequence()
-    let el = document.getElementById("canvEditMode")
-    this.createGrid(el.clientWidth, el.clientHeight)
-    this.displayMelody(this.sequence)
+    if(!this.editModeVisible){
+      this.editp5 = new p5(this.editSketch, document.getElementById("canvEditMode"))
+      this.createINoteSequence()
+      let el = document.getElementById("canvEditMode")
+      this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
+      this.displayMelody(this.sequence, this.editp5)
+      this.editModeVisible = true
+    }
   }
 
   public delete(){
@@ -289,12 +294,23 @@ export class SketchpadComponent implements OnInit {
     this.melodyCreated = false
     this.state = "prediction"
     this.deleteOption = false
+    this.continueVisible = false
+    this.editModeVisible = false
   }
 
   public continueSeq(){
-    this.mRNN.initialize().then(()=>{
-      //this.mRNN.continueSequence()
-    })
-    this.continuedp5 = new p5(this.editSketch, document.getElementById("continuedSeq"))
+    if(!this.continueVisible){
+      this.continuedp5 = new p5(this.editSketch, document.getElementById("continuedSeq"))
+      let el = document.getElementById("canvEditMode")
+      this.createGrid(el.clientWidth, el.clientHeight, this.continuedp5)
+      let qSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
+      this.mRNN.initialize().then(()=>{
+        this.mRNN.continueSequence(qSequence, 30, 1.1).then((seq)=>{
+          console.log(seq + " q: " + qSequence)
+          this.displayMelody(seq, this.continuedp5)
+          this.continueVisible = true;
+        })
+      })
+    }
   }
 }
