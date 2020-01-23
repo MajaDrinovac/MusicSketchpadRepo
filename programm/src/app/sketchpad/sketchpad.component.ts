@@ -47,6 +47,9 @@ export class SketchpadComponent implements OnInit {
   private continuedp5:p5
   private editModeVisible:Boolean = false
   private continueVisible:String = "not"
+  private canvElement = document.getElementById("canv")
+
+  public edit:Boolean = false
 
   constructor() { 
     let options = {
@@ -58,6 +61,7 @@ export class SketchpadComponent implements OnInit {
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
     this.player = new mm.Player()
+    this.canvElement = document.getElementById("canv")
   }
 
   ngOnInit() {
@@ -76,7 +80,8 @@ export class SketchpadComponent implements OnInit {
 
   private sketch = (s) =>{
     s.setup = () =>{
-      let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("drawCanv").parent(document.getElementById("canv"))
+      this.canvElement = document.getElementById("canv")
+      let canv = s.createCanvas(this.canvElement.clientWidth-1, this.canvElement.clientHeight-1).id("drawCanv").parent(this.canvElement)
       //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth*2/5, document.getElementsByClassName("content")[0].clientHeight*2/3).id("drawCanv").parent(document.getElementById("canv"))
       //s.background(208, 208, 208)
       s.background(255, 255, 255)
@@ -161,11 +166,11 @@ export class SketchpadComponent implements OnInit {
 
   private editSketch = (s) =>{
     s.setup = () =>{
-      let canvElement = document.getElementById("canvEditMode")
+      
       //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
-      let canv = s.createCanvas(canvElement.clientWidth-1, canvElement.clientHeight-1)
+      let canv = s.createCanvas(this.canvElement.clientWidth-1, this.canvElement.clientHeight-1)
       s.background(0, 0, 0)
-      this.createDictionary(canvElement.clientHeight)
+      this.createDictionary(this.canvElement.clientHeight)
       //this.createGrid(canvElement.clientWidth,canvElement.clientHeight)
       /*let offset = Math.round(canvElement.clientHeight/7)
       for(let i = 1; i < 7; i++){
@@ -192,8 +197,8 @@ export class SketchpadComponent implements OnInit {
 
     let anz = displaySequence.length
     let getSteps = displaySequence[anz-1].quantizedEndStep
-    console.log("steps: " + getSteps + " res: " + Math.floor(document.getElementById("canvEditMode").clientWidth/getSteps))
-    let res = Math.floor(document.getElementById("canvEditMode").clientWidth/getSteps)
+    console.log("steps: " + getSteps + " res: " + Math.floor(this.canvElement.clientWidth/getSteps))
+    let res = Math.floor(this.canvElement.clientWidth/getSteps)
     for(let i = 0; i < displaySequence.length; i++){
       let pitch = displaySequence[i].pitch
       let dur = displaySequence[i].quantizedEndStep - displaySequence[i].quantizedStartStep
@@ -204,12 +209,18 @@ export class SketchpadComponent implements OnInit {
   }
   }
 
-  private createGrid(width, height, p5sketch){
+  private createGrid(width, height, p5sketch, orientation){
     let offset = Math.round(height/7)
     for(let i = 1; i <= 7; i++){
       p5sketch.strokeWeight(1)
       p5sketch.stroke(200)
       p5sketch.line(0, i*offset, width, i*offset)
+
+      if(orientation == "vertical"){
+        p5sketch.strokeWeight(1)
+        p5sketch.stroke(200)
+        p5sketch.line(i*offset, 0, i*offset, height)
+      }
     }
   }
 
@@ -277,10 +288,10 @@ export class SketchpadComponent implements OnInit {
 
   public convertToEditMode(){
     if(!this.editModeVisible){
-      this.editp5 = new p5(this.editSketch, document.getElementById("canvEditMode"))
+      this.canvElement = document.getElementById("canvEditMode")
+      this.editp5 = new p5(this.editSketch, this.canvElement)
       this.createINoteSequence()
-      let el = document.getElementById("canvEditMode")
-      this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
+      this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.editp5, "horizontal")
       this.displayMelody(this.sequence, this.editp5)
       this.editModeVisible = true
     }
@@ -310,9 +321,9 @@ export class SketchpadComponent implements OnInit {
   public continueSeq(){
     if(this.continueVisible != "visible"){
     this.continueVisible = "loading"
-      this.continuedp5 = new p5(this.editSketch, document.getElementById("continuedSeq"))
-      let el = document.getElementById("canvEditMode")
-      this.createGrid(el.clientWidth, el.clientHeight, this.continuedp5)
+      this.canvElement = document.getElementById("continuedSeq")
+      this.continuedp5 = new p5(this.editSketch, this.canvElement)
+      this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.continuedp5, "horizontal")
       let qSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
       this.mRNN.initialize().then(()=>{
         this.mRNN.continueSequence(qSequence, 60, 1.1).then((seq)=>{
@@ -322,5 +333,26 @@ export class SketchpadComponent implements OnInit {
         })
       })
     }
+  }
+
+  public activateEditMode(){
+    this.drawp5.remove()
+    if(this.editp5 != null){
+      this.editp5.remove()
+    }
+    if(this.continuedp5 != null){
+      this.continuedp5.remove()
+    }
+    this.canvElement= document.getElementById("canv")
+    console.log(this.canvElement.getAttribute("colspan"))    
+    this.canvElement.setAttribute("colspan", "5")
+    console.log(this.canvElement.getAttribute("colspan"))
+    this.displayEditable()
+  }
+
+  private displayEditable(){
+    this.drawp5 = new p5(this.editSketch, this.canvElement)
+    this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.drawp5, "vertical")
+    this.displayMelody(this.sequence, this.drawp5)
   }
 }

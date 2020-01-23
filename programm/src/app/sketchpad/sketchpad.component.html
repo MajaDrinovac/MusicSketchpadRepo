@@ -7,14 +7,14 @@
         <button mat-flat-button *ngIf="melodyCreated === true" id="convert-btn" (click)="convertToEditMode()">Convert</button>
         <button mat-icon-button *ngIf="deleteOption === true" id="delete-btn" (click)="delete()"><mat-icon color="warn">delete</mat-icon> </button>
     </mat-toolbar>
-    <mat-grid-list cols="10" id="canv-grid" rowHeight="10vh">
-        <mat-grid-tile colspan="10" rowspan="1">
+    <mat-grid-list cols="12" id="canv-grid" rowHeight="10vh">
+        <mat-grid-tile colspan="12" rowspan="1">
             <span *ngIf="state == 'chooseColor'">Choose a color</span>
         </mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="8"></mat-grid-tile>
-        <mat-grid-tile id="canv" colspan="3" rowspan="6"></mat-grid-tile>
+        <mat-grid-tile id="canv" colspan="5" rowspan="6"></mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="6"></mat-grid-tile>
-        <mat-grid-tile id="canvEditMode" colspan="2" rowspan="3"></mat-grid-tile>
+        <mat-grid-tile id="canvEditMode" (dblclick)="activateEditMode()" colspan="2" rowspan="3"></mat-grid-tile>
         <mat-grid-tile colspan="4" rowspan="1"></mat-grid-tile>
         <mat-grid-tile id="continuedSeq" colspan="2" rowspan = "3">
             <mat-spinner *ngIf="continueVisible == 'loading'"></mat-spinner>
