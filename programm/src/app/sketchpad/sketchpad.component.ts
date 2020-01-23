@@ -308,8 +308,8 @@ export class SketchpadComponent implements OnInit {
   }
 
   public continueSeq(){
-    this.continueVisible = "loading"
     if(this.continueVisible != "visible"){
+    this.continueVisible = "loading"
       this.continuedp5 = new p5(this.editSketch, document.getElementById("continuedSeq"))
       let el = document.getElementById("canvEditMode")
       this.createGrid(el.clientWidth, el.clientHeight, this.continuedp5)
