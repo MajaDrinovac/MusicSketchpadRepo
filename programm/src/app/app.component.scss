@@ -6,6 +6,7 @@ mat-grid-list {
   height: 100%;
   width: 100%;
   background: #221C29;
+  overflow-y: hidden;
  
 }
 
@@ -17,13 +18,7 @@ mat-grid-list {
   height: 100%;
 }
 
-#b{
-  background-image: linear-gradient(to bottom right, #BAA7FF, #6F319E);
-  width: 20%;
-  height: 20%;
-  border-radius: 100%;
-  
-}
+
 section.naveintraege {
   //border-bottom: 1px solid white;
   padding-top: 2vh;
@@ -72,6 +67,21 @@ section.naveintraege:hover{
   cursor: pointer;
   background: #372D42;
 }
+
+#profil{
+  width: 100%;
+  padding-left: 40%;
+
+}
+
+#person{
+  width: 100%;
+  font-size: 7vw;
+  padding-left: 20%;
+
+
+}
+
 /*
 section.naveintraege {
     &:before, &:after {
