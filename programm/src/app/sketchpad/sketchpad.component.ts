@@ -50,7 +50,7 @@ export class SketchpadComponent implements OnInit {
   private canvElement = document.getElementById("canv")
 
   public edit:Boolean = false
-
+  private displayArr
   constructor() { 
     let options = {
       inputs: ['x', 'y'],
@@ -199,11 +199,13 @@ export class SketchpadComponent implements OnInit {
     let getSteps = displaySequence[anz-1].quantizedEndStep
     console.log("steps: " + getSteps + " res: " + Math.floor(this.canvElement.clientWidth/getSteps))
     let res = Math.floor(this.canvElement.clientWidth/getSteps)
+    this.displayArr = []
     for(let i = 0; i < displaySequence.length; i++){
       let pitch = displaySequence[i].pitch
       let dur = displaySequence[i].quantizedEndStep - displaySequence[i].quantizedStartStep
 
       p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
+      this.displayArr[i] = {xStart: durPrev*res, yStart: this.y_notes[pitch], width: dur*res, height: res}
       //durPrev is offset for the next rect
       durPrev += dur
   }
@@ -348,6 +350,32 @@ export class SketchpadComponent implements OnInit {
     this.canvElement.setAttribute("colspan", "5")
     console.log(this.canvElement.getAttribute("colspan"))
     this.displayEditable()
+    this.editMelody()
+  }
+
+  private editMelody(){
+    let dragging = false
+    this.drawp5.draw = () =>{
+      if(dragging){
+
+      }
+    }
+
+    this.drawp5.mouseDragged = (event)=>{
+      let x = this.drawp5.mouseX
+      let y = this.drawp5.mouseY
+      for(let i = 0; i < this.displayArr.length; i++){
+        console.log(this.displayArr[i])
+        let rectWidth = this.displayArr[i].xStart + this.displayArr[i].width
+        let rectHeight = this.displayArr[i].yStart + this.displayArr[i].height
+        if(x > this.displayArr[i].xStart && x < rectWidth && y > this.displayArr[i].yStart && y < rectHeight){
+          dragging == true
+        }
+        
+      }
+      console.log("x: " + this.drawp5.mouseX + ", y: " + this.drawp5.mouseY)
+    }
+
   }
 
   private displayEditable(){
