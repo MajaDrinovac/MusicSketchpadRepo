@@ -309,7 +309,7 @@ export class SketchpadComponent implements OnInit {
 
   public continueSeq(){
     if(this.continueVisible != "visible"){
-    this.continueVisible = "loading"
+      this.continueVisible = "loading"
       this.continuedp5 = new p5(this.editSketch, document.getElementById("continuedSeq"))
       let el = document.getElementById("canvEditMode")
       this.createGrid(el.clientWidth, el.clientHeight, this.continuedp5)
@@ -322,5 +322,9 @@ export class SketchpadComponent implements OnInit {
         })
       })
     }
+  }
+
+  public stopMelody(){
+    this.player.stop()
   }
 }

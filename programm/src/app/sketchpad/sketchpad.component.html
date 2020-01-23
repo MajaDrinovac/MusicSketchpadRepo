@@ -2,7 +2,7 @@
     <mat-toolbar>
         <input  type="color" id="colorPicker" (click)="disableControls()" [(ngModel)]="color" (change)="convertHex2Rgb()">
         <button mat-icon-button *ngIf="melodyCreated === true" (click)="playMelody()"><mat-icon>play_arrow</mat-icon></button>
-        <button mat-icon-button *ngIf="melodyCreated === true"><mat-icon>stop</mat-icon></button>
+        <button mat-icon-button *ngIf="melodyCreated === true" (click)="stopMelody()"><mat-icon>stop</mat-icon></button>
         <button mat-flat-button *ngIf="melodyCreated === true" (click)="continueSeq()">Continue</button>
         <button mat-flat-button *ngIf="melodyCreated === true" id="convert-btn" (click)="convertToEditMode()">Convert</button>
         <button mat-icon-button *ngIf="deleteOption === true" id="delete-btn" (click)="delete()"><mat-icon color="warn">delete</mat-icon> </button>
