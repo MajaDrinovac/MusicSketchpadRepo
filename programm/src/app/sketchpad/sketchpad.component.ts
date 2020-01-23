@@ -241,7 +241,7 @@ export class SketchpadComponent implements OnInit {
                 console.log("res: " + this.resultArray[i] + " modulo: " + (countNotes%10))
                 notes++
                 let dur = (countNotes%10)*0.1
-                let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur, isDrum: true}
+                let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur}
                 lastNumber = lastNumber + dur
                 this.sequence.notes.push(x)
                 this.sequence.totalTime = x.endTime
