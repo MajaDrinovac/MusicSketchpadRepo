@@ -323,4 +323,8 @@ export class SketchpadComponent implements OnInit {
       })
     }
   }
+
+  public stopMelody(){
+    this.player.stop()
+  }
 }
