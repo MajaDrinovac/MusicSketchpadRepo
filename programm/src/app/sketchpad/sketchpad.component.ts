@@ -48,6 +48,7 @@ export class SketchpadComponent implements OnInit {
   private editModeVisible:Boolean = false
   private continueVisible:String = "not"
   private canvElement = document.getElementById("canv")
+  public melodies = []
 
   public edit:Boolean = false
   private displayArr
@@ -291,6 +292,7 @@ export class SketchpadComponent implements OnInit {
   public convertToEditMode(){
     if(!this.editModeVisible){
       this.canvElement = document.getElementById("canvEditMode")
+      //this.canvElement = document.getElementsByClassName("canvMelody")[this.listMelody]
       this.editp5 = new p5(this.editSketch, this.canvElement)
       this.createINoteSequence()
       this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.editp5, "horizontal")
@@ -324,6 +326,7 @@ export class SketchpadComponent implements OnInit {
     if(this.continueVisible != "visible"){
     this.continueVisible = "loading"
       this.canvElement = document.getElementById("continuedSeq")
+      //this.canvElement = document.getElementsByClassName("canvMelody")[this.listMelody]
       this.continuedp5 = new p5(this.editSketch, this.canvElement)
       this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.continuedp5, "horizontal")
       let qSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
@@ -355,6 +358,8 @@ export class SketchpadComponent implements OnInit {
 
   private editMelody(){
     let dragging = false
+    let actX
+    let  actY
     this.drawp5.draw = () =>{
       if(dragging){
 
@@ -370,10 +375,17 @@ export class SketchpadComponent implements OnInit {
         let rectHeight = this.displayArr[i].yStart + this.displayArr[i].height
         if(x > this.displayArr[i].xStart && x < rectWidth && y > this.displayArr[i].yStart && y < rectHeight){
           dragging == true
+          actX = x - this.displayArr[i].xStart 
+          actY = y - this.displayArr[i].yStart
         }
         
       }
       console.log("x: " + this.drawp5.mouseX + ", y: " + this.drawp5.mouseY)
+    }
+
+    this.drawp5.mouseReleased = ()=>{
+      dragging = false
+      
     }
 
   }

@@ -7,7 +7,7 @@ $width-sketchpad: 80vw;
 }
 
 #canv-grid{
-    width: 100vw;
+    width: 80vw;
     height: 100vh;
 }
 
@@ -16,25 +16,33 @@ $width-sketchpad: 80vw;
     width: $width-sketchpad;
 }
 
+#melodies{
+    width: 100vw;
+    height: 100vh;
+}
+
 mat-toolbar{
     padding-left: 10vw;
 }
 
-button{
-    margin-left: 3vw;
-}
 
 #convert-btn{
     margin-left: 0vw;
-}
-
-#delete-btn{
-    margin-left: 34vw;
-    position: fixed;
 }
 
 #editMelody{
     background: #000;
 }
 
+button{
+    margin-left: 1vw;
+}
+#controls{
+    position: absolute;
+    margin-left:0vw;
+    padding-top: 2vh;
+}
 
+#convert-btn{
+    margin-left: 2vw;
+}

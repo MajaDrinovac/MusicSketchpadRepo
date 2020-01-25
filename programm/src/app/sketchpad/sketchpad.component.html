@@ -1,23 +1,42 @@
-<div id="sketchpad">
-    <mat-toolbar>
+
+    <!--<mat-toolbar>
         <input type="color" id="colorPicker" (click)="disableControls()" [(ngModel)]="color" (change)="convertHex2Rgb()">
         <button mat-icon-button *ngIf="melodyCreated === true" (click)="playMelody()"><mat-icon>play_arrow</mat-icon></button>
         <button mat-icon-button *ngIf="melodyCreated === true"><mat-icon>stop</mat-icon></button>
         <button mat-flat-button *ngIf="melodyCreated === true" (click)="continueSeq()">Continue</button>
         <button mat-flat-button *ngIf="melodyCreated === true" id="convert-btn" (click)="convertToEditMode()">Convert</button>
         <button mat-icon-button *ngIf="deleteOption === true" id="delete-btn" (click)="delete()"><mat-icon color="warn">delete</mat-icon> </button>
-    </mat-toolbar>
-    <mat-grid-list cols="12" id="canv-grid" rowHeight="10vh">
+    </mat-toolbar>-->
+    <mat-grid-list cols="12" id="canv-grid" rowHeight="fit" >
         <mat-grid-tile colspan="12" rowspan="1">
             <span *ngIf="state == 'chooseColor'">Choose a color</span>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="8"></mat-grid-tile>
+        <!--<mat-grid-tile id="canvEditMode" (dblclick)="activateEditMode()" colspan="2" rowspan="3"></mat-grid-tile>-->
+        <!--<mat-grid-tile colspan="2" rowspan="10"></mat-grid-tile>-->
+        <mat-grid-tile colspan="1" rowspan="8">
+            <input type="color" id="colorPicker" (click)="disableControls()" [(ngModel)]="color" (change)="convertHex2Rgb()">
+        </mat-grid-tile>
+        <!--<mat-grid-tile colspan="1" rowspan="8"></mat-grid-tile>
         <mat-grid-tile id="canv" colspan="5" rowspan="6"></mat-grid-tile>
         <mat-grid-tile colspan="1" rowspan="6"></mat-grid-tile>
-        <mat-grid-tile id="canvEditMode" (dblclick)="activateEditMode()" colspan="2" rowspan="3"></mat-grid-tile>
         <mat-grid-tile colspan="4" rowspan="1"></mat-grid-tile>
         <mat-grid-tile id="continuedSeq" colspan="2" rowspan = "3">
             <mat-spinner *ngIf="continueVisible == 'loading'"></mat-spinner>
+        </mat-grid-tile>-->
+        <mat-grid-tile id="canv" colspan="6" rowspan="8"></mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="8" ></mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="8">
+            <mat-grid-list cols="1" rowHeight="20vh" id="melodies">
+                <mat-grid-tile colspan="1" rowspan="1" *ngFor="let melody of melodies; let i = index"></mat-grid-tile>
+            </mat-grid-list>
+        </mat-grid-tile>
+        <mat-grid-tile id="contr" colspan="8" rowspan="1"> 
+            <div id="controls">
+            <button mat-icon-button *ngIf="melodyCreated === true" (click)="playMelody()" id="play"><mat-icon>play_arrow</mat-icon></button>
+            <button mat-icon-button *ngIf="melodyCreated === true"><mat-icon>stop</mat-icon></button>
+            <button mat-flat-button color="primary" *ngIf="melodyCreated === true" (click)="continueSeq()">Continue</button>
+            <button mat-flat-button color="primary" *ngIf="melodyCreated === true" id="convert-btn" (click)="convertToEditMode()">Edit</button>
+            <button mat-icon-button *ngIf="deleteOption === true" id="delete-btn" (click)="delete()"><mat-icon color="warn">delete</mat-icon> </button>
+            </div>
         </mat-grid-tile>
     </mat-grid-list>
-</div>
