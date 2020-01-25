@@ -6,6 +6,7 @@ mat-grid-list {
   height: 100%;
   width: 100%;
   background: #221C29;
+  overflow-y: hidden;
  
 }
 
@@ -17,13 +18,7 @@ mat-grid-list {
   height: 100%;
 }
 
-#b{
-  background-image: linear-gradient(to bottom right, #BAA7FF, #6F319E);
-  width: 20%;
-  height: 20%;
-  border-radius: 100%;
-  
-}
+
 section.naveintraege {
   //border-bottom: 1px solid white;
   padding-top: 2vh;
@@ -31,6 +26,7 @@ section.naveintraege {
   color: #c2bcbc;
   vertical-align: middle;
   cursor: pointer;
+  font-size: 1vw;
 }
 
 section.naveintraege mat-icon {
@@ -40,24 +36,33 @@ section.naveintraege mat-icon {
   color: #c2bcbc;
   height: 34px;
   margin-left: 10%;
+  margin-top: -3.9%;
 }
 
 section.profil {
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-top: 6vh;
+  padding-bottom: 6vh;
   color: #c2bcbc;
-  vertical-align: middle;
+  //vertical-align: middle;
+  padding-left: 33%;
   cursor: pointer;
   margin-top: 5%;
 }
 
+#profilBez {
+  width: 50%;
+  padding-left: 16%;
+  padding-top: 35%;
+  font-size: 1vw;
+}
+
 section.profil mat-icon {
   vertical-align: middle;
-  font-size: 4vh;
-  margin-right: 10%;
+  font-size: 7vw;
+  //margin-right: 10%;
   color: #c2bcbc;
   height: 34px;
-  margin-left: 10%;
+  //margin-left: 10%;
 }
 
 section.titel {
@@ -72,6 +77,21 @@ section.naveintraege:hover{
   cursor: pointer;
   background: #372D42;
 }
+
+/*#profil{
+  width: 100%;
+  padding-left: 30%;
+
+}*/
+
+/*#person{
+  width: 100%;
+  font-size: 7vw;
+  padding-left: 20%;
+
+
+}*/
+
 /*
 section.naveintraege {
     &:before, &:after {
