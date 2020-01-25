@@ -12,12 +12,13 @@ import {MatIconModule}from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {FormsModule} from '@angular/forms'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {DisplayMelodyComponent } from './sketchpad/display-melody/display-melody.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    SketchpadComponent
+    SketchpadComponent,
+    DisplayMelodyComponent
   ],
   imports: [
     BrowserModule,

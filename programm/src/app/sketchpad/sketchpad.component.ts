@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
-import { MusicRNN, Player } from '@magenta/music/es6'
+import { MusicRNN, Player, INoteSequence } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
 
@@ -18,7 +18,7 @@ export class SketchpadComponent implements OnInit {
   public state:String= "prediction"
   private targetLabel:String
   private resultArray = []
-  private sequence
+  private sequence:INoteSequence
   private noten_midi = {
     C: 60,
     D: 62,
