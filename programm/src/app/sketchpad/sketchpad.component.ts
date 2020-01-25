@@ -47,8 +47,10 @@ export class SketchpadComponent implements OnInit {
   private continuedp5:p5
   private editModeVisible:Boolean = false
   private continueVisible:String = "not"
-  private canvElement = document.getElementById("canv")
+  private canvElement
   public melodies = []
+
+  private countEdit
 
   public edit:Boolean = false
   private displayArr
@@ -63,6 +65,7 @@ export class SketchpadComponent implements OnInit {
     this.targetLabel = "C"
     this.player = new mm.Player()
     this.canvElement = document.getElementById("canv")
+    this.countEdit = 0
   }
 
   ngOnInit() {
@@ -264,6 +267,7 @@ export class SketchpadComponent implements OnInit {
     }
     this.melodyCreated = true
     console.log("total Time: " + this.sequence.totalTime)
+    this.melodies.push(this.sequence)
   }
 
   public convertHex2Rgb(){
@@ -298,6 +302,7 @@ export class SketchpadComponent implements OnInit {
       this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.editp5, "horizontal")
       this.displayMelody(this.sequence, this.editp5)
       this.editModeVisible = true
+      this.countEdit++
     }
   }
 

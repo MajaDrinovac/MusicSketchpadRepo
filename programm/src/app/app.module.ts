@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SketchpadComponent } from './sketchpad/sketchpad.component'
 import {FormsModule} from '@angular/forms'
+import {DisplayMelodyComponent} from './sketchpad/display-melody/display-melody.component'
 import {
   MatAutocompleteModule,
   MatButtonModule,

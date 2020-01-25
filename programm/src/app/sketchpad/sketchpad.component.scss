@@ -1,4 +1,4 @@
-$width-sketchpad: 100vw;
+$width-sketchpad: 90vw;
 
 #canv{
     width: 100vw;
@@ -7,8 +7,8 @@ $width-sketchpad: 100vw;
 }
 
 #canv-grid{
-    
-    width: 80vw;
+    margin-left: 5vw;
+    width: 100vw;
     height: 100vh;
 }
 
@@ -16,9 +16,8 @@ $width-sketchpad: 100vw;
     height: 100vh;
     width: $width-sketchpad;
 }
-
 #melodies{
-    width: 100vw;
+    width: 20vw;
     height: 100vh;
 }
 
