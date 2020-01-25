@@ -3,16 +3,44 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {MatSidenavModule} from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SketchpadComponent } from './sketchpad/sketchpad.component'
-import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule}from '@angular/material/grid-list';
-import {MatIconModule}from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {FormsModule} from '@angular/forms'
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {DisplayMelodyComponent } from './sketchpad/display-melody/display-melody.component'
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+} from '@angular/material';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +58,8 @@ import {DisplayMelodyComponent } from './sketchpad/display-melody/display-melody
     MatButtonModule,
     MatToolbarModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
