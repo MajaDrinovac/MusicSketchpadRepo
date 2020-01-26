@@ -19,7 +19,7 @@ export class SketchpadComponent implements OnInit {
   private targetLabel:String
   private resultArray = []
   private sequence:INoteSequence
-  private noten_midi = {
+  private noten_midi= {
     C: 60,
     D: 62,
     E: 64,
@@ -28,7 +28,7 @@ export class SketchpadComponent implements OnInit {
     A: 69,
     B: 71
   }
-  private noten_midi_drums = {
+  private noten_midi_d = {
     C: 36,
     D: 38,
     E: 40,
@@ -37,13 +37,22 @@ export class SketchpadComponent implements OnInit {
     A: 46,
     B: 48
   }
+  private noten_midi_t = {
+    C: 48,
+    D: 46,
+    E: 45,
+    F: 42,
+    G: 40,
+    A: 38,
+    B: 36
+  }
   private y_notes = {}
   private fillColor = [113, 134, 235]
   public color = "#7186EB"
   public melodyCreated:Boolean = false
   private player:Player
   public deleteOption:Boolean = false
-  private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn")
+  private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/melody_rnn")
   private continuedp5:p5
   private editModeVisible:Boolean = false
   private continueVisible:String = "not"
@@ -198,7 +207,6 @@ export class SketchpadComponent implements OnInit {
       qSequence = mm.sequences.quantizeNoteSequence(seq, 4)
     }
     displaySequence = qSequence.notes
-
     let anz = displaySequence.length
     let getSteps = displaySequence[anz-1].quantizedEndStep
     console.log("steps: " + getSteps + " res: " + Math.floor(this.canvElement.clientWidth/getSteps))
@@ -209,6 +217,8 @@ export class SketchpadComponent implements OnInit {
       let dur = displaySequence[i].quantizedEndStep - displaySequence[i].quantizedStartStep
 
       p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
+
+      //für editable
       this.displayArr[i] = {xStart: durPrev*res, yStart: this.y_notes[pitch], width: dur*res, height: res}
       //durPrev is offset for the next rect
       durPrev += dur
@@ -232,9 +242,11 @@ export class SketchpadComponent implements OnInit {
 
   private createDictionary(height){
     let off = Math.round(height/7);
-    let count = 1
+    let count = 0
+    console.log("height: " + height)
     for(let note in this.noten_midi){
       this.y_notes[this.noten_midi[note]] = off*count
+      console.log("y_notes: " + this.y_notes[this.noten_midi[note]])
       count++
     }
     console.log(this.y_notes)
@@ -266,7 +278,7 @@ export class SketchpadComponent implements OnInit {
         }
     }
     this.melodyCreated = true
-    console.log("total Time: " + this.sequence.totalTime)
+    
     this.melodies.push(this.sequence)
   }
 
@@ -303,6 +315,9 @@ export class SketchpadComponent implements OnInit {
       this.displayMelody(this.sequence, this.editp5)
       this.editModeVisible = true
       this.countEdit++
+    }else{
+      this.editp5.remove()
+      this.canvElement = document.getElementById("canvEditMode")
     }
   }
 
@@ -330,7 +345,7 @@ export class SketchpadComponent implements OnInit {
   public continueSeq(){
     if(this.continueVisible != "visible"){
     this.continueVisible = "loading"
-      this.canvElement = document.getElementById("continuedSeq")
+      this.canvElement = document.getElementById("canvContinue")
       //this.canvElement = document.getElementsByClassName("canvMelody")[this.listMelody]
       this.continuedp5 = new p5(this.editSketch, this.canvElement)
       this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.continuedp5, "horizontal")

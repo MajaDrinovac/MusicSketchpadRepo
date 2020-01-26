@@ -35,7 +35,7 @@ function displayMelody(seq){
     durPrev = 0
     displaySequence = []
     createGrid()
-    displaySequence = seq.notes
+    //displaySequence = seq.notes
     console.log(core.sequences.isQuantizedSequence(seq))
     if(core.sequences.isQuantizedSequence(seq) == true){
         qSequence = seq
