@@ -1,6 +1,6 @@
 <div id="sketchpad">
     <mat-toolbar>
-        <input type="color" id="colorPicker" (click)="disableControls()" [(ngModel)]="color" (change)="convertHex2Rgb()">
+        <input  type="color" id="colorPicker" (click)="disableControls()" [(ngModel)]="color" (change)="convertHex2Rgb()">
         <button mat-icon-button *ngIf="melodyCreated === true" (click)="playMelody()"><mat-icon>play_arrow</mat-icon></button>
         <button mat-icon-button *ngIf="melodyCreated === true"><mat-icon>stop</mat-icon></button>
         <button mat-flat-button *ngIf="melodyCreated === true" (click)="continueSeq()">Continue</button>

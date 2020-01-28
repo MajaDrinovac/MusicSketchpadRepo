@@ -26,6 +26,7 @@ section.naveintraege {
   color: #c2bcbc;
   vertical-align: middle;
   cursor: pointer;
+  font-size: 1vw;
 }
 
 section.naveintraege mat-icon {
@@ -38,21 +39,29 @@ section.naveintraege mat-icon {
 }
 
 section.profil {
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-top: 6vh;
+  padding-bottom: 6vh;
   color: #c2bcbc;
-  vertical-align: middle;
+  //vertical-align: middle;
+  padding-left: 33%;
   cursor: pointer;
   margin-top: 5%;
 }
 
+#profilBez {
+  width: 50%;
+  padding-left: 16%;
+  padding-top: 35%;
+  font-size: 1vw;
+}
+
 section.profil mat-icon {
   vertical-align: middle;
-  font-size: 4vh;
-  margin-right: 10%;
+  font-size: 7vw;
+  //margin-right: 10%;
   color: #c2bcbc;
   height: 34px;
-  margin-left: 10%;
+  //margin-left: 10%;
 }
 
 section.titel {
@@ -69,22 +78,20 @@ section.naveintraege:hover{
 
 }
 
-#profil{
+/*#profil{
   width: 100%;
-  padding-left: 40%;
-  padding-top: 25%;
-  padding-bottom: 25%;
+  padding-left: 30%;
 
-}
+}*/
 
-#person{
+/*#person{
   width: 100%;
   font-size: 7vw;
   padding-left: 20%;
   padding-top: 10%;
 
 
-}
+}*/
 
 /*
 section.naveintraege {
