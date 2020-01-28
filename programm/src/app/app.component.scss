@@ -6,7 +6,7 @@ mat-grid-list {
   height: 100%;
   width: 100%;
   background: #221C29;
-  overflow-y: hidden;
+
  
 }
 
@@ -66,11 +66,14 @@ section.titel {
 section.naveintraege:hover{
   cursor: pointer;
   background: #372D42;
+
 }
 
 #profil{
   width: 100%;
   padding-left: 40%;
+  padding-top: 25%;
+  padding-bottom: 25%;
 
 }
 
@@ -78,6 +81,7 @@ section.naveintraege:hover{
   width: 100%;
   font-size: 7vw;
   padding-left: 20%;
+  padding-top: 10%;
 
 
 }

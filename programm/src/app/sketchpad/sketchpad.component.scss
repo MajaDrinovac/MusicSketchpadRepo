@@ -18,6 +18,7 @@ $width-sketchpad: 80vw;
 
 mat-toolbar{
     padding-left: 10vw;
+    background: white;
 }
 
 button{
@@ -31,6 +32,10 @@ button{
 #delete-btn{
     margin-left: 34vw;
     position: fixed;
+}
+
+#sketchpad{
+    background: #F7F7F7;
 }
 
 
