@@ -19,7 +19,7 @@ export class SketchpadComponent implements OnInit {
   private targetLabel:String
   private resultArray = []
   private sequence
-  private noten_midi = {
+  private noten_midi_t = {
     C: 60,
     D: 62,
     E: 64,
@@ -35,6 +35,15 @@ export class SketchpadComponent implements OnInit {
     F: 42,
     G: 45,
     A: 46,
+    B: 48
+  }
+  private noten_midi = {
+    C: 59,
+    D: 58,
+    E: 56,
+    F: 54,
+    G: 52,
+    A: 50,
     B: 48
   }
   private y_notes = {}
@@ -64,6 +73,8 @@ export class SketchpadComponent implements OnInit {
     this.drawp5 = new p5(this.sketch)
     //this.editp5 = new p5(this.editSketch)
   }
+
+
 
   private modelLoaded(err){
     if(err){
@@ -164,7 +175,7 @@ export class SketchpadComponent implements OnInit {
       let canvElement = document.getElementById("canvEditMode")
       //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
       let canv = s.createCanvas(canvElement.clientWidth-1, canvElement.clientHeight-1)
-      s.background(0, 0, 0)
+      //s.background(0, 0, 0)
       this.createDictionary(canvElement.clientHeight)
       //this.createGrid(canvElement.clientWidth,canvElement.clientHeight)
       /*let offset = Math.round(canvElement.clientHeight/7)
@@ -198,6 +209,7 @@ export class SketchpadComponent implements OnInit {
       let pitch = displaySequence[i].pitch
       let dur = displaySequence[i].quantizedEndStep - displaySequence[i].quantizedStartStep
 
+      p5sketch.fill(0,0,0)
       p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
       //durPrev is offset for the next rect
       durPrev += dur
