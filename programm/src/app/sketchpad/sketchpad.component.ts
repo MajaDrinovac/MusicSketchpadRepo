@@ -56,6 +56,7 @@ export class SketchpadComponent implements OnInit {
   private continuedp5:p5
   private editModeVisible:Boolean = false
   private continueVisible:String = "not"
+  private temp
 
   constructor() { 
     let options = {
@@ -172,7 +173,8 @@ export class SketchpadComponent implements OnInit {
 
   private editSketch = (s) =>{
     s.setup = () =>{
-      let canvElement = document.getElementById("canvEditMode")
+      let canvElement = document.getElementById("canv")
+      console.log(document.getElementById("canv-g").clientWidth)
       //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
       let canv = s.createCanvas(canvElement.clientWidth-1, canvElement.clientHeight-1)
       //s.background(0, 0, 0)
@@ -203,8 +205,8 @@ export class SketchpadComponent implements OnInit {
 
     let anz = displaySequence.length
     let getSteps = displaySequence[anz-1].quantizedEndStep
-    console.log("steps: " + getSteps + " res: " + Math.floor(document.getElementById("canvEditMode").clientWidth/getSteps))
-    let res = Math.floor(document.getElementById("canvEditMode").clientWidth/getSteps)
+    console.log("steps: " + getSteps + " res: " + Math.floor(document.getElementById("canv").clientWidth/getSteps))
+    let res = Math.floor(document.getElementById("canv").clientWidth/getSteps)
     for(let i = 0; i < displaySequence.length; i++){
       let pitch = displaySequence[i].pitch
       let dur = displaySequence[i].quantizedEndStep - displaySequence[i].quantizedStartStep
@@ -218,16 +220,18 @@ export class SketchpadComponent implements OnInit {
 
   private createGrid(width, height, p5sketch){
     let offset = Math.round(height/7)
+    let x = Math.round(width/7)
     for(let i = 1; i <= 7; i++){
       p5sketch.strokeWeight(1)
       p5sketch.stroke(200)
       p5sketch.line(0, i*offset, width, i*offset)
     }
+    
   }
 
   private createDictionary(height){
     let off = Math.round(height/7);
-    let count = 1
+    let count = 0
     for(let note in this.noten_midi){
       this.y_notes[this.noten_midi[note]] = off*count
       count++
@@ -289,12 +293,22 @@ export class SketchpadComponent implements OnInit {
 
   public convertToEditMode(){
     if(!this.editModeVisible){
-      this.editp5 = new p5(this.editSketch, document.getElementById("canvEditMode"))
+      this.editModeVisible = true
+      this.drawp5.remove()
+      this.editp5 = new p5(this.editSketch, document.getElementById("canv"))
       this.createINoteSequence()
-      let el = document.getElementById("canvEditMode")
+      let el = document.getElementById("canv")
       this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
       this.displayMelody(this.sequence, this.editp5)
-      this.editModeVisible = true
+    }
+  }
+
+  public convertToDrawMode(){
+    if(this.editModeVisible){
+      this.editModeVisible = false
+      delete this.sequence
+      this.editp5.remove()
+      this.drawp5 = new p5(this.sketch, document.getElementById("canv"))
     }
   }
 

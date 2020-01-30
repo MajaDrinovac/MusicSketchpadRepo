@@ -8,8 +8,8 @@
                 </mat-grid-tile>
                 <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
                 <mat-grid-tile colspan="1" rowspan="1" id="drawContr-btn">
-                    <button mat-flat-button color="accent"><mat-icon>edit</mat-icon></button>
-                    <button mat-flat-button [disabled]="!melodyCreated"><mat-icon>grid_on</mat-icon></button>
+                    <button mat-flat-button [disabled]="state != 'prediction'" color="accent" (click)="convertToDrawMode()"><mat-icon>edit</mat-icon></button>
+                    <button mat-flat-button [disabled]="" (click)="convertToEditMode()"><mat-icon>grid_on</mat-icon></button>
                 </mat-grid-tile>
             </mat-grid-list>
         </mat-grid-tile>
