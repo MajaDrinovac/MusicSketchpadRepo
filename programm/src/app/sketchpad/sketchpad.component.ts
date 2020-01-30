@@ -56,7 +56,9 @@ export class SketchpadComponent implements OnInit {
   private continuedp5:p5
   private editModeVisible:Boolean = false
   private continueVisible:String = "not"
-  private temp
+  private displayArr = []
+  public colorBtnEdit = "accent"
+  public colorBtnGrid = ""
 
   constructor() { 
     let options = {
@@ -213,6 +215,9 @@ export class SketchpadComponent implements OnInit {
 
       p5sketch.fill(0,0,0)
       p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
+
+      this.displayArr[i] = {xStart: durPrev*res, yStart: this.y_notes[pitch], width: dur*res, height: res}
+
       //durPrev is offset for the next rect
       durPrev += dur
   }
@@ -222,7 +227,7 @@ export class SketchpadComponent implements OnInit {
     let offset = Math.round(height/7)
     let xOffset = Math.round(width/7)
     let x = Math.round(width/7)
-    for(let i = 1; i <= 7; i++){
+    for(let i = 1; i < 7; i++){
       p5sketch.strokeWeight(1)
       p5sketch.stroke(200)
       p5sketch.line(0, i*offset, width, i*offset)
@@ -292,7 +297,6 @@ export class SketchpadComponent implements OnInit {
     this.player.start(quantizedSequence)
     console.log(quantizedSequence)
   }
-
   public convertToEditMode(){
     if(!this.editModeVisible){
       this.editModeVisible = true
@@ -302,6 +306,8 @@ export class SketchpadComponent implements OnInit {
       let el = document.getElementById("canv")
       this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
       this.displayMelody(this.sequence, this.editp5)
+      this.colorBtnEdit = ""
+      this.colorBtnGrid = "accent"
     }
   }
 
@@ -312,6 +318,8 @@ export class SketchpadComponent implements OnInit {
       this.editp5.remove()
       this.drawp5 = new p5(this.sketch, document.getElementById("canv"))*/
       this.delete()
+      this.colorBtnEdit = "accent"
+      this.colorBtnGrid = ""
     }
   }
 
@@ -355,5 +363,59 @@ export class SketchpadComponent implements OnInit {
 
   public stopMelody(){
     this.player.stop()
+  }
+
+  private canvElement
+  public activateEditMode(){
+    this.drawp5.remove()
+
+    this.canvElement= document.getElementById("canv")
+    this.displayEditable()
+    this.editMelody()
+  }
+
+  private editMelody(){
+    let dragging = false
+    let actX
+    let  actY
+    this.drawp5.draw = () =>{
+      if(dragging){
+        
+      }
+    }
+
+    this.drawp5.mouseDragged = (event)=>{
+      let x = this.drawp5.mouseX
+      let y = this.drawp5.mouseY
+      for(let i = 0; i < this.displayArr.length; i++){
+        console.log(this.displayArr[i])
+        let rectWidth = this.displayArr[i].xStart + this.displayArr[i].width
+        let rectHeight = this.displayArr[i].yStart + this.displayArr[i].height
+        if(x > this.displayArr[i].xStart && x < rectWidth && y > this.displayArr[i].yStart && y < rectHeight){
+          dragging == true
+          actX = x - this.displayArr[i].xStart 
+          actY = y - this.displayArr[i].yStart
+          
+        }
+        
+      }
+      console.log("x: " + this.drawp5.mouseX + ", y: " + this.drawp5.mouseY)
+    }
+
+    this.drawp5.mouseReleased = ()=>{
+      dragging = false
+      console.log("here")
+      
+    }
+
+  }
+
+  private displayEditable(){
+    this.canvElement = document.getElementById("canv")
+    this.drawp5.remove()
+    this.drawp5 = new p5(this.editSketch, this.canvElement)
+    //this.editp5.remove()
+    this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.drawp5)
+    this.displayMelody(this.sequence, this.drawp5)
   }
 }
