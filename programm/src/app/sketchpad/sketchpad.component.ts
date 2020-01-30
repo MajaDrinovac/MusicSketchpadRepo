@@ -176,7 +176,7 @@ export class SketchpadComponent implements OnInit {
       let canvElement = document.getElementById("canv")
       console.log(document.getElementById("canv-g").clientWidth)
       //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
-      let canv = s.createCanvas(canvElement.clientWidth-1, canvElement.clientHeight-1)
+      let canv = s.createCanvas(canvElement.clientWidth, canvElement.clientHeight)
       //s.background(0, 0, 0)
       this.createDictionary(canvElement.clientHeight)
       //this.createGrid(canvElement.clientWidth,canvElement.clientHeight)
@@ -220,11 +220,13 @@ export class SketchpadComponent implements OnInit {
 
   private createGrid(width, height, p5sketch){
     let offset = Math.round(height/7)
+    let xOffset = Math.round(width/7)
     let x = Math.round(width/7)
     for(let i = 1; i <= 7; i++){
       p5sketch.strokeWeight(1)
       p5sketch.stroke(200)
       p5sketch.line(0, i*offset, width, i*offset)
+      p5sketch.line(i*xOffset, 0, i*xOffset, height)
     }
     
   }
@@ -305,10 +307,11 @@ export class SketchpadComponent implements OnInit {
 
   public convertToDrawMode(){
     if(this.editModeVisible){
-      this.editModeVisible = false
+      /*this.editModeVisible = false
       delete this.sequence
       this.editp5.remove()
-      this.drawp5 = new p5(this.sketch, document.getElementById("canv"))
+      this.drawp5 = new p5(this.sketch, document.getElementById("canv"))*/
+      this.delete()
     }
   }
 
