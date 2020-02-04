@@ -1,23 +1,26 @@
 <div id="sketchpad">
-    <mat-toolbar>
-        <input  type="color" id="colorPicker" (click)="disableControls()" [(ngModel)]="color" (change)="convertHex2Rgb()">
-        <button mat-icon-button *ngIf="melodyCreated === true" (click)="playMelody()"><mat-icon>play_arrow</mat-icon></button>
-        <button mat-icon-button *ngIf="melodyCreated === true" (click)="stopMelody()"><mat-icon>stop</mat-icon></button>
-        <button mat-flat-button *ngIf="melodyCreated === true" (click)="continueSeq()">Continue</button>
-        <button mat-flat-button *ngIf="melodyCreated === true" id="convert-btn" (click)="convertToEditMode()">Convert</button>
-        <button mat-icon-button *ngIf="deleteOption === true" id="delete-btn" (click)="delete()"><mat-icon color="warn">delete</mat-icon> </button>
-    </mat-toolbar>
-    <mat-grid-list cols="10" id="canv-grid" rowHeight="10vh">
-        <mat-grid-tile colspan="10" rowspan="1">
-            <span *ngIf="state == 'chooseColor'">Choose a color</span>
+    <mat-grid-list cols="12" id="canv-grid" rowHeight="fit">
+        <mat-grid-tile colspan="12" rowspan="1">
+            <mat-grid-list cols="5" rowHeight="fit" class="top">
+                <mat-grid-tile colspan="1" rowspan="1" id="melodyContr-btn">
+                    <button mat-flat-button [disabled]="!melodyCreated" (click)="playMelody()"><mat-icon>play_arrow</mat-icon>Play</button>
+                    <button id="stop" mat-flat-button disabled><mat-icon>stop</mat-icon>Stop</button>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="1" id="drawContr-btn">
+                    <button mat-flat-button [color]="colorBtnEdit" (click)="convertToDrawMode()" id="edit"><mat-icon>edit</mat-icon></button>
+                    <button mat-flat-button [color]="colorBtnGrid" (click)="convertToEditMode()"><mat-icon>grid_on</mat-icon></button>
+                </mat-grid-tile>
+            </mat-grid-list>
         </mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="8"></mat-grid-tile>
-        <mat-grid-tile id="canv" colspan="3" rowspan="6"></mat-grid-tile>
-        <mat-grid-tile colspan="1" rowspan="6"></mat-grid-tile>
-        <mat-grid-tile id="canvEditMode" colspan="2" rowspan="3"></mat-grid-tile>
-        <mat-grid-tile colspan="4" rowspan="1"></mat-grid-tile>
-        <mat-grid-tile id="continuedSeq" colspan="2" rowspan = "3">
-            <mat-spinner *ngIf="continueVisible == 'loading'"></mat-spinner>
+        <mat-grid-tile colspan="1" rowspan="8" class="sidebar"></mat-grid-tile>
+        
+        <mat-grid-tile colspan="8" rowspan="8" id="canv-g">
+            <mat-card id="canv"></mat-card>
         </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="8" class="sidebar"></mat-grid-tile>
+        
+        <mat-grid-tile colspan="12" rowspan="1"></mat-grid-tile>
     </mat-grid-list>
+
 </div>

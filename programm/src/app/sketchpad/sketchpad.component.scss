@@ -1,19 +1,15 @@
 $width-sketchpad: 80vw;
+$height-sketchpad: 100vh;
 
-#canv{
-    width: 100vw;
-    height: 100vh;
-    border: 0.5px solid gray;
-}
 
 #canv-grid{
     width: 100vw;
     height: 100vh;
 }
-
 #sketchpad{
-    height: 100vh;
+    height: $height-sketchpad;
     width: $width-sketchpad;
+    background: #F6F6F6;
 }
 
 mat-toolbar{
@@ -21,22 +17,26 @@ mat-toolbar{
     background: white;
 }
 
-button{
-    margin-left: 3vw;
-}
-
-#convert-btn{
-    margin-left: 0vw;
-}
-
-#delete-btn{
-    margin-left: 34vw;
-    position: fixed;
-}
-
-#colorPicker {
-    border: none;
-    border-radius: 5px;
+mat-card{
     padding: 0;
+    width: 63vw;
+    height: 77vh;
+    margin: 0;
 }
 
+.top{
+    width: 100vw;
+    height: 100vh;
+}
+
+#stop{
+    left: 0.5vw;
+}
+
+#melodyContr-btn{
+    margin-left: 6vw;
+}
+
+#drawContr-btn{
+    margin-left: 18vw;
+}
