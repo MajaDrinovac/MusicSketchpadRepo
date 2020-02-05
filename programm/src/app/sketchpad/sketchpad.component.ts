@@ -215,9 +215,9 @@ export class SketchpadComponent implements OnInit {
 
       p5sketch.fill(0,0,0)
       p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
-
-      this.displayArr[i] = {xStart: durPrev*res, yStart: this.y_notes[pitch], width: dur*res, height: res}
-
+      let x = {xStart: durPrev*res, yStart: this.y_notes[pitch], width: dur*res, height: res, pitch: pitch}
+      this.displayArr.push(x)
+      console.log("displayarr" + this.displayArr[i])
       //durPrev is offset for the next rect
       durPrev += dur
   }
@@ -235,19 +235,18 @@ export class SketchpadComponent implements OnInit {
     }
     
   }
-
+  private off
   private createDictionary(height){
-    let off = Math.round(height/7);
+    this.off = Math.round(height/7);
     let count = 0
     for(let note in this.noten_midi){
-      this.y_notes[this.noten_midi[note]] = off*count
+      this.y_notes[this.noten_midi[note]] = this.off*count
       count++
     }
     console.log(this.y_notes)
   }
 
   private createINoteSequence(){
-    console.log("resultArray length: " + this.resultArray.length)
     let countNotes = 0
     let lastNumber = 0
     let notes = 0
@@ -261,7 +260,6 @@ export class SketchpadComponent implements OnInit {
             if(this.resultArray[i-1] == this.resultArray[i]){
                 countNotes++
             }else{
-                console.log("res: " + this.resultArray[i] + " modulo: " + (countNotes%10))
                 notes++
                 let dur = (countNotes%10)*0.1
                 let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur}
@@ -272,7 +270,6 @@ export class SketchpadComponent implements OnInit {
         }
     }
     this.melodyCreated = true
-    console.log("total Time: " + this.sequence.totalTime)
   }
 
   public convertHex2Rgb(){
@@ -308,6 +305,7 @@ export class SketchpadComponent implements OnInit {
       this.displayMelody(this.sequence, this.editp5)
       this.colorBtnEdit = ""
       this.colorBtnGrid = "accent"
+      this.activateEditMode()
     }
   }
 
@@ -367,55 +365,65 @@ export class SketchpadComponent implements OnInit {
 
   private canvElement
   public activateEditMode(){
-    this.drawp5.remove()
+    //this.drawp5.remove()
 
     this.canvElement= document.getElementById("canv")
-    this.displayEditable()
+    //this.displayEditable()
     this.editMelody()
   }
-
+  public coord
   private editMelody(){
-    let dragging = false
     let actX
     let  actY
-    this.drawp5.draw = () =>{
-      if(dragging){
-        
-      }
-    }
+    let draggedRect
+    let diffx
+    let diffy
+    let m = []
+    let arrNumber
 
-    this.drawp5.mouseDragged = (event)=>{
-      let x = this.drawp5.mouseX
-      let y = this.drawp5.mouseY
+    this.editp5.mouseDragged = (event)=>{
+      let x = this.editp5.mouseX
+      let y = this.editp5.mouseY
       for(let i = 0; i < this.displayArr.length; i++){
-        console.log(this.displayArr[i])
         let rectWidth = this.displayArr[i].xStart + this.displayArr[i].width
         let rectHeight = this.displayArr[i].yStart + this.displayArr[i].height
+
         if(x > this.displayArr[i].xStart && x < rectWidth && y > this.displayArr[i].yStart && y < rectHeight){
-          dragging == true
-          actX = x - this.displayArr[i].xStart 
-          actY = y - this.displayArr[i].yStart
-          
+          draggedRect = this.displayArr[i]
+          arrNumber = i
+          diffx = this.editp5.mouseX - draggedRect.xStart
+          diffy = this.editp5.mouseY - draggedRect.yStart
+          m.push({diffx: diffx, diffy: diffy})
         }
         
       }
-      console.log("x: " + this.drawp5.mouseX + ", y: " + this.drawp5.mouseY)
+      //console.log("x: " +actX+ ", y: " + actY)
     }
 
-    this.drawp5.mouseReleased = ()=>{
-      dragging = false
-      console.log("here")
-      
-    }
+    this.editp5.mouseReleased = ()=>{
+      this.canvElement = document.getElementById("canv")
 
+      actX = this.editp5.mouseX - m[0].diffx
+      actY = this.editp5.mouseY - m[0].diffy
+
+      this.editp5.fill(255)
+      this.editp5.stroke(255)
+      this.editp5.rect(draggedRect.xStart, draggedRect.yStart, draggedRect.width, draggedRect.height)
+      draggedRect.xStart = actX
+      draggedRect.yStart = actY
+
+      actY = this.off * Math.round(actY/this.off)
+
+      this.changeMelody(draggedRect, arrNumber)
+
+      this.displayArr[arrNumber] = draggedRect
+      this.editp5.fill(0)
+      this.editp5.rect(actX, actY, draggedRect.width, draggedRect.height)
+      this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.editp5)
+    }
   }
 
-  private displayEditable(){
-    this.canvElement = document.getElementById("canv")
-    this.drawp5.remove()
-    this.drawp5 = new p5(this.editSketch, this.canvElement)
-    //this.editp5.remove()
-    this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.drawp5)
-    this.displayMelody(this.sequence, this.drawp5)
+  private changeMelody(rect, arrNumber){
+    this.displayArr[arrNumber]
   }
 }
