@@ -437,10 +437,8 @@ export class SketchpadComponent implements OnInit {
   }
 
   private changeMelody(rect, arrNumber, actY){
-    //alert(actY - this.y_notes[rect.pitch])
     let newPitch
     for(let n in this.y_notes){
-      //alert(n)
       if(this.y_notes[n] == actY){
         newPitch = n
       }
