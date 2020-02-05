@@ -196,13 +196,14 @@ export class SketchpadComponent implements OnInit {
     let durPrev = 0;
     let displaySequence = []
     let qSequence
+    this.displayArr = []
 
-    console.log(mm.sequences.isQuantizedSequence(seq))
     if(mm.sequences.isQuantizedSequence(seq) == true){
       qSequence = seq
     }else{
       qSequence = mm.sequences.quantizeNoteSequence(seq, 4)
     }
+
     displaySequence = qSequence.notes
 
     let anz = displaySequence.length
@@ -289,10 +290,13 @@ export class SketchpadComponent implements OnInit {
   }
 
   public playMelody(){
-    this.createINoteSequence()
+    if(!this.editModeVisible){
+      this.createINoteSequence()
+    }
     let quantizedSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
     this.player.start(quantizedSequence)
-    console.log(quantizedSequence)
+    //this.player.start(this.sequence)
+    //console.log(quantizedSequence)
   }
   public convertToEditMode(){
     if(!this.editModeVisible){
@@ -380,8 +384,10 @@ export class SketchpadComponent implements OnInit {
     let diffy
     let m = []
     let arrNumber
+    let melodyEdited = false
 
     this.editp5.mouseDragged = (event)=>{
+      melodyEdited = true
       let x = this.editp5.mouseX
       let y = this.editp5.mouseY
       for(let i = 0; i < this.displayArr.length; i++){
@@ -393,6 +399,7 @@ export class SketchpadComponent implements OnInit {
           arrNumber = i
           diffx = this.editp5.mouseX - draggedRect.xStart
           diffy = this.editp5.mouseY - draggedRect.yStart
+          actX = this.displayArr[i].xStart
           m.push({diffx: diffx, diffy: diffy})
         }
         
@@ -401,29 +408,43 @@ export class SketchpadComponent implements OnInit {
     }
 
     this.editp5.mouseReleased = ()=>{
-      this.canvElement = document.getElementById("canv")
+      if(melodyEdited){
+        this.canvElement = document.getElementById("canv")
 
-      actX = this.editp5.mouseX - m[0].diffx
-      actY = this.editp5.mouseY - m[0].diffy
+        //actX = this.editp5.mouseX - m[0].diffx
+        actY = this.editp5.mouseY - m[0].diffy
 
-      this.editp5.fill(255)
-      this.editp5.stroke(255)
-      this.editp5.rect(draggedRect.xStart, draggedRect.yStart, draggedRect.width, draggedRect.height)
-      draggedRect.xStart = actX
-      draggedRect.yStart = actY
+        this.editp5.fill(255)
+        this.editp5.stroke(255)
+        this.editp5.rect(draggedRect.xStart, draggedRect.yStart, draggedRect.width, draggedRect.height)
+        draggedRect.xStart = actX
+        draggedRect.yStart = actY
 
-      actY = this.off * Math.round(actY/this.off)
+        actY = this.off * Math.round(actY/this.off)
+        
+        //alert("pitch: " + draggedRect.pitch + " y: " + this.y_notes[draggedRect.pitch] + " newy: " + actY + " off: " + this.off)
 
-      this.changeMelody(draggedRect, arrNumber)
+        draggedRect.pitch = this.changeMelody(draggedRect, arrNumber, actY)
 
-      this.displayArr[arrNumber] = draggedRect
-      this.editp5.fill(0)
-      this.editp5.rect(actX, actY, draggedRect.width, draggedRect.height)
-      this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.editp5)
+        this.displayArr[arrNumber] = draggedRect
+
+        this.sequence.notes[arrNumber].pitch = this.displayArr[arrNumber].pitch
+        this.createGrid(this.canvElement.clientWidth, this.canvElement.clientHeight, this.editp5)
+        this.displayMelody(this.sequence, this.editp5)
+        melodyEdited = false
+      }
     }
   }
 
-  private changeMelody(rect, arrNumber){
-    this.displayArr[arrNumber]
+  private changeMelody(rect, arrNumber, actY){
+    //alert(actY - this.y_notes[rect.pitch])
+    let newPitch
+    for(let n in this.y_notes){
+      //alert(n)
+      if(this.y_notes[n] == actY){
+        newPitch = n
+      }
+    }
+    return parseInt(newPitch)
   }
 }
