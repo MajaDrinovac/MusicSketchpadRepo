@@ -88,6 +88,7 @@ export class SketchpadComponent implements OnInit {
     }
   }
 
+  //create drawsketch
   private sketch = (s) =>{
     s.setup = () =>{
       let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("drawCanv").parent(document.getElementById("canv"))
@@ -96,6 +97,7 @@ export class SketchpadComponent implements OnInit {
       s.background(255, 255, 255)
     }
 
+    //predict x/y to note
     s.mouseDragged = ()=>{
       if(this.state == "prediction"){
         let inputs = {
@@ -192,6 +194,7 @@ export class SketchpadComponent implements OnInit {
     }
   }
 
+  //display melody on sketch
   private displayMelody(seq, p5sketch){
     let durPrev = 0;
     let displaySequence = []
@@ -224,6 +227,7 @@ export class SketchpadComponent implements OnInit {
   }
   }
 
+  //create grid in editmode
   private createGrid(width, height, p5sketch){
     let offset = Math.round(height/7)
     let xOffset = Math.round(width/7)
@@ -247,6 +251,7 @@ export class SketchpadComponent implements OnInit {
     console.log(this.y_notes)
   }
 
+  //make melody from array of notes
   private createINoteSequence(){
     let countNotes = 0
     let lastNumber = 0
@@ -298,6 +303,7 @@ export class SketchpadComponent implements OnInit {
     //this.player.start(this.sequence)
     //console.log(quantizedSequence)
   }
+
   public convertToEditMode(){
     if(!this.editModeVisible){
       this.editModeVisible = true
@@ -386,6 +392,7 @@ export class SketchpadComponent implements OnInit {
     let arrNumber
     let melodyEdited = false
 
+    //when mouse dragged in editMode --> edit notes
     this.editp5.mouseDragged = (event)=>{
       melodyEdited = true
       let x = this.editp5.mouseX

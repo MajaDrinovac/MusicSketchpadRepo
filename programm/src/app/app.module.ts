@@ -12,13 +12,15 @@ import {MatIconModule}from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {FormsModule} from '@angular/forms'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material/card'
+import {MatCardModule} from '@angular/material/card';
+import { ControlsComponent } from './sketchpad/controls/controls.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SketchpadComponent
+    SketchpadComponent,
+    ControlsComponent
   ],
   imports: [
     BrowserModule,
