@@ -14,7 +14,7 @@
 
     <!--Opacity-->
       .cls-1, .cls-10, .cls-11, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-12 {
-        opacity: 0.5;
+        opacity: 0.4;
       }
 
       <!--5. Färbiges-->
@@ -65,8 +65,8 @@
 
       <!-- 4. Färbiges -->
       .cls-8 {
-        -webkit-animation: action2 2.1s infinite  alternate;
-        animation: action2 2.1s infinite  alternate;
+        -webkit-animation: action2 2.4s infinite  alternate;
+        animation: action2 2.4s infinite  alternate;
         transform-origin: center center;
         animation-delay: 1.4s;
         fill: #464a91;
@@ -108,8 +108,8 @@
       }
 
       .cls-12{
-         -webkit-animation: action5 1.3s infinite  alternate;
-        animation: action5 1.3s infinite  alternate;
+         -webkit-animation: action5 1.9s infinite  alternate;
+        animation: action5 1.9s infinite  alternate;
         transform-origin: center center;
 
       }
@@ -172,7 +172,7 @@
   <path class="cls-1" d="M137,194.73V110.29a9,9,0,1,1,17.92,0v84.44Z"/>
   <path class="cls-2" d="M190,99.06v95.67H172.09V99.06a9,9,0,1,1,17.92,0Z"/>
   <path class="cls-12" d="M208.48,194.73V130.87a9,9,0,0,1,17.93,0v63.86Z"/>
-  <path class="cls-2" d="M262.21,187.29v7.44H244.28v-7.44a9,9,0,0,1,17.93,0Z"/>
+  <path class="cls-12" d="M262.21,187.29v7.44H244.28v-7.44a9,9,0,0,1,17.93,0Z"/>
   <path class="cls-12" d="M298.3,172.61v22.12H280.38V172.61a9,9,0,1,1,17.92,0Z"/>
   <path class="cls-3" d="M315.47,194.73V156a9,9,0,1,1,17.93,0v38.78Z"/>
   <path class="cls-2" d="M369.5,180.08v14.65H351.57V180.08a9,9,0,1,1,17.93,0Z"/>

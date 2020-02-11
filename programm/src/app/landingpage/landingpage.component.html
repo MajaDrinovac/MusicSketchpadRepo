@@ -4,15 +4,17 @@
   
   
   <mat-grid-list cols="1" class="grid" rowHeight="fit">
-    <mat-grid-tile  class="background" colspan="1">
+    <mat-grid-tile  class="background" colspan="1" rowspan="12">
  
-        Music Sketchpad
+        <div id="heading">Music Sketchpad</div>
       
-      <a routerLink="/sketchpad">Sketchpad Seite</a>
-  
+       
     </mat-grid-tile>
-  
+<mat-grid-tile>
+  <a class="link" routerLink="/sketchpad"><img id="icon" src="../../assets/icons/download.png"></a>
+</mat-grid-tile>
+
    
-  
   </mat-grid-list>
 
+  

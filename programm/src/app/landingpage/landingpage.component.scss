@@ -1,3 +1,6 @@
+@font-face { font-family: 'Starting_DEMO';
+  src: url('../../assets/fonts/Starting_DEMO.ttf') format('truetype'); }
+
 mat-grid-list {
     font-family: 'Montserrat', sans-serif;
   }
@@ -25,6 +28,17 @@ mat-grid-list {
   #background{
       width: 70%;
   }
-  
-  
+
+#heading{
+  font-family: Starting_DEMO;
+  font-size: 7vw;
+}
+ 
+#icon{
+  height: 10vh;
+  width: 10vh;
+  margin-top: 0vw;
+  margin-left: 0vw;
+}
+
   
