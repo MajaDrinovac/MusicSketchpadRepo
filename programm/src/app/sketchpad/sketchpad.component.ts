@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
-import WebMidi from 'webmidi'
+import * as Tone from 'tone'
 import { MusicRNN, Player } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
-
 @Component({
   selector: 'sketchpad',
   templateUrl: './sketchpad.component.html',
@@ -299,11 +298,13 @@ export class SketchpadComponent implements OnInit {
       this.createINoteSequence()
     }
     let quantizedSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
-    this.player.start(quantizedSequence)
+    
+    //this.player.start(quantizedSequence)
+    
     //this.player.start(this.sequence)
     //console.log(quantizedSequence)
   }
-
+  private seq
   public convertToEditMode(){
     if(!this.editModeVisible){
       this.editModeVisible = true
@@ -415,6 +416,7 @@ export class SketchpadComponent implements OnInit {
     }
 
     this.editp5.mouseReleased = ()=>{
+      //only if the a note was dragged to edit the pitch
       if(melodyEdited){
         this.canvElement = document.getElementById("canv")
 
@@ -443,11 +445,10 @@ export class SketchpadComponent implements OnInit {
     }
   }
 
+  //in edit mode change pitch and return the new pitch
   private changeMelody(rect, arrNumber, actY){
-    //alert(actY - this.y_notes[rect.pitch])
     let newPitch
     for(let n in this.y_notes){
-      //alert(n)
       if(this.y_notes[n] == actY){
         newPitch = n
       }
