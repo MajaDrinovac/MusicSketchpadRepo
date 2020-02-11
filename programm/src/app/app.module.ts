@@ -19,7 +19,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
-  { path: 'sketchpad', component: SketchpadComponent }
+  { path: 'sketchpad', component: SketchpadComponent },
+  { path: '',
+    redirectTo: '/landingpage',
+    pathMatch: 'full'
+}
+
+
 ];
 
 
