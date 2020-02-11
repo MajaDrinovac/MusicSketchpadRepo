@@ -12,13 +12,21 @@ import {MatIconModule}from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {FormsModule} from '@angular/forms'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatCardModule} from '@angular/material/card'
+import {MatCardModule} from '@angular/material/card';
+import { LandingpageComponent } from './landingpage/landingpage.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { path: 'landingpage', component: LandingpageComponent },
+  { path: 'sketchpad', component: SketchpadComponent }
+];
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SketchpadComponent
+    SketchpadComponent,
+    LandingpageComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +39,11 @@ import {MatCardModule} from '@angular/material/card'
     MatToolbarModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

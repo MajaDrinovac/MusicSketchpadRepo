@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: 'landingpage/landingpage.component.html',
+  styleUrls: ['landingpage/landingpage.component.scss']
 })
 export class AppComponent {
   title = 'MusicSketchpad';
