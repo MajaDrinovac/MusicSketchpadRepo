@@ -6,7 +6,7 @@ mat-grid-list {
   height: 100%;
   width: 100%;
   background: #221C29;
-  overflow-y: hidden;
+
  
 }
 
@@ -36,7 +36,7 @@ section.naveintraege mat-icon {
   color: #c2bcbc;
   height: 34px;
   margin-left: 10%;
-  margin-top: -3.9%;
+  margin-top: 1%;
 }
 
 section.profil {
@@ -59,10 +59,10 @@ section.profil {
 section.profil mat-icon {
   vertical-align: middle;
   font-size: 7vw;
-  //margin-right: 10%;
+  margin-right: 10%;
   color: #c2bcbc;
   height: 34px;
-  //margin-left: 10%;
+ // margin-left: 10%;
 }
 
 section.titel {
@@ -76,6 +76,7 @@ section.titel {
 section.naveintraege:hover{
   cursor: pointer;
   background: #372D42;
+
 }
 
 /*#profil{
@@ -88,6 +89,7 @@ section.naveintraege:hover{
   width: 100%;
   font-size: 7vw;
   padding-left: 20%;
+  padding-top: 10%;
 
 
 }*/

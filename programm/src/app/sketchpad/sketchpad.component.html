@@ -1,4 +1,5 @@
 <div id="sketchpad">
+    
     <mat-grid-list cols="12" id="canv-grid" rowHeight="fit">
         <mat-grid-tile colspan="12" rowspan="1">
             <controls [melodyCreated]="melodyCreated" [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" (toEditMode)="convertToEditMode()" (toDrawMode)="convertToDrawMode()" (played)="playMelody()"></controls>
