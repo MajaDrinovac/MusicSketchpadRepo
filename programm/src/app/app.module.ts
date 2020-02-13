@@ -16,6 +16,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ControlsComponent } from './sketchpad/controls/controls.component'
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { RouterModule, Routes } from '@angular/router';
+import {MatSelectModule} from '@angular/material/select';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     FormsModule,
     MatProgressSpinnerModule,
     MatCardModule,
+    MatSelectModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

@@ -11,9 +11,13 @@ export class ControlsComponent implements OnInit {
   @Input() colorBtnEdit 
   @Input() colorBtnGrid
   @Input() melodyCreated
+  @Input() instruments
   @Output() toEditMode = new EventEmitter()
   @Output() toDrawMode = new EventEmitter()
   @Output() played = new EventEmitter()
+  @Output() changed = new EventEmitter<Number>()
+
+  public instrumentNr
 
   //public colorBtnEdit = "accent"
   //public colorBtnGrid = ""
@@ -21,6 +25,10 @@ export class ControlsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  public onChange(value){
+    this.changed.emit(value)
   }
 
   public onConvertToEditMode(){

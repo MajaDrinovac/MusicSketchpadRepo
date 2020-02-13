@@ -12,6 +12,7 @@ declare let ml5:any
   styleUrls: ['./sketchpad.component.scss']
 })
 export class SketchpadComponent implements OnInit {
+  public instruments
   private drawp5:p5
   private editp5:p5
   private model
@@ -156,9 +157,9 @@ export class SketchpadComponent implements OnInit {
           //this.state = "controls"
           this.deleteOption = true
           const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
-    this.instruments = Object.values(response.instruments);
-    const select = document.getElementById("select") as HTMLSelectElement
-    select.innerHTML = this.instruments.map(i => `<option>${i}</option>`).join('');
+          this.instruments = Object.values(response.instruments);
+    //const select = document.getElementById("select") as HTMLSelectElement
+    //select.innerHTML = this.instruments.map(i => `<option>${i}</option>`).join('');
         }
       //console.log(this.resultArray)
     } 
@@ -282,7 +283,7 @@ export class SketchpadComponent implements OnInit {
     }
     this.melodyCreated = true
   }
-private instruments
+
   public convertHex2Rgb(){
     this.melodyCreated = false
     let value = this.color.replace('#','');
@@ -299,23 +300,19 @@ private instruments
     this.deleteOption = false
   }
 
-  async playMelody(){
+  public playMelody(){
     if(!this.editModeVisible){
       this.createINoteSequence()
     }
-    //let sgm_plus = "../../assets/soundfont/soundfont.json"
     let q = this.soundfont_player.loadSamples(this.sequence)
-    console.log(q)
-    //this.soundfont_player.start(this.sequence)
-    //this.player.start(this.sequence)
-    //console.log(quantizedSequence)
-
-    const inst = (document.getElementById("select") as HTMLSelectElement).selectedIndex
     this.sequence.notes.forEach(element => {
-      element.program = inst
+      element.program =  this.inst
     });
     this.soundfont_player.start(this.sequence)
-    console.log(this.sequence)
+  }
+  private inst
+  public changeInstrument(value: Event){
+    this.inst = value
   }
 
   public convertToEditMode(){
