@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
-import { MusicRNN, Player } from '@magenta/music/es6'
+import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
 
@@ -12,6 +12,7 @@ declare let ml5:any
   styleUrls: ['./sketchpad.component.scss']
 })
 export class SketchpadComponent implements OnInit {
+  public instruments
   private drawp5:p5
   private editp5:p5
   private model
@@ -50,7 +51,8 @@ export class SketchpadComponent implements OnInit {
   private fillColor = [113, 134, 235]
   public color = "#7186EB"
   public melodyCreated:Boolean = false
-  private player:Player
+  private midi_player:MIDIPlayer
+  private soundfont_player:SoundFontPlayer
   public deleteOption:Boolean = false
   private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn")
   private continuedp5:p5
@@ -69,12 +71,13 @@ export class SketchpadComponent implements OnInit {
     this.model = ml5.neuralNetwork(options)
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
-    this.player = new mm.Player()
+    this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
   }
 
   ngOnInit() {
     this.drawp5 = new p5(this.sketch)
     //this.editp5 = new p5(this.editSketch)
+    alert(document.getElementById("canv").clientWidth)
   }
 
 
@@ -147,13 +150,17 @@ export class SketchpadComponent implements OnInit {
         this.targetLabel = s.key.toUpperCase()
       }
     }
-    s.mouseReleased = () =>{
+    s.mouseReleased = async () =>{
       //this.isDrawed = true
         //this.createINoteSequence()
         if(this.state == "prediction"){
           this.melodyCreated = true
           //this.state = "controls"
           this.deleteOption = true
+          const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
+          this.instruments = Object.values(response.instruments);
+    //const select = document.getElementById("select") as HTMLSelectElement
+    //select.innerHTML = this.instruments.map(i => `<option>${i}</option>`).join('');
         }
       //console.log(this.resultArray)
     } 
@@ -298,10 +305,15 @@ export class SketchpadComponent implements OnInit {
     if(!this.editModeVisible){
       this.createINoteSequence()
     }
-    let quantizedSequence = mm.sequences.quantizeNoteSequence(this.sequence, 4)
-    this.player.start(quantizedSequence)
-    //this.player.start(this.sequence)
-    //console.log(quantizedSequence)
+    let q = this.soundfont_player.loadSamples(this.sequence)
+    this.sequence.notes.forEach(element => {
+      element.program =  this.inst
+    });
+    this.soundfont_player.start(this.sequence)
+  }
+  private inst
+  public changeInstrument(value: Event){
+    this.inst = value
   }
 
   public convertToEditMode(){
@@ -370,7 +382,7 @@ export class SketchpadComponent implements OnInit {
   }
 
   public stopMelody(){
-    this.player.stop()
+    //this.player.stop()
   }
 
   private canvElement

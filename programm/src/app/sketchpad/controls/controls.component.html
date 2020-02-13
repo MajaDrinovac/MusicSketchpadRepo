@@ -1,7 +1,15 @@
-<mat-grid-list cols="5" rowHeight="fit" class="top">
-    <mat-grid-tile colspan="1" rowspan="1" id="melodyContr-btn">
+<mat-grid-list cols="10" rowHeight="fit" class="top">
+    <mat-grid-tile colspan="2" rowspan="1" id="melodyContr-btn">
         <button mat-flat-button [disabled]="!melodyCreated" (click)="onPlayed()"><mat-icon>play_arrow</mat-icon>Play</button>
         <button id="stop" mat-flat-button disabled><mat-icon>stop</mat-icon>Stop</button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1">
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="1" id="sel"> 
+        <mat-select disableRipple>
+            <mat-option *ngFor="let instrument of instruments, let i = index" [value]="i" (click)="onChange(i)">{{instrument}}</mat-option>
+        </mat-select>
     </mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
     <mat-grid-tile colspan="1" rowspan="1" id="drawContr-btn">

@@ -6,38 +6,21 @@
 
     <mat-grid-tile class="content" colspan="8">
         <div id="sketchpad">
+    
             <mat-grid-list cols="12" id="canv-grid" rowHeight="fit">
                 <mat-grid-tile colspan="12" rowspan="1">
-                    <mat-grid-list cols="5" rowHeight="fit" class="top">
-                        <mat-grid-tile colspan="1" rowspan="1" id="melodyContr-btn">
-                            <button mat-flat-button [disabled]="!melodyCreated" (click)="playMelody()">
-                                <mat-icon>play_arrow</mat-icon>Play
-                            </button>
-                            <button id="stop" mat-flat-button disabled>
-                                <mat-icon>stop</mat-icon>Stop
-                            </button>
-                        </mat-grid-tile>
-                        <mat-grid-tile colspan="1" rowspan="1"></mat-grid-tile>
-                        <mat-grid-tile colspan="1" rowspan="1" id="drawContr-btn">
-                            <button mat-flat-button [color]="colorBtnEdit" (click)="convertToDrawMode()" id="edit">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                            <button mat-flat-button [color]="colorBtnGrid" (click)="convertToEditMode()">
-                                <mat-icon>grid_on</mat-icon>
-                            </button>
-                        </mat-grid-tile>
-                    </mat-grid-list>
+                    <controls [melodyCreated]="melodyCreated" [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments" (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()" (toDrawMode)="convertToDrawMode()" (played)="playMelody()"></controls>
                 </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="8" class="sidebar"></mat-grid-tile>
-
+                <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
+                </mat-grid-tile>
+                
                 <mat-grid-tile colspan="8" rowspan="8" id="canv-g">
                     <mat-card id="canv"></mat-card>
                 </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="8" class="sidebar"></mat-grid-tile>
-
+                <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
+                </mat-grid-tile>
                 <mat-grid-tile colspan="12" rowspan="1"></mat-grid-tile>
             </mat-grid-list>
-
         </div>
 
     </mat-grid-tile>

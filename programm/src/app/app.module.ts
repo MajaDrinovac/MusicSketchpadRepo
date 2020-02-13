@@ -22,6 +22,7 @@ import { BibliothekComponent } from './bibliothek/bibliothek.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
 
+import {MatSelectModule} from '@angular/material/select';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     MatCardModule,
     MatInputModule,
     ReactiveFormsModule,
+    MatSelectModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
