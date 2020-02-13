@@ -77,7 +77,6 @@ export class SketchpadComponent implements OnInit {
   ngOnInit() {
     this.drawp5 = new p5(this.sketch)
     //this.editp5 = new p5(this.editSketch)
-    alert(document.getElementById("canv").clientWidth)
   }
 
 
