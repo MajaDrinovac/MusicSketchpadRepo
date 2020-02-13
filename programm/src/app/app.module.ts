@@ -14,13 +14,28 @@ import {FormsModule} from '@angular/forms'
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatCardModule} from '@angular/material/card';
 import { ControlsComponent } from './sketchpad/controls/controls.component'
+import { LandingpageComponent } from './landingpage/landingpage.component';
+import { RouterModule, Routes } from '@angular/router';
+import {MatSelectModule} from '@angular/material/select';
+
+const appRoutes: Routes = [
+  { path: 'landingpage', component: LandingpageComponent },
+  { path: 'sketchpad', component: SketchpadComponent },
+  { path: '',
+    redirectTo: '/landingpage',
+    pathMatch: 'full'
+}
+
+
+];
 
 
 @NgModule({
   declarations: [
     AppComponent,
     SketchpadComponent,
-    ControlsComponent
+    ControlsComponent,
+    LandingpageComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +48,12 @@ import { ControlsComponent } from './sketchpad/controls/controls.component'
     MatToolbarModule,
     FormsModule,
     MatProgressSpinnerModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
