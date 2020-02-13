@@ -22,10 +22,10 @@ export class ControlsComponent implements OnInit {
   //public colorBtnEdit = "accent"
   //public colorBtnGrid = ""
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+
 
   public onChange(value){
     this.changed.emit(value)
