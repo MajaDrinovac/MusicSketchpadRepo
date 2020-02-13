@@ -18,12 +18,18 @@ import { LoginComponent } from './login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ControlsComponent } from './sketchpad/controls/controls.component';
+import { BibliothekComponent } from './bibliothek/bibliothek.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavComponent } from './nav/nav.component';
 
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
   { path: 'sketchpad', component: SketchpadComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'bibliothek', component: BibliothekComponent},
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'nav', component: NavComponent },
   {
     path: '',
     redirectTo: '/landingpage',
@@ -38,7 +44,10 @@ const appRoutes: Routes = [
     SketchpadComponent,
     ControlsComponent,
     LandingpageComponent,
-    LoginComponent
+    LoginComponent,
+    BibliothekComponent,
+    DashboardComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
