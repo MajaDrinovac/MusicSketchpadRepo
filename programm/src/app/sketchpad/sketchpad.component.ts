@@ -5,6 +5,8 @@ import WebMidi from 'webmidi'
 import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
+import {MatDialog, MatDialogConfig} from '@angular/material'
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'sketchpad',
@@ -62,7 +64,7 @@ export class SketchpadComponent implements OnInit {
   public colorBtnEdit = "accent"
   public colorBtnGrid = ""
 
-  constructor() { 
+  constructor(private dialog: MatDialog) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -79,7 +81,20 @@ export class SketchpadComponent implements OnInit {
     //this.editp5 = new p5(this.editSketch)
   }
 
+  openDialog(){
+    this.state = "color"
+    const dialogConfig = new MatDialogConfig();
 
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "20vw"
+    dialogConfig.data = {instruments: this.instruments, color: this.color};
+
+    this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
+      this.state = "prediction"
+      this.color = result
+    })
+  }
 
   private modelLoaded(err){
     if(err){
@@ -176,7 +191,8 @@ export class SketchpadComponent implements OnInit {
     }
     console.log(this.color)
     this.drawp5.strokeWeight(20)
-    this.drawp5.stroke(this.fillColor[0], this.fillColor[1], this.fillColor[2])
+    //this.drawp5.stroke(this.fillColor[0], this.fillColor[1], this.fillColor[2])
+    this.drawp5.stroke(this.color)
     this.drawp5.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
     this.resultArray.push(results[0].label);
   }

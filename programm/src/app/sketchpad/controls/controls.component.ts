@@ -16,6 +16,7 @@ export class ControlsComponent implements OnInit {
   @Output() toDrawMode = new EventEmitter()
   @Output() played = new EventEmitter()
   @Output() changed = new EventEmitter<Number>()
+  @Output() opened = new EventEmitter()
 
   public instrumentNr
 
@@ -26,6 +27,9 @@ export class ControlsComponent implements OnInit {
 
   ngOnInit() {}
 
+  onOpenDialog(){
+    this.opened.emit()
+  }
 
   public onChange(value){
     this.changed.emit(value)

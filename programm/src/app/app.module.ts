@@ -21,8 +21,19 @@ import { ControlsComponent } from './sketchpad/controls/controls.component';
 import { BibliothekComponent } from './bibliothek/bibliothek.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
+import {MatMenuModule} from '@angular/material/menu';
+import  { MatDialogModule } from '@angular/material/dialog'
+import { ColorPickerModule } from 'ngx-color-picker'
+import {MatListModule} from '@angular/material/list'
 
 import {MatSelectModule} from '@angular/material/select';
+import { DialogComponent } from './sketchpad/dialog/dialog.component';
+import { ColorSketchModule } from 'ngx-color/sketch';
+import { ColorBlockModule } from 'ngx-color/block'; // <color-block></color-block>
+import { ColorCompactModule } from 'ngx-color/compact'; // <color-compact></color-compact>
+import { ColorCircleModule } from 'ngx-color/circle'; // <color-circle></color-circle>
+import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></color-swatches>
+import { ColorChromeModule } from 'ngx-color/chrome'; // <color-chrome></color-chrome>
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -48,7 +59,8 @@ const appRoutes: Routes = [
     LoginComponent,
     BibliothekComponent,
     DashboardComponent,
-    NavComponent
+    NavComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -65,12 +77,23 @@ const appRoutes: Routes = [
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
+    MatMenuModule,
+    MatDialogModule,
+    ColorPickerModule,
+    ColorSketchModule,
+    ColorBlockModule,
+    ColorCompactModule,
+    ColorCircleModule,
+    ColorSwatchesModule,
+    ColorChromeModule,
+    MatListModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogComponent]
 })
 export class AppModule { }

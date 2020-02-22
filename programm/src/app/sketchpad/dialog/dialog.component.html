@@ -1,0 +1,29 @@
+<h2 mat-dialog-title [style.color]="'#ababab'" *ngIf="!instrumentDialogVisible"><mat-icon>colorize</mat-icon>  Color Picker</h2>
+<h2 mat-dialog-title *ngIf="instrumentDialogVisible">Instrumente</h2>
+<div mat-dialog-content style="align-self: center;" *ngIf="!instrumentDialogVisible"> 
+       <!-- <mat-card type="text"
+            class="c-picker"
+            [(colorPicker)]="color" 
+            [style.background]="color" 
+            [cpPresetColors]="['#fff', '#000', '#2889e9', '#e920e9', '#fff500', 'rgb(236,64,64)']" 
+            [cpPosition]="'bottom'"
+            [style.color]="fontColorPrediction()" 
+            >
+            <mat-icon>arrow_drop_down</mat-icon>
+        </mat-card>-->
+        <color-circle (onChange)="handleChange($event)" id="color" (onSwatchHover)="handleMouseOver($event)"></color-circle>
+</div>
+<div mat-dialog-content *ngIf="instrumentDialogVisible"> 
+    <mat-list>
+        <mat-list-item *ngFor="let instrument of instruments, let i = index" class="instrument" [style.color]="isClicked == i ? color : '#000'" (click)="chooseInstrument(i)">{{instrument}}</mat-list-item>
+    </mat-list>
+</div>
+<div mat-dialog-actions *ngIf="!instrumentDialogVisible" style="direction: rtl;">
+    <button mat-raised-button color="primary" (click)="next()"><mat-icon>arrow_forward</mat-icon>Next </button>
+    <button mat-button color="warn" (click)="close()">Close</button>
+</div>
+<div mat-dialog-actions *ngIf="instrumentDialogVisible" style="direction: rtl;">
+    <button mat-raised-button color="primary" (click)="save()">Accept</button>
+    <button mat-button (click)="back()">Back</button>
+</div>
+

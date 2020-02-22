@@ -9,7 +9,7 @@
     
             <mat-grid-list cols="12" id="canv-grid" rowHeight="fit">
                 <mat-grid-tile colspan="12" rowspan="1">
-                    <controls [melodyCreated]="melodyCreated" [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments" (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()" (toDrawMode)="convertToDrawMode()" (played)="playMelody()"></controls>
+                    <controls (opened)="openDialog()" [melodyCreated]="melodyCreated" [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments" (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()" (toDrawMode)="convertToDrawMode()" (played)="playMelody()"></controls>
                 </mat-grid-tile>
                 <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
                 </mat-grid-tile>
