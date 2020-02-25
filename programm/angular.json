@@ -28,8 +28,10 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/theme.scss"
+              }
             ],
             "scripts": [
               "./node_modules/ml5/dist/ml5.min.js",
@@ -97,8 +99,10 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              {
+                "input": "src/theme.scss"
+              }
             ],
             "scripts": []
           }
