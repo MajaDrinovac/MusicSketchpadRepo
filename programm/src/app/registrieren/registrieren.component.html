@@ -2,16 +2,20 @@
     <mat-grid-tile rows="3" class="nav" colspan="2">
 
         <app-nav class="nav"></app-nav>
-
     </mat-grid-tile>
 
     <mat-grid-tile class="content" colspan="8">
 
-        <div id="loginbox">
+        <div id="registrierenbox">
 
 
-            <form class="loginForm">
-                <h2>Melde dich an</h2>
+            <form class="registrierenForm">
+                <h2>Registriere dich</h2>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Benutzername</mat-label>
+                    <input matInput type="text">
+                </mat-form-field>
 
                 <br>
                 <mat-form-field class="example-full-width">
@@ -30,10 +34,15 @@
                     <input matInput type="password">
                 </mat-form-field>
                 <br>
-                <button class="buttonSend" mat-raised-button color="accent">Melde dich an</button>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Passwort wiederholen</mat-label>
+                    <input matInput type="password">
+                </mat-form-field>
                 <br>
-                <a routerLink="/registrieren">
-                    <h5>Noch kein Mitglied?<br>Registrieren</h5>
+                <button class="buttonSend" mat-raised-button color="accent">Registriere dich</button>
+                <br>
+                <a routerLink="/login">
+                    <h5>Schon Mitglied?<br>Melde dich an</h5>
                 </a>
 
             </form>
