@@ -77,7 +77,8 @@ public convertHex2Rgb(hex){
   }
   public save(){
     //this.dialogRef.close("pizza")
-    this.dialogRef.close(this.color)
+    let d = {color: this.color, instrument: this.isClicked}
+    this.dialogRef.close(d)
   }
 
   public close(){

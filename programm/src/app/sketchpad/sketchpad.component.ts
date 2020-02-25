@@ -92,7 +92,8 @@ export class SketchpadComponent implements OnInit {
 
     this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
       this.state = "prediction"
-      this.color = result
+      this.color = result.color
+      this.inst = result.instrument
     })
   }
 
@@ -327,7 +328,7 @@ export class SketchpadComponent implements OnInit {
     this.soundfont_player.start(this.sequence)
   }
   private inst
-  public changeInstrument(value: Event){
+  public changeInstrument(value){
     this.inst = value
   }
 
