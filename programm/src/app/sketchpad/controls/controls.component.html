@@ -17,7 +17,7 @@
 </mat-menu>
 
 <mat-menu #line="matMenu">
-    <button mat-menu-item>Light</button>
-    <button mat-menu-item>Medium</button>
-    <button mat-menu-item>Thick</button>
+    <button mat-menu-item (click)="changeLineWeight(10)">Light</button>
+    <button mat-menu-item (click)="changeLineWeight(20)">Medium</button>
+    <button mat-menu-item (click)="changeLineWeight(30)">Thick</button>
 </mat-menu>

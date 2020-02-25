@@ -191,7 +191,7 @@ export class SketchpadComponent implements OnInit {
       return
     }
     console.log(this.color)
-    this.drawp5.strokeWeight(20)
+    this.drawp5.strokeWeight(this.lineWeight)
     //this.drawp5.stroke(this.fillColor[0], this.fillColor[1], this.fillColor[2])
     this.drawp5.stroke(this.color)
     this.drawp5.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
@@ -327,9 +327,13 @@ export class SketchpadComponent implements OnInit {
     });
     this.soundfont_player.start(this.sequence)
   }
-  private inst
+  private inst = 1
   public changeInstrument(value){
     this.inst = value
+  }
+  private lineWeight = 20
+  public changeLineWeight(value){
+    this.lineWeight = value
   }
 
   public convertToEditMode(){

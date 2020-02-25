@@ -17,6 +17,7 @@ export class ControlsComponent implements OnInit {
   @Output() played = new EventEmitter()
   @Output() changed = new EventEmitter<Number>()
   @Output() opened = new EventEmitter()
+  @Output() changedLine = new EventEmitter<Number>()
 
   public instrumentNr
 
@@ -45,5 +46,9 @@ export class ControlsComponent implements OnInit {
 
   public onPlayed(){
     this.played.emit()
+  }
+
+  public changeLineWeight(value){
+    this.changedLine.emit(value);
   }
 }
