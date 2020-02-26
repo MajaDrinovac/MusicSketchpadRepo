@@ -45,6 +45,7 @@ const appRoutes: Routes = [
   { path: 'bibliothek', component: BibliothekComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'nav', component: NavComponent },
+  { path: 'profil', component: ProfilComponent },
   {
     path: '',
     redirectTo: '/landingpage',

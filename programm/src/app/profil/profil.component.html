@@ -1,1 +1,45 @@
-<p>profil works!</p>
+<mat-grid-list cols="10" class="grid" rowHeight="fit">
+    <mat-grid-tile rows="3" class="nav" colspan="2">
+
+        <app-nav class="nav"></app-nav>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile class="content" colspan="8">
+
+        <mat-card id="loginbox">
+
+
+            <form class="loginForm">
+                <h2>Melde dich an</h2>
+
+                <br>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Email</mat-label>
+                    <input matInput [formControl]="emailFormControl" placeholder="example@mail.com">
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="example-full-width">
+                    <mat-label>Passwort</mat-label>
+                    <input matInput type="password">
+                </mat-form-field>
+                <br>
+                <button class="buttonSend" mat-raised-button color="accent">Melde dich an</button>
+                <br>
+                <a routerLink="/registrieren">
+                    <h5>Noch kein Mitglied?<br>Registrieren</h5>
+                </a>
+
+            </form>
+
+        </mat-card>
+
+    </mat-grid-tile>
+
+</mat-grid-list>
