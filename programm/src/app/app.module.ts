@@ -34,7 +34,8 @@ import { ColorCompactModule } from 'ngx-color/compact'; // <color-compact></colo
 import { ColorCircleModule } from 'ngx-color/circle'; // <color-circle></color-circle>
 import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></color-swatches>
 import { ColorChromeModule } from 'ngx-color/chrome';
-import { RegistrierenComponent } from './registrieren/registrieren.component'; // <color-chrome></color-chrome>
+import { RegistrierenComponent } from './registrieren/registrieren.component';
+import { ProfilComponent } from './profil/profil.component'; // <color-chrome></color-chrome>
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     NavComponent,
     DialogComponent,
-    RegistrierenComponent
+    RegistrierenComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
