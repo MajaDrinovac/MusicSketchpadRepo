@@ -11,9 +11,11 @@
                 <mat-grid-tile colspan="12" rowspan="1">
                     <controls (opened)="openDialog()" [melodyCreated]="melodyCreated" [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments" (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()" (changedLine)="changeLineWeight($event)" (toDrawMode)="convertToDrawMode()" (played)="playMelody()"></controls>
                 </mat-grid-tile>
-                <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
+                <!--<mat-grid-tile colspan="1" rowspan="8" class="sidebar" [style.background]="'url(\'../../assets/icons/paint.svg\')'" [style.background-repeat]="'no-repeat'">
+                    <button mat-button><mat-icon svgIcon="acoustic-guitar"></mat-icon></button>
+                </mat-grid-tile>-->
+                <mat-grid-tile colspan="1" rowspan="8" class="sidebar" >
                 </mat-grid-tile>
-                
                 <mat-grid-tile colspan="8" rowspan="8" id="canv-g">
                     <mat-card id="canv"></mat-card>
                 </mat-grid-tile>

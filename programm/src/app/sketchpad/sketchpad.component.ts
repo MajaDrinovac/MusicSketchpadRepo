@@ -5,8 +5,10 @@ import WebMidi from 'webmidi'
 import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
-import {MatDialog, MatDialogConfig} from '@angular/material'
+import {MatDialog, MatDialogConfig, MatIconRegistry} from '@angular/material'
 import { DialogComponent } from './dialog/dialog.component';
+import { DomSanitizer } from '@angular/platform-browser';
+import { IconService } from '../icon.service';
 
 @Component({
   selector: 'sketchpad',
@@ -63,8 +65,9 @@ export class SketchpadComponent implements OnInit {
   private displayArr = []
   public colorBtnEdit = "accent"
   public colorBtnGrid = ""
+  private colorInst = "#"
 
-  constructor(private dialog: MatDialog) { 
+  constructor(private dialog: MatDialog, private iconService:IconService) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -78,6 +81,7 @@ export class SketchpadComponent implements OnInit {
 
   ngOnInit() {
     this.drawp5 = new p5(this.sketch)
+    this.iconService.customIcons()
     //this.editp5 = new p5(this.editSketch)
   }
 
@@ -291,7 +295,7 @@ export class SketchpadComponent implements OnInit {
             }else{
                 notes++
                 let dur = (countNotes%10)*0.1
-                let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur}
+                let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur, inst: this.inst}
                 lastNumber = lastNumber + dur
                 this.sequence.notes.push(x)
                 this.sequence.totalTime = x.endTime

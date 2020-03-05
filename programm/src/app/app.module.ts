@@ -35,6 +35,8 @@ import { ColorCircleModule } from 'ngx-color/circle'; // <color-circle></color-c
 import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></color-swatches>
 import { ColorChromeModule } from 'ngx-color/chrome'; // <color-chrome></color-chrome>
 
+import {HttpClientModule} from '@angular/common/http'
+
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
   { path: 'sketchpad', component: SketchpadComponent },
@@ -87,6 +89,7 @@ const appRoutes: Routes = [
     ColorSwatchesModule,
     ColorChromeModule,
     MatListModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
