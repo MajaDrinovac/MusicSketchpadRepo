@@ -83,20 +83,20 @@ mat-grid-list {
   
   }
   
-  #loginbox {
+  #registrierenbox {
       /*width: 36vw;
-      height: 35vw;
+      height: 41vw;
       background-color: white;
       border-radius: 20px;*/
       border-radius: 20px;
       padding-left: 10%;
       padding-right: 10%;
-      padding-top: 3%;
-      padding-bottom: 6%;
+      padding-top: 1%;
+      padding-bottom: 4%;
       font-family: 'Montserrat', sans-serif;
   }
 
-  .loginForm {
+  .registrierenForm {
       text-align: center;
   }
 
@@ -122,9 +122,4 @@ mat-grid-list {
   h5 {
     color: rgba(255, 65, 125, 0.79);
     font-weight: 300;
-  }
-
-  #link{
-    color: #c2bcbc;
-    text-decoration: none;
   }

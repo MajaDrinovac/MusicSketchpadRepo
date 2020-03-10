@@ -33,20 +33,24 @@ import { ColorBlockModule } from 'ngx-color/block'; // <color-block></color-bloc
 import { ColorCompactModule } from 'ngx-color/compact'; // <color-compact></color-compact>
 import { ColorCircleModule } from 'ngx-color/circle'; // <color-circle></color-circle>
 import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></color-swatches>
-import { ColorChromeModule } from 'ngx-color/chrome'; // <color-chrome></color-chrome>
+import { ColorChromeModule } from 'ngx-color/chrome';
+import { RegistrierenComponent } from './registrieren/registrieren.component';
+import { ProfilComponent } from './profil/profil.component'; // <color-chrome></color-chrome>
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
   { path: 'sketchpad', component: SketchpadComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'registrieren', component: RegistrierenComponent },
   { path: 'bibliothek', component: BibliothekComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'nav', component: NavComponent },
+  { path: 'profil', component: ProfilComponent },
   {
     path: '',
     redirectTo: '/landingpage',
     pathMatch: 'full'
-  },
+  }
 ];
 
 
@@ -60,7 +64,9 @@ const appRoutes: Routes = [
     BibliothekComponent,
     DashboardComponent,
     NavComponent,
-    DialogComponent
+    DialogComponent,
+    RegistrierenComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
