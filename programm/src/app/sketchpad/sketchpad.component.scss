@@ -7,6 +7,8 @@ $height-sketchpad: 100vh;
     height: 100vh;
 }
 #sketchpad{
+    margin-top: 30px;
+    margin-left: -50px;
     height: $height-sketchpad;
     width: $width-sketchpad;
     background: #F6F6F6;
@@ -128,80 +130,34 @@ mat-grid-list {
     text-decoration: none;
   }
   
-  /*#profil{
-    width: 100%;
-    padding-left: 30%;
+
+
+
+  //NAVIGATION
+  .sidebar {
+    margin-left: 64px;
+    padding: 0;
+    width: 200px;
+    position: relative;
+    background-color: #f1f1f1;
+    height: 100%;
+  }
   
-  }*/
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+   
+  .sidebar a.active {
+    background-color: #555;
+    color: white;
+  }
   
-  /*#person{
-    width: 100%;
-    font-size: 7vw;
-    padding-left: 20%;
-    padding-top: 10%;
-  
-  
-  }*/
-  
-  /*
-  section.naveintraege {
-      &:before, &:after {
-        position: absolute;
-        //left: -100px;
-        //bottom: -200px;
-        //width: 100px;
-        //height: 500px;
-        border-radius: 50%;
-        background: #a657c5;
-        content: '';
-        opacity: 0;
-        transition: transform 0.15s cubic-bezier(0.4, 0.4, 0.4, 1), opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
-        z-index: -1;
-        transform: translate(100%, -70%) translate3d(3, 3, 3);
-      }
-      &:hover {
-        &:before, &:after {
-          opacity: 0.15;
-          transition: transform 0.2s cubic-bezier(0.4, 0.7, 0.7, 1), opacity 0.5s cubic-bezier(0.02, 0.01, 0.47, 1);
-        }
-        &:before {
-          transform: translate3d(50%, 0, 0) scale(0.9);
-        }
-        &:after {
-          transform: translate(50%, 0) scale(1.1);
-        } 
-      }
-    }
-    section.naveintraege {
-      position: relative;
-      margin: 0;
-      //height: 60px;
-      //width: 100%;
-      outline: none;
-      text-decoration: none;
-      display: flex;
-      //justify-content: center;
-      //align-items: center;
-      cursor: pointer;
-      text-transform: uppercase;
-      background-color: transparent;
-      //border-bottom: 1px solid white;
-      //color: white;
-      //font-weight: 400;
-      //font-size: 20px;
-      font-family: inherit;
-      z-index: 0;
-      //overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
-      &:hover {
-        animation: rotate 0.7s ease-in-out both;
-        span {
-          animation: storm 0.7s ease-in-out both;
-          animation-delay: 0.06s;
-        }
-      }
-    }
-    */
-    
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
     
   

@@ -5,15 +5,27 @@
     </mat-grid-tile>
 
     <mat-grid-tile class="content" colspan="8">
+        <div class="sidebar" id="mySidenav">
+            <a href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+            <button id="close" (click)="closeNav()">CLOSE</button>
+
+        </div>
+
         <div id="sketchpad">
-    
+
             <mat-grid-list cols="12" id="canv-grid" rowHeight="fit">
                 <mat-grid-tile colspan="12" rowspan="1">
-                    <controls (opened)="openDialog()" [melodyCreated]="melodyCreated" [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments" (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()" (changedLine)="changeLineWeight($event)" (toDrawMode)="convertToDrawMode()" (played)="playMelody()"></controls>
+                    <controls (opened)="openDialog()" [melodyCreated]="melodyCreated" [colorBtnEdit]="colorBtnEdit"
+                        [colorBtnGrid]="colorBtnGrid" [instruments]="instruments" (changed)="changeInstrument($event)"
+                        (toEditMode)="convertToEditMode()" (changedLine)="changeLineWeight($event)"
+                        (toDrawMode)="convertToDrawMode()" (played)="playMelody()"></controls>
                 </mat-grid-tile>
                 <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
                 </mat-grid-tile>
-                
+
                 <mat-grid-tile colspan="8" rowspan="8" id="canv-g">
                     <mat-card id="canv"></mat-card>
                 </mat-grid-tile>
