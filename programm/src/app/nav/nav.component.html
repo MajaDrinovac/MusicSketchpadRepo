@@ -10,7 +10,7 @@
     </section>
 
     <a routerLink="/dashboard">
-        <section class="naveintraege">
+        <section [style.backgroundColor]="dashboardMenue" class="naveintraege" id="dashboardMenue">
             <mat-icon>dashboard_outline</mat-icon>
             <a routerLink="/dashboard">Dashboard</a>
         </section>
@@ -25,7 +25,7 @@
 
 
     <a routerLink="/bibliothek">
-        <section class="naveintraege">
+        <section [style.backgroundColor]="bibliothekMenue" class="naveintraege" id="bibliothekMenue">
             <mat-icon>folder_outline</mat-icon>
             <a routerLink="/bibliothek">Bibliothek</a>
         </section>
