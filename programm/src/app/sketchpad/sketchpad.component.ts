@@ -63,6 +63,7 @@ export class SketchpadComponent implements OnInit {
   private displayArr = []
   public colorBtnEdit = "accent"
   public colorBtnGrid = ""
+  public colorWhite = "#fff"
 
   constructor(private dialog: MatDialog) { 
     let options = {
