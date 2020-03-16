@@ -80,11 +80,16 @@ mat-grid-list {
     }
   }
 
-  #addInstrument{
-    margin-left: 5vw;
+  .addInstrument{
+    /*margin-left: 5vw;
     margin-right: 5vw;
-    margin-top: 5vh;
+    margin-top: 8vh;*/
+    width: 4vw;
+    margin-left: 1.8vw;
+    margin-top: 4.5vh;
   }
+
+
   
   .sidenav{
     height: 100%;
@@ -207,6 +212,7 @@ mat-grid-list {
   }
 
   .mat-sidenav{
+    width: 14vw;
     box-shadow: inset 7px 0 9px -7px #888;
   }
 
@@ -214,7 +220,18 @@ mat-grid-list {
     margin-top: 2vh;
     margin-left: 1.9vw;
   }
-    
+
+.instrument-placeholder{
+  width: 8vw;
+  height: 14vh;
+  margin-left: 1.8vw;
+  border: 2px dotted;
+  opacity: 0.8;
+}
+
+.instr-item{
+  margin-top: 10vh;
+}
     
   
 

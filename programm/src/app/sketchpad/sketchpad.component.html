@@ -1,5 +1,5 @@
 <mat-grid-list cols="100" class="grid" rowHeight="fit">
-    <mat-grid-tile rows="3" class="nav" colspan="8" id="test">
+    <mat-grid-tile rows="5" class="nav" colspan="8" id="test">
 
 
         <div class="sidenav">
@@ -32,12 +32,19 @@
             <mat-sidenav mode="side" opened class="sidenavElements">
                 <p id="header">FAVORITES</p>
                 <mat-list>
-                    <mat-list-item >hello</mat-list-item>
-                    <mat-list-item >hello</mat-list-item>
-                    <mat-list-item >hello</mat-list-item>
-                    <mat-list-item>hello</mat-list-item>
+                    <mat-list-item class="instr-item" [style.margin-top]="'5vh'">
+                        <div class="instrument-placeholder"  [style.border]="'2px dotted' + color" >
+                            <button mat-raised-button class="addInstrument"(click)="openDialog()"><mat-icon>add</mat-icon></button>
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item class="instr-item"><div class="instrument-placeholder">
+                        <button mat-raised-button class="addInstrument"><mat-icon>add</mat-icon></button>
+                    </div></mat-list-item>
+                    <mat-list-item class="instr-item"><div class="instrument-placeholder">
+                        <button mat-raised-button class="addInstrument"><mat-icon>add</mat-icon></button>
+                    </div></mat-list-item>
                 </mat-list>
-                <button mat-fab id="addInstrument"><mat-icon>add</mat-icon></button>
+                <!--<button mat-fab id="addInstrument"><mat-icon>add</mat-icon></button>-->
             </mat-sidenav>
             <mat-sidenav-content class="sidenavContent">
                 <div id="sketchpad">

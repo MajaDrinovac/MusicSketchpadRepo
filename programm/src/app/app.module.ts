@@ -36,7 +36,7 @@ import { ColorCircleModule } from 'ngx-color/circle'; // <color-circle></color-c
 import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></color-swatches>
 import { ColorChromeModule } from 'ngx-color/chrome';
 import { RegistrierenComponent } from './registrieren/registrieren.component';
-import { ProfilComponent } from './profil/profil.component'; // <color-chrome></color-chrome>
+import { ProfilComponent } from './profil/profil.component';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -97,7 +97,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -7,8 +7,8 @@ mat-grid-list {
   .nav{
     height: 100%;
     width: 100%;
-    /**background: #221C29;**/
-    background-color: #607D8B;
+    background: #221C29;
+   /** background-color: #607D8B;**/
   }
   
   .content{
@@ -49,7 +49,7 @@ mat-grid-list {
     padding-left: 33%;
     cursor: pointer;
     margin-top: 5%;
-    //background-color: #372D42;
+    background-color: #372D42;
   }
   
   #profilBez {
@@ -87,7 +87,7 @@ mat-grid-list {
       height: 35vw;
       background-color: white;
       border-radius: 20px;*/
-      /*border-radius: 20px;*/
+      border-radius: 20px;
       padding-left: 10vw;
       padding-right: 10vw;
       padding-top: 3vh;
