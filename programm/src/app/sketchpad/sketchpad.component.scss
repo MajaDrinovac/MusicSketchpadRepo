@@ -7,6 +7,9 @@ $height-sketchpad: 100vh;
     height: 100vh;
 }
 #sketchpad{
+    padding-top: 5%;
+    padding-right: 50%;
+    //margin-left: -90px;
     height: $height-sketchpad;
     width: $width-sketchpad;
     background: #F6F6F6;
@@ -44,13 +47,20 @@ mat-card{
 mat-grid-list {
     font-family: 'Montserrat', sans-serif;
   }
+
+  #link{
+    color: #c2bcbc;
+    text-decoration: none;
+  }
+
+
+  //NAV
   
-  .nav{
+  .sidenav{
     height: 100%;
     width: 100%;
     background: #221C29;
   
-   
   }
   
   .content{
@@ -67,19 +77,18 @@ mat-grid-list {
     padding-top: 2vh;
     padding-bottom: 2vh;
     color: #c2bcbc;
-    vertical-align: middle;
+    //vertical-align: middle;
     cursor: pointer;
     font-size: 1vw;
-    margin-top: 8px;
   }
   
   section.naveintraege mat-icon {
     vertical-align: middle;
     font-size: 4vh;
-    margin-right: 10%;
+    //margin-right: 10%;
     color: #c2bcbc;
     height: 34px;
-    margin-left: 10%;
+    margin-left: 28%;
     margin-top: 1%;
   }
   
@@ -101,9 +110,9 @@ mat-grid-list {
   }
   
   section.profil mat-icon {
-    vertical-align: middle;
+    //vertical-align: middle;
     font-size: 7vw;
-    margin-right: 10%;
+    margin-right: 0;
     color: #c2bcbc;
     height: 34px;
    // margin-left: 10%;
@@ -111,9 +120,9 @@ mat-grid-list {
   
   section.titel {
     color: #c2bcbc;
-    font-size: 1.5vw;
-    margin-top: 7%;
-    margin-left: 10%;
+    font-size: 1vw;
+    margin-top: 5%;
+    margin-left: 5%;
     margin-right: 10%;
   }
   
@@ -122,81 +131,53 @@ mat-grid-list {
     background: #372D42;
   
   }
-  
-  /*#profil{
-    width: 100%;
-    padding-left: 30%;
-  
-  }*/
-  
-  /*#person{
-    width: 100%;
-    font-size: 7vw;
-    padding-left: 20%;
-    padding-top: 10%;
-  
-  
-  }*/
-  
-  /*
-  section.naveintraege {
-      &:before, &:after {
-        position: absolute;
-        //left: -100px;
-        //bottom: -200px;
-        //width: 100px;
-        //height: 500px;
-        border-radius: 50%;
-        background: #a657c5;
-        content: '';
-        opacity: 0;
-        transition: transform 0.15s cubic-bezier(0.4, 0.4, 0.4, 1), opacity 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
-        z-index: -1;
-        transform: translate(100%, -70%) translate3d(3, 3, 3);
-      }
-      &:hover {
-        &:before, &:after {
-          opacity: 0.15;
-          transition: transform 0.2s cubic-bezier(0.4, 0.7, 0.7, 1), opacity 0.5s cubic-bezier(0.02, 0.01, 0.47, 1);
-        }
-        &:before {
-          transform: translate3d(50%, 0, 0) scale(0.9);
-        }
-        &:after {
-          transform: translate(50%, 0) scale(1.1);
-        } 
-      }
-    }
-    section.naveintraege {
-      position: relative;
-      margin: 0;
-      //height: 60px;
-      //width: 100%;
-      outline: none;
+
+  #kreis{
+      width: 20vw;
+      height: 20vw;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 100%;
+      margin: 2vw;
+  }
+
+  #text{
+
+      width: 20vw;
+      height: 10vw;
+      background-color: purple;
+
+  }
+
+  a{
+      color: #c2bcbc;
       text-decoration: none;
-      display: flex;
-      //justify-content: center;
-      //align-items: center;
-      cursor: pointer;
-      text-transform: uppercase;
-      background-color: transparent;
-      //border-bottom: 1px solid white;
-      //color: white;
-      //font-weight: 400;
-      //font-size: 20px;
-      font-family: inherit;
-      z-index: 0;
-      //overflow: hidden;
-      transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
-      &:hover {
-        animation: rotate 0.7s ease-in-out both;
-        span {
-          animation: storm 0.7s ease-in-out both;
-          animation-delay: 0.06s;
-        }
-      }
-    }
-    */
+  }
+  
+
+
+ 
+
+  .mat-drawer-container {
+    width: 100%;
+  }
+
+  #activeEintrag {
+    background-color: rgb(78, 63, 94);
+  }
+
     
     
   
+
+
+
+
+
+
+
+
+
+  
+  
+

@@ -39,12 +39,43 @@ mat-grid-list {
       border-width: 1px;
       border-radius: 100%;
       margin: 2vw;
+      background-color: red;
   }
 
-  a{
-      color: #c2bcbc;
-      text-decoration: none;
+  .kreis{
+    width: 20vw;
+      height: 20vw;
+      border-radius: 100%;
+      background-color: red;
+      position: relative;
+
   }
+
+  .kreis:hover .post-s{
+    width: 20vw;
+  }
+  .post-s{
+    width: 0vw;
+    height: 20vw;
+    border-radius: 100%;
+    background: rgba(103, 58 ,183, 0.71);
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: 0.5 ease-in;
+
+  }
+
+  .post-s h2{
+    text-align: center;
+    color: white;
+    border: 6px solid white;
+    padding: 10px;
+  }
+
   
   /*#profil{
     width: 100%;

@@ -21,12 +21,13 @@ import { ControlsComponent } from './sketchpad/controls/controls.component';
 import { BibliothekComponent } from './bibliothek/bibliothek.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NavComponent } from './nav/nav.component';
-import {MatMenuModule} from '@angular/material/menu';
-import  { MatDialogModule } from '@angular/material/dialog'
+import { MatMenuModule } from '@angular/material/menu';
+import { MatDialogModule } from '@angular/material/dialog'
 import { ColorPickerModule } from 'ngx-color-picker'
-import {MatListModule} from '@angular/material/list'
+import { MatListModule } from '@angular/material/list'
 
-import {MatSelectModule} from '@angular/material/select';
+
+import { MatSelectModule } from '@angular/material/select';
 import { DialogComponent } from './sketchpad/dialog/dialog.component';
 import { ColorSketchModule } from 'ngx-color/sketch';
 import { ColorBlockModule } from 'ngx-color/block'; // <color-block></color-block>
@@ -42,8 +43,8 @@ const appRoutes: Routes = [
   { path: 'sketchpad', component: SketchpadComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registrieren', component: RegistrierenComponent },
-  { path: 'bibliothek', component: BibliothekComponent},
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'bibliothek', component: BibliothekComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'nav', component: NavComponent },
   { path: 'profil', component: ProfilComponent },
   {

@@ -484,4 +484,10 @@ export class SketchpadComponent implements OnInit {
     }
     return parseInt(newPitch)
   }
+
+  closeNav() {
+    (<HTMLInputElement>document.getElementById("mySidenav")).style.visibility = "hidden";
+    //(<HTMLInputElement>document.getElementById("sketchpad")).style.marginLeft = "111px";
+
+  }
 }

@@ -1,28 +1,33 @@
-<section class="titel">
-    MUSIC SKETCHPAD
-</section>
-
-<section class="profil">
-    <!--<div id="profil"><mat-icon id="person">person</mat-icon><br>Profil</div>-->
-    <mat-icon id="person">person_outline</mat-icon><br>
-    <div id="profilBez"><a routerLink="/login">Profil</a></div>
-</section>
-
-<a routerLink="/dashboard">
-    <section class="naveintraege">
-        <mat-icon>dashboard_outline</mat-icon>Dashboard
+<div class="sidenav">
+    <section class="titel">
+        MUSIC SKETCHPAD
     </section>
-</a>
 
-<a routerLink="/sketchpad">
-    <section class="naveintraege">
-        <mat-icon>gesture</mat-icon>Neue Melodie
+    <section class="profil">
+        <!--<div id="profil"><mat-icon id="person">person</mat-icon><br>Profil</div>-->
+        <mat-icon id="person">person_outline</mat-icon><br>
+        <div id="profilBez"><a routerLink="/login">Profil</a></div>
     </section>
-</a>
+
+    <a routerLink="/dashboard">
+        <section [style.backgroundColor]="dashboardMenue" class="naveintraege" id="dashboardMenue">
+            <mat-icon>dashboard_outline</mat-icon>
+            <a routerLink="/dashboard">Dashboard</a>
+        </section>
+    </a>
+
+    <a routerLink="/sketchpad">
+        <section class="naveintraege">
+            <mat-icon>gesture</mat-icon>
+            <a routerLink="/sketchpad">Neue Melodie</a>
+        </section>
+    </a>
 
 
-<a routerLink="/bibliothek">
-    <section class="naveintraege">
-        <mat-icon>folder_outline</mat-icon>Bibliothek
-    </section>
-</a>
+    <a routerLink="/bibliothek">
+        <section [style.backgroundColor]="bibliothekMenue" class="naveintraege" id="bibliothekMenue">
+            <mat-icon>folder_outline</mat-icon>
+            <a routerLink="/bibliothek">Bibliothek</a>
+        </section>
+    </a>
+</div>
