@@ -53,14 +53,51 @@ mat-grid-list {
     text-decoration: none;
   }
 
-
+#test{
+  overflow: visible !important;
+}
   //NAV
+
+  .whiteIcon{
+    color: #ECEFF1;
+  }
+  
+  .large{
+    margin-top: 5vh;
+    margin-left: 0.7vw;
+    /**background-color: #DC9ADE;**/
+   /** background-color: #DC455F;**/
+   background-color: #607D8B;
+   /**background-color: #F44336;**/
+
+    .mat-icon {
+      font-size: 36px !important;
+      width: 36px !important;
+      height: 36px !important;
+      line-height: 36px !important;
+      left: 0;
+      margin: 1vh 0.7vw;
+    }
+  }
+
+  .addInstrument{
+    /*margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 8vh;*/
+    width: 4vw;
+    margin-left: 1.8vw;
+    margin-top: 4.5vh;
+  }
+
+
   
   .sidenav{
     height: 100%;
     width: 100%;
-    background: #221C29;
-  
+    /**background: #221C29;**/
+  /**background-color: #2C1E3A;**/
+  background-color: #607D8B;
+  box-shadow: 0px 0px 20px black;
   }
   
   .content{
@@ -71,7 +108,7 @@ mat-grid-list {
     height: 100%;
   }
   
-  
+  /**
   section.naveintraege {
     //border-bottom: 1px solid white;
     padding-top: 2vh;
@@ -82,6 +119,7 @@ mat-grid-list {
     font-size: 1vw;
   }
   
+
   section.naveintraege mat-icon {
     vertical-align: middle;
     font-size: 4vh;
@@ -90,7 +128,7 @@ mat-grid-list {
     height: 34px;
     margin-left: 28%;
     margin-top: 1%;
-  }
+  }**/
   
   section.profil {
     padding-top: 6vh;
@@ -166,7 +204,34 @@ mat-grid-list {
     background-color: rgb(78, 63, 94);
   }
 
-    
+  #header{
+    margin-top: 5vh;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 1.7em;
+  }
+
+  .mat-sidenav{
+    width: 14vw;
+    box-shadow: inset 7px 0 9px -7px #888;
+  }
+
+#person{
+    margin-top: 2vh;
+    margin-left: 1.9vw;
+  }
+
+.instrument-placeholder{
+  width: 8vw;
+  height: 14vh;
+  margin-left: 1.8vw;
+  border: 2px dotted;
+  opacity: 0.8;
+}
+
+.instr-item{
+  margin-top: 10vh;
+}
     
   
 

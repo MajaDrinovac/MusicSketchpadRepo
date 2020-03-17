@@ -1,5 +1,5 @@
 <mat-grid-list cols="100" class="grid" rowHeight="fit">
-    <mat-grid-tile rows="3" class="nav" colspan="5">
+    <mat-grid-tile rows="5" class="nav" colspan="8" id="test">
 
 
         <div class="sidenav">
@@ -8,47 +8,47 @@
             </section>-->
 
             <a routerLink="/login">
-                <section class="naveintraege">
                     <!--<div id="profil"><mat-icon id="person">person</mat-icon><br>Profil</div>-->
-                    <mat-icon id="person">person_outline</mat-icon><br>
-                </section>
+                    <button mat-fab [style.background]="'#607D8B'" id="person"><mat-icon class="whiteIcon">person_outline</mat-icon></button>
             </a>
-
             <a routerLink="/dashboard">
-                <section class="naveintraege">
-                    <mat-icon>dashboard_outline</mat-icon>
-                </section>
+                <button mat-raised-button class="large"><mat-icon class="whiteIcon">dashboard_outline</mat-icon></button>
             </a>
 
             <a routerLink="/sketchpad">
-                <section id="activeEintrag" class="naveintraege">
-                    <mat-icon>gesture</mat-icon>
-                </section>
+                <button mat-raised-button class="large" color="accent" ><mat-icon class="whiteIcon">gesture</mat-icon></button>
             </a>
 
-
             <a routerLink="/bibliothek">
-                <section class="naveintraege">
-                    <mat-icon>folder_outline</mat-icon>
-                </section>
+                <button mat-raised-button class="large"><mat-icon class="whiteIcon">folder_outline</mat-icon></button>
             </a>
         </div>
 
     </mat-grid-tile>
 
-    <mat-grid-tile class="content" colspan="95">
+    <mat-grid-tile class="content" colspan="92">
 
-        <mat-drawer-container class="example-container">
-            <mat-drawer mode="side" opened class="sidenavElements">
-                <br>
-                <p>kjdsfhkjsdfj</p>
-                <p>hellohjhjhkjjjjjjjjjjjjjjjjjjjjjjjjgjsdhfkjh</p>
-                <br>
-                <br>
-                <br>
-                <p>ks</p>
-            </mat-drawer>
-            <mat-drawer-content class="sidenavContent">
+        <mat-sidenav-container class="example-container">
+            <mat-sidenav mode="side" opened class="sidenavElements">
+                <p id="header">FAVORITES</p>
+                <mat-list>
+                    <mat-list-item class="instr-item" [style.margin-top]="'5vh'">
+                        <div class="instrument-placeholder"  [style.border]="'2px dotted' + colorFirst" id="first">
+                            <button mat-raised-button class="addInstrument"(click)="openDialog('first')"><mat-icon [svgIcon]="instrumentIcons[0]"></mat-icon></button>
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item class="instr-item">
+                        <div class="instrument-placeholder" id="second" [style.border]="'2px dotted' + colorSecond">
+                            <button mat-raised-button class="addInstrument" (click)="openDialog('second')"><mat-icon [svgIcon]="instrumentIcons[1]"></mat-icon></button>
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item class="instr-item"><div class="instrument-placeholder" [style.border]="'2px dotted' + colorThird">
+                        <button mat-raised-button class="addInstrument" (click)="openDialog('third')"><mat-icon [svgIcon]="instrumentIcons[2]"></mat-icon></button>
+                    </div></mat-list-item>
+                </mat-list>
+                <!--<button mat-fab id="addInstrument"><mat-icon>add</mat-icon></button>-->
+            </mat-sidenav>
+            <mat-sidenav-content class="sidenavContent">
                 <div id="sketchpad">
 
                     <mat-grid-list cols="12" id="canv-grid" rowHeight="fit">
@@ -70,8 +70,8 @@
                         <mat-grid-tile colspan="12" rowspan="1"></mat-grid-tile>
                     </mat-grid-list>
                 </div>
-            </mat-drawer-content>
-        </mat-drawer-container>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
 
 
 
