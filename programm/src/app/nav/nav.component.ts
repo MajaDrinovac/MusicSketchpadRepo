@@ -15,10 +15,13 @@ export class NavComponent implements OnInit {
   ngOnInit() {
     if (this.getWebServerRelativeUrl() == "/dashboard") {
       this.dashboardMenue = "rgb(108, 140, 156)";
-      this.bibliothekMenue = "#607D8B";
+      this.bibliothekMenue = "";
     } else if (this.getWebServerRelativeUrl() == "/bibliothek") {
-      this.dashboardMenue = "#607D8B";
+      this.dashboardMenue = "";
       this.bibliothekMenue = "rgb(108, 140, 156)";
+    } else {
+      this.dashboardMenue = "";
+      this.bibliothekMenue = "";
     }
   }
 
