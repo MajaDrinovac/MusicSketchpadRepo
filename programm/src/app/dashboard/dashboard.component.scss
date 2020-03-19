@@ -17,8 +17,7 @@ mat-grid-list {
   .nav{
     height: 100%;
     width: 100%;
-    background: #221C29;
-  
+    background: #607D8B;  
    
   }
   
@@ -44,6 +43,10 @@ mat-grid-list {
   a{
       color: #c2bcbc;
       text-decoration: none;
+  }
+
+  app-nav.nav {
+    
   }
   
   /*#profil{

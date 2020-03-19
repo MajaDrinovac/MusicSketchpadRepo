@@ -7,6 +7,7 @@ import { core } from '@angular/compiler';
 declare let ml5:any
 import {MatDialog, MatDialogConfig} from '@angular/material'
 import { DialogComponent } from './dialog/dialog.component';
+import { IconService } from '../icon.service';
 
 @Component({
   selector: 'sketchpad',
@@ -63,8 +64,10 @@ export class SketchpadComponent implements OnInit {
   private displayArr = []
   public colorBtnEdit = "accent"
   public colorBtnGrid = ""
+  public colorWhite = "#fff"
+  public instrumentIcons = ['add', 'add', 'add']
 
-  constructor(private dialog: MatDialog) { 
+  constructor(private iconService:IconService,private dialog: MatDialog) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -78,10 +81,16 @@ export class SketchpadComponent implements OnInit {
 
   ngOnInit() {
     this.drawp5 = new p5(this.sketch)
-    //this.editp5 = new p5(this.editSketch)
+    this.iconService.registerIcons();
+    this.instrumentIcons[0] = 'piano'
+    this.editp5 = new p5(this.editSketch)
   }
 
-  openDialog(){
+  public colorFirst = this.color
+  public colorSecond = '#888'
+  public colorThird = '#888'
+
+  openDialog(pos:string){
     this.state = "color"
     const dialogConfig = new MatDialogConfig();
 
@@ -94,6 +103,13 @@ export class SketchpadComponent implements OnInit {
       this.state = "prediction"
       this.color = result.color
       this.inst = result.instrument
+      if(pos == "second"){
+        this.instrumentIcons[1] = 'guitar'
+        this.colorSecond = this.color
+      }else{
+        this.instrumentIcons[2] = "drum"
+        this.colorThird = this.color
+      }
     })
   }
 
@@ -483,5 +499,11 @@ export class SketchpadComponent implements OnInit {
       }
     }
     return parseInt(newPitch)
+  }
+
+  closeNav() {
+    (<HTMLInputElement>document.getElementById("mySidenav")).style.visibility = "hidden";
+    //(<HTMLInputElement>document.getElementById("sketchpad")).style.marginLeft = "111px";
+
   }
 }
