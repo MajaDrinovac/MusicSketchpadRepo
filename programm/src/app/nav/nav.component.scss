@@ -6,11 +6,10 @@ mat-grid-list {
     font-family: 'Montserrat', sans-serif;
   }
 
-  .nav{
+  .sidenav{
     height: 100%;
     width: 100%;
-    background: #221C29;
-
+    background: #607D8B;
   }
   
   .content{
@@ -78,7 +77,7 @@ mat-grid-list {
   
   section.naveintraege:hover{
     cursor: pointer;
-    background: #372D42;
+    background: rgb(103, 136, 153);
   
   }
 

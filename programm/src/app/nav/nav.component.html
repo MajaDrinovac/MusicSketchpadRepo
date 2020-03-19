@@ -10,7 +10,7 @@
     </section>
 
     <a routerLink="/dashboard">
-        <section [style.backgroundColor]="dashboardMenue" class="naveintraege" id="dashboardMenue">
+        <section [style.backgroundColor]="dashboardMenue" ng-mouseover="style.backgroundColor='rgb(103, 136, 153)'" class="naveintraege" id="dashboardMenue">
             <mat-icon>dashboard_outline</mat-icon>
             <a routerLink="/dashboard">Dashboard</a>
         </section>
