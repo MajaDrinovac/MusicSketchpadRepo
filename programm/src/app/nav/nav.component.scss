@@ -1,129 +1,124 @@
 $width-sketchpad: 80vw;
 $height-sketchpad: 100vh;
 
-
 mat-grid-list {
-    font-family: 'Montserrat', sans-serif;
-  }
+  font-family: "Montserrat", sans-serif;
+}
 
-  .nav{
-    height: 100%;
-    width: 100%;
-    background: #221C29;
+.sidenav {
+  height: 100%;
+  width: 100%;
+  background: #607d8b;
+}
 
-  }
-  
-  .content{
-    background-color: #F6F6F6;
-  }
-  
-  .grid{
-    height: 100%;
-  }
-  
-  
-  section.naveintraege {
-    //border-bottom: 1px solid white;
-    padding-top: 2vh;
-    padding-bottom: 2vh;
-    color: #c2bcbc;
-    vertical-align: middle;
-    cursor: pointer;
-    font-size: 1vw;
-  }
-  
-  section.naveintraege mat-icon {
-    vertical-align: middle;
-    font-size: 4vh;
-    margin-right: 10%;
-    color: #c2bcbc;
-    height: 34px;
-    margin-left: 10%;
-    margin-top: 1%;
-  }
-  
-  section.profil {
-    padding-top: 6vh;
-    padding-bottom: 6vh;
-    color: #c2bcbc;
-    //vertical-align: middle;
-    padding-left: 33%;
-    cursor: pointer;
-    margin-top: 5%;
-  }
-  
-  #profilBez {
-    width: 50%;
-    padding-left: 16%;
-    padding-top: 35%;
-    font-size: 1vw;
-  }
-  
-  section.profil mat-icon {
-    vertical-align: middle;
-    font-size: 7vw;
-    margin-right: 10%;
-    color: #c2bcbc;
-    height: 34px;
-   // margin-left: 10%;
-  }
-  
-  section.titel {
-    color: #c2bcbc;
-    font-size: 1.5vw;
-    margin-top: 7%;
-    margin-left: 10%;
-    margin-right: 10%;
-  }
-  
-  section.naveintraege:hover{
-    cursor: pointer;
-    background: #372D42;
-  
-  }
+.content {
+  background-color: #f6f6f6;
+}
 
-  #kreis{
-      width: 20vw;
-      height: 20vw;
-      border-style: solid;
-      border-width: 1px;
-      border-radius: 100%;
-      margin: 2vw;
-  }
+.grid {
+  height: 100%;
+}
 
-  #text{
+section.naveintraege {
+  //border-bottom: 1px solid white;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  color: white;
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: 1vw;
+}
 
-      width: 20vw;
-      height: 10vw;
-      background-color: purple;
+section.naveintraege mat-icon {
+  vertical-align: middle;
+  font-size: 4vh;
+  margin-right: 10%;
+  color: white;
+  height: 34px;
+  margin-left: 10%;
+  margin-top: 1%;
+}
 
-  }
+section.profil {
+  padding-top: 6vh;
+  padding-bottom: 6vh;
+  color: white;
+  //vertical-align: middle;
+  padding-left: 33%;
+  cursor: pointer;
+  margin-top: 5%;
+}
 
-  a{
-      color: #c2bcbc;
-      text-decoration: none;
-  }
+#profilBez {
+  width: 50%;
+  padding-left: 16%;
+  padding-top: 35%;
+  font-size: 1vw;
+}
 
+section.profil mat-icon {
+  vertical-align: middle;
+  font-size: 7vw;
+  margin-right: 10%;
+  color: white;
+  height: 34px;
+  // margin-left: 10%;
+}
 
-  .active {
-    background-color: rgb(78, 63, 94);
-  }
+section.titel {
+  color: white;
+  font-size: 1.5vw;
+  margin-top: 7%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
 
-  #bibliothekMenue {
+section.naveintraege:hover {
+  cursor: pointer;
+  background: rgb(103, 136, 153);
+}
 
-  }
+#kreis {
+  width: 20vw;
+  height: 20vw;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 100%;
+  margin: 2vw;
+}
 
-  #dashboardMenue {
-    
-  }
-  
-  /*#profil{
+#text {
+  width: 20vw;
+  height: 10vw;
+  background-color: purple;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.active {
+  background-color: rgb(78, 63, 94);
+}
+
+#bibliothekMenue:hover {
+  cursor: pointer;
+  background: rgb(103, 136, 153);
+}
+
+#dashboardMenue:hover {
+  cursor: pointer;
+  background: rgb(103, 136, 153);
+}
+
+/*#profil{
     width: 100%;
     padding-left: 30%;
   
   }*/
-  
-  /*#person{
+
+/*#person{
     width: 100%;
     font-size: 7vw;
     padding-left: 20%;
@@ -131,8 +126,8 @@ mat-grid-list {
   
   
   }*/
-  
-  /*
+
+/*
   section.naveintraege {
       &:before, &:after {
         position: absolute;
@@ -191,6 +186,3 @@ mat-grid-list {
       }
     }
     */
-    
-    
-  
