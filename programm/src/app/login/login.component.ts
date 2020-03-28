@@ -22,11 +22,19 @@ export class LoginComponent implements OnInit {
     const email: String = document.getElementById("emailAdresse").value;
     const passwort: String = document.getElementById("passwort").value;
 
-    if(email != "" && email == "") {
+    if(email != "" && this.validateEmail(email) && passwort != "" && passwort.length >= 8) {
       alert(email);
+      alert(passwort);
+
+      const json: String = '{"email":"' + email + '","passwort":"' + passwort + '"}';
+
+
+
+
+
     }
 
-    alert(passwort);
+    
   }
 
   validateEmail(email) {
