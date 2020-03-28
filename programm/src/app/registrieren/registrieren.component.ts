@@ -24,8 +24,20 @@ export class RegistrierenComponent implements OnInit {
     const passwort1: String = document.getElementById("passwort1").value;
     const passwort2: String = document.getElementById("passwort2").value;
 
-    
+    if(benutzer != "" && benutzer.length >=6 && email != "" && this.validateEmail(email) && passwort1 != "" && passwort1.length >= 8 && passwort2 != "" && passwort2.length >= 8 && passwort1 == passwort2) {
 
+      const json: String = '{"benutzername":"' + benutzer + '","email":"' + email + '","passwort":"' + passwort1 + '"}';
+
+      alert(json);
+
+    }
+
+
+  }
+
+  validateEmail(email:any) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
   }
 
 }
