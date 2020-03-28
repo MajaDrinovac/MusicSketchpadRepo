@@ -14,13 +14,13 @@
                 <br>
                 <mat-form-field class="example-full-width">
                     <mat-label>Benutzername</mat-label>
-                    <input matInput type="text">
+                    <input id="benutzername" matInput type="text">
                 </mat-form-field>
 
                 <br>
                 <mat-form-field class="example-full-width">
                     <mat-label>Email</mat-label>
-                    <input matInput [formControl]="emailFormControl" placeholder="example@mail.com">
+                    <input id="email" matInput [formControl]="emailFormControl" placeholder="example@mail.com">
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                         Please enter a valid email address
                     </mat-error>
@@ -31,15 +31,15 @@
                 <br>
                 <mat-form-field class="example-full-width">
                     <mat-label>Passwort</mat-label>
-                    <input matInput type="password">
+                    <input id="passwort1" matInput type="password">
                 </mat-form-field>
                 <br>
                 <mat-form-field class="example-full-width">
                     <mat-label>Passwort wiederholen</mat-label>
-                    <input matInput type="password">
+                    <input id="passwort2" matInput type="password">
                 </mat-form-field>
                 <br>
-                <button class="buttonSend" mat-raised-button color="accent">Registriere dich</button>
+                <button class="buttonSend" mat-raised-button color="accent" (click)="createJson()">Registriere dich</button>
                 <br>
                 <a routerLink="/login">
                     <h5>Schon Mitglied?<br>Melde dich an</h5>

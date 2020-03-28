@@ -18,4 +18,14 @@ export class RegistrierenComponent implements OnInit {
     Validators.email,
   ]);
 
+  createJson() {
+    const benutzer: String = document.getElementById("benutzername").value;
+    const email: String = document.getElementById("email").value;
+    const passwort1: String = document.getElementById("passwort1").value;
+    const passwort2: String = document.getElementById("passwort2").value;
+
+    
+
+  }
+
 }
