@@ -1,10 +1,17 @@
 var express = require('express');
+const http = require('http')
+const path = require('path')
 var bodyParser = require('body-parser')
+
+
+
 var app = express();
+
 
 //damit man die JSON Files die mitgegeben werden lesen kann
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
 
 
 //message - testen ob der serer funktioniert

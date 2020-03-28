@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
+import { HttpService } from './http.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -74,6 +76,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     MatSidenavModule,
     BrowserAnimationsModule,
+    HttpClientJsonpModule,
+    HttpClientModule,
     MatGridListModule,
     MatIconModule,
     MatButtonModule,
@@ -99,7 +103,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [ HttpService ],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
 })

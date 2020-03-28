@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../http.service';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
 import { MusicRNN, Player } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
+import { User } from '../user';
 
 
 @Component({
@@ -13,9 +15,23 @@ import { core } from '@angular/compiler';
 })
 export class LandingpageComponent implements OnInit {
 
-  constructor() { }
+  httpService : HttpService
+  user : Array<User>
+
+  constructor(httpService : HttpService) {
+    this.httpService = httpService
+   }
 
   ngOnInit() {
+    
+  }
+
+  getUser(){
+
+    console.log("test")
+    this.httpService.getUser().subscribe(data =>{this.user = data})
+    console.log( this.httpService.getUser().subscribe(data =>{this.user = data}))
+   
   }
 
 }
