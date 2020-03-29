@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
+import { HttpService } from './http.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +27,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog'
 import { ColorPickerModule } from 'ngx-color-picker'
 import { MatListModule } from '@angular/material/list'
-import {HttpClientModule} from '@angular/common/http'
 
 
 import { MatSelectModule } from '@angular/material/select';
@@ -75,6 +76,8 @@ const appRoutes: Routes = [
     AppRoutingModule,
     MatSidenavModule,
     BrowserAnimationsModule,
+    HttpClientJsonpModule,
+    HttpClientModule,
     MatGridListModule,
     MatIconModule,
     MatButtonModule,
@@ -94,14 +97,13 @@ const appRoutes: Routes = [
     ColorCircleModule,
     ColorSwatchesModule,
     ColorChromeModule,
-    HttpClientModule,
     MatListModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     ),
   ],
-  providers: [],
+  providers: [ HttpService ],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent]
 })
