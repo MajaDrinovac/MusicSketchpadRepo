@@ -27,7 +27,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog'
 import { ColorPickerModule } from 'ngx-color-picker'
 import { MatListModule } from '@angular/material/list'
-import {HttpClientModule} from '@angular/common/http'
 
 
 import { MatSelectModule } from '@angular/material/select';
@@ -98,7 +97,6 @@ const appRoutes: Routes = [
     ColorCircleModule,
     ColorSwatchesModule,
     ColorChromeModule,
-    HttpClientModule,
     MatListModule,
     RouterModule.forRoot(
       appRoutes,
