@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'registrieren',
@@ -7,6 +8,7 @@ import { Validators, FormControl } from '@angular/forms';
   styleUrls: ['./registrieren.component.scss']
 })
 export class RegistrierenComponent implements OnInit {
+  httpService: HttpService;
 
   constructor() { }
 
@@ -24,18 +26,22 @@ export class RegistrierenComponent implements OnInit {
     const passwort1: String = (<HTMLInputElement>document.getElementById("passwort1")).value;
     const passwort2: String = (<HTMLInputElement>document.getElementById("passwort2")).value;
 
-    if(benutzer != "" && benutzer.length >=6 && email != "" && this.validateEmail(email) && passwort1 != "" && passwort1.length >= 8 && passwort2 != "" && passwort2.length >= 8 && passwort1 == passwort2) {
+    if (benutzer != "" && benutzer.length >= 6 && email != "" && this.validateEmail(email) && passwort1 != "" && passwort1.length >= 8 && passwort2 != "" && passwort2.length >= 8 && passwort1 == passwort2) {
 
-      const json: String = '{"benutzername":"' + benutzer + '","email":"' + email + '","passwort":"' + passwort1 + '"}';
+      const json: String = '{"username":"' + benutzer + '","email":"' + email + '","password":"' + passwort1 + '"}';
 
-      alert(json);
+      this.postJson(json);
 
     }
 
 
   }
 
-  validateEmail(email:any) {
+  postJson(json:String) {
+    //this.httpService.insertUser(json).subscribe(() => { this.person.push(json) });
+  }
+
+  validateEmail(email: any) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
