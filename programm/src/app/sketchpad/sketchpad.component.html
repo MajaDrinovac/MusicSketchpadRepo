@@ -1,5 +1,5 @@
 <mat-grid-list cols="100" class="grid" rowHeight="fit">
-    <mat-grid-tile rows="3" class="nav" colspan="5">
+    <mat-grid-tile rows="5" class="nav" colspan="5" id="test">
 
 
         <div class="sidenav">
@@ -38,17 +38,37 @@
 
     <mat-grid-tile class="content" colspan="95">
 
-        <mat-drawer-container class="example-container">
-            <mat-drawer mode="side" opened class="sidenavElements">
-                <br>
-                <p>kjdsfhkjsdfj</p>
-                <p>hellohjhjhkjjjjjjjjjjjjjjjjjjjjjjjjgjsdhfkjh</p>
+        <mat-sidenav-container class="example-container">
+            <mat-sidenav mode="side" opened class="sidenavElements">
                 <br>
                 <br>
-                <br>
-                <p>ks</p>
-            </mat-drawer>
-            <mat-drawer-content class="sidenavContent">
+                <p id="header">FAVORITES</p>
+                <mat-list>
+                    <mat-list-item class="instr-item" [style.margin-top]="'5vh'">
+                        <div class="instrument-placeholder" [style.border]="'2px dotted' + colorFirst" id="first">
+                            <button mat-raised-button class="addInstrument" (click)="openDialog('first')">
+                                <mat-icon [svgIcon]="instrumentIcons[0]"></mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item class="instr-item">
+                        <div class="instrument-placeholder" id="second" [style.border]="'2px dotted' + colorSecond">
+                            <button mat-raised-button class="addInstrument" (click)="openDialog('second')">
+                                <mat-icon [svgIcon]="instrumentIcons[1]"></mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-item>
+                    <mat-list-item class="instr-item">
+                        <div class="instrument-placeholder" [style.border]="'2px dotted' + colorThird">
+                            <button mat-raised-button class="addInstrument" (click)="openDialog('third')">
+                                <mat-icon [svgIcon]="instrumentIcons[2]"></mat-icon>
+                            </button>
+                        </div>
+                    </mat-list-item>
+                </mat-list>
+                <!--<button mat-fab id="addInstrument"><mat-icon>add</mat-icon></button>-->
+            </mat-sidenav>
+            <mat-sidenav-content class="sidenavContent">
                 <div id="sketchpad">
 
                     <mat-grid-list cols="12" id="canv-grid" rowHeight="fit">
@@ -70,8 +90,8 @@
                         <mat-grid-tile colspan="12" rowspan="1"></mat-grid-tile>
                     </mat-grid-list>
                 </div>
-            </mat-drawer-content>
-        </mat-drawer-container>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
 
 
 

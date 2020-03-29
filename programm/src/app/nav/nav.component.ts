@@ -7,18 +7,21 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  @Input() dashboardMenue: String = "#221C29";
-  @Input() bibliothekMenue: String = "#221C29";
+  @Input() dashboardMenue: String = "#607D8B";
+  @Input() bibliothekMenue: String = "#607D8B";
 
   constructor() { }
 
   ngOnInit() {
     if (this.getWebServerRelativeUrl() == "/dashboard") {
-      this.dashboardMenue = "rgb(78, 63, 94)";
-      this.bibliothekMenue = "#221C29";
+      this.dashboardMenue = "rgb(108, 140, 156)";
+      this.bibliothekMenue = "";
     } else if (this.getWebServerRelativeUrl() == "/bibliothek") {
-      this.dashboardMenue = "#221C29";
-      this.bibliothekMenue = "rgb(78, 63, 94)";
+      this.dashboardMenue = "";
+      this.bibliothekMenue = "rgb(108, 140, 156)";
+    } else {
+      this.dashboardMenue = "";
+      this.bibliothekMenue = "";
     }
   }
 
