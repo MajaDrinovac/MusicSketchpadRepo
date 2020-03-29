@@ -39,14 +39,17 @@ mat-grid-list {
       border-width: 1px;
       border-radius: 100%;
       margin: 2vw;
-      background-color: red;
+      //background-color: red;
   }
 
   .kreis{
     width: 20vw;
       height: 20vw;
       border-radius: 100%;
-      background-color: red;
+      border-width: 1px;
+      border-style: solid;
+      margin: 2vw;
+      //background-color: red;
       position: relative;
 
   }
@@ -58,7 +61,7 @@ mat-grid-list {
     width: 0vw;
     height: 20vw;
     border-radius: 100%;
-    background: rgba(103, 58 ,183, 0.71);
+    background: #607d8bda;
     position: absolute;
     top: 0;
     display: flex;
