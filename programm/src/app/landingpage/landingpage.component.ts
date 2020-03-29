@@ -29,9 +29,10 @@ export class LandingpageComponent implements OnInit {
   getUser(){
 
     console.log("test")
-    this.httpService.getUser().subscribe(data =>{this.user = data})
-    console.log( this.httpService.getUser().subscribe(data =>{this.user = data}))
-   
+    this.httpService.getUser().subscribe(value => console.log(value), 
+    error => console.log('from sub ' + error), 
+    () => console.log('completed'))
+
   }
 
 }
