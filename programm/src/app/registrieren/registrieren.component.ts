@@ -19,10 +19,10 @@ export class RegistrierenComponent implements OnInit {
   ]);
 
   createJson() {
-    const benutzer: String = document.getElementById("benutzername").value;
-    const email: String = document.getElementById("email").value;
-    const passwort1: String = document.getElementById("passwort1").value;
-    const passwort2: String = document.getElementById("passwort2").value;
+    const benutzer: String = (<HTMLInputElement>document.getElementById("benutzername")).value;
+    const email: String = (<HTMLInputElement>document.getElementById("email")).value;
+    const passwort1: String = (<HTMLInputElement>document.getElementById("passwort1")).value;
+    const passwort2: String = (<HTMLInputElement>document.getElementById("passwort2")).value;
 
     if(benutzer != "" && benutzer.length >=6 && email != "" && this.validateEmail(email) && passwort1 != "" && passwort1.length >= 8 && passwort2 != "" && passwort2.length >= 8 && passwort1 == passwort2) {
 
