@@ -23,9 +23,6 @@ export class LoginComponent implements OnInit {
     const passwort: String = (<HTMLInputElement>document.getElementById("passwort")).value;
 
     if(email != "" && this.validateEmail(email) && passwort != "" && passwort.length >= 8) {
-      alert(email);
-      alert(passwort);
-
       const json: String = '{"email":"' + email + '","passwort":"' + passwort + '"}';
 
       alert(json);
