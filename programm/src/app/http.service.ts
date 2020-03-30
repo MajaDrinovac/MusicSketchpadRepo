@@ -17,8 +17,8 @@ export class HttpService {
     return this.http.get<User[]>('http://localhost:3000/findAllUsers');
   }
 
-  insertUser(json: String) {
-    console.log("sth")
-    return this.http.post<String>('http://localhost:3000/createUser', json);
+  insertUser(user:User) {
+    console.log(user)
+    return this.http.post<String>('http://localhost:3000/createUser', user);
   }
 }

@@ -2,6 +2,9 @@ var express = require('express');
 const http = require('http')
 const path = require('path')
 var bodyParser = require('body-parser')
+const MongoClient = require("mongodb").MongoClient
+const url = "mongodb://localhost:27017/"
+let dbo
 
 
 
@@ -30,8 +33,13 @@ app.get("/findAllUsers", function(req, res){
     ]
 
     //TODO: Find users in DB
+    dbo.collection("users").find({}).toArray(function(err, res){
+        if(err) throw err;
+        console.log(res)
+    })
+    
 
-    res.send(users)
+    res.send("cursor")
 })
 
 
@@ -39,10 +47,17 @@ app.get("/findAllUsers", function(req, res){
 app.post('/createUser', function (req, res) {
     console.log(req.body)
     let user = req.body
+    let result
 
     //TODO: create new user in DB 
+    let testuser = {benutzername: "Test2", email: "test@gmail.com", passwort: "test123"}
+    dbo.collection("users").insertOne(testuser, function(err, res){
+        if(err) throw err;
+        console.log("test passt")
+        result = res
+    })
 
-    res.send('Got the user');
+    res.send("result: "+ result);
   });
 
 //login
@@ -57,4 +72,12 @@ app.post('/login', function(req, res){
 //Server is listening on port 3000
 app.listen(3000, function (){
     console.log('Server listening on port 3000')
+    MongoClient.connect(url, function(err, db){
+        if(err) throw err;
+        dbo = db.db("musicDemoDB")
+        let cursor = dbo.collection("users").find()
+        cursor.forEach(element => {
+            console.log(element)
+        });
+    })
 })
