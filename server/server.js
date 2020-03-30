@@ -47,18 +47,29 @@ app.get("/findAllUsers", function(req, res){
 app.post('/createUser', function (req, res) {
     console.log(req.body)
     let user = req.body
-    let result
+    let result = ""
 
     //TODO: create new user in DB 
-    let testuser = {benutzername: "Test2", email: "test@gmail.com", passwort: "test123"}
-    dbo.collection("users").insertOne(testuser, function(err, res){
+    //let testuser = {benutzername: "Test2", email: "test@gmail.com", passwort: "test123"}
+    dbo.collection("users").insertOne(user, function(err, res){
         if(err) throw err;
-        console.log("test passt")
-        result = res
+        console.log("test passt: " + res)
+        result = res.ops
+        result = result[0].benutzername
     })
-
-    res.send("result: "+ result);
+    res.send(result);
   });
+
+//nur zum testen
+app.post("/delete", function(req, res){
+    let user = req.body
+    let toDelete = {benutzername: "Test4"}
+    dbo.collection("users").deleteOne(user, function(err, res){
+        if(err) throw err;
+        console.log("1 deleted")
+    })
+    res.send("deleted")
+})
 
 //login
 app.post('/login', function(req, res){

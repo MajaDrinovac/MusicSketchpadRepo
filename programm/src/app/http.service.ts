@@ -6,6 +6,9 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class HttpService {
+  findUser() {
+    throw new Error("Method not implemented.");
+  }
 
   http: HttpClient;
 

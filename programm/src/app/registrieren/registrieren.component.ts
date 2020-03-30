@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
 import { HttpService } from '../http.service';
 import { User } from '../user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'registrieren',
@@ -15,7 +16,7 @@ export class RegistrierenComponent implements OnInit {
   public passw1:string = ""
   public passw2:string = ""
   
-  constructor(private httpService:HttpService) { }
+  constructor(public router:Router,private httpService:HttpService) { }
 
   ngOnInit() {
   }
@@ -29,8 +30,8 @@ export class RegistrierenComponent implements OnInit {
     if (this.benutzername != "" && this.benutzername.length >= 6 && this.email != "" && this.validateEmail(this.email) && this.passw1 != "" && this.passw1.length >= 8 && this.passw2 != "" && this.passw2.length >= 8 && this.passw1 == this.passw2) {
       let user = new User(this.benutzername, this.email, this.passw1)
       console.log(user)
-      this.httpService.insertUser(user).subscribe((res)=>{console.log(res)})
-    }
+      this.httpService.insertUser(user).subscribe((res)=>{ this.router.navigate(['/profil']) }
+    )}
   }
 
   validateEmail(email: any) {
