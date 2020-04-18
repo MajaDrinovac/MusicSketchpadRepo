@@ -205,9 +205,10 @@ mat-grid-list {
 .instrument-placeholder{
   width: 8vw;
   height: 14vh;
-  margin-left: 1.8vw;
+  //margin-left: 1.8vw;
   border: 2px dotted;
   opacity: 0.8;
+  align-items: center;
 }
 
 .instr-item{
