@@ -83,6 +83,12 @@ app.post('/login', function(req, res){
 app.post("/saveMelody", function(req, res){
     let melody = req.body
     let result = "nixx"
+    dbo.collection("melody").insertOne(melody, function(err, res){
+        if(err) throw err;
+        console.log("test passt: " + res)
+        result = res.ops
+        result = result[0]
+    })
     console.log(melody)
     res.send(result)
 })
