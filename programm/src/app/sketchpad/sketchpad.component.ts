@@ -9,6 +9,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material'
 import { DialogComponent } from './dialog/dialog.component';
 import { IconService } from '../icon.service';
 import { HttpService } from '../http.service';
+import { MelodyTitleComponent } from '../melody-title/melody-title.component';
 
 @Component({
   selector: 'sketchpad',
@@ -23,7 +24,7 @@ export class SketchpadComponent implements OnInit {
   public state:String= "prediction"
   private targetLabel:String
   private resultArray = []
-  private sequence:INoteSequence
+  private sequence
   private noten_midi_t = {
     C: 60,
     D: 62,
@@ -114,6 +115,15 @@ export class SketchpadComponent implements OnInit {
     })
   }
 
+  openTitleDialog(){
+      this.createINoteSequence()
+      this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
+      this.sequence.title = data
+      //console.log(this.sequence)
+      this.saveMelody()
+    })
+  }
+
   private modelLoaded(err){
     if(err){
       console.log(err)
@@ -200,7 +210,7 @@ export class SketchpadComponent implements OnInit {
   }
 
   public saveMelody(){
-    this.createINoteSequence()
+    //this.createINoteSequence()
     //this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
     let json = JSON.stringify(this.sequence)
     let obj = JSON.parse(json)
@@ -308,6 +318,7 @@ export class SketchpadComponent implements OnInit {
     let notes = 0
     delete this.sequence
     this.sequence = {
+        title: "",
         notes: [],
         totalTime: 0
     }

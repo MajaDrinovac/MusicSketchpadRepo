@@ -80,17 +80,18 @@ app.post('/login', function(req, res){
     res.send("User "+ req.body.username +" exists")
 })
 
+app.get("/deleteMel", function(req, res){
+    dbo.collection("melody").drop(function(err, delOk){
+        if(err) throw err;
+        if(delOk) console.log("ok")
+    })
+})
+
 app.get("/findAllMelodies", function(req, res){
-    //let result = []
-    //let result = "nixx"
     dbo.collection("melody").find({}).toArray(function(err, result){
         if(err) throw err;
-        //console.log(res)
-        //result = res
         res.send(result)
     })
-    //console.log(result)
-    //res.send(result)
 })
 
 app.post("/saveMelody", function(req, res){
