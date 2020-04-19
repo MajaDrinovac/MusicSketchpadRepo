@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
-import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer } from '@magenta/music/es6'
+import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer, INoteSequence } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
 import {MatDialog, MatDialogConfig} from '@angular/material'
 import { DialogComponent } from './dialog/dialog.component';
 import { IconService } from '../icon.service';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'sketchpad',
@@ -22,7 +23,7 @@ export class SketchpadComponent implements OnInit {
   public state:String= "prediction"
   private targetLabel:String
   private resultArray = []
-  private sequence
+  private sequence:INoteSequence
   private noten_midi_t = {
     C: 60,
     D: 62,
@@ -67,7 +68,7 @@ export class SketchpadComponent implements OnInit {
   public colorWhite = "#fff"
   public instrumentIcons = ['add', 'add', 'add']
 
-  constructor(private iconService:IconService,private dialog: MatDialog) { 
+  constructor(private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -180,6 +181,7 @@ export class SketchpadComponent implements OnInit {
       }else{
         this.targetLabel = s.key.toUpperCase()
       }
+
     }
     s.mouseReleased = async () =>{
       //this.isDrawed = true
@@ -195,6 +197,15 @@ export class SketchpadComponent implements OnInit {
         }
       //console.log(this.resultArray)
     } 
+  }
+
+  public saveMelody(){
+    this.createINoteSequence()
+    //this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
+    let json = JSON.stringify(this.sequence)
+    let obj = JSON.parse(json)
+    this.httpService.saveMelody(obj).subscribe((res)=>{console.log(res)});
+    
   }
   
   private whileTraining(epoch, loss){

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
+import { INoteSequence } from '@magenta/music/es6';
 
 @Injectable({
   providedIn: 'root'
@@ -23,5 +24,10 @@ export class HttpService {
   insertUser(user:User) {
     console.log(user)
     return this.http.post<String>('http://localhost:3000/createUser', user);
+  }
+
+  saveMelody(melody){
+    console.log(melody)
+    return this.http.post<String>("http://localhost:3000/saveMelody", melody);
   }
 }

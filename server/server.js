@@ -80,6 +80,13 @@ app.post('/login', function(req, res){
     res.send("User "+ req.body.username +" exists")
 })
 
+app.post("/saveMelody", function(req, res){
+    let melody = req.body
+    let result = "nixx"
+    console.log(melody)
+    res.send(result)
+})
+
 //Server is listening on port 3000
 app.listen(3000, function (){
     console.log('Server listening on port 3000')
