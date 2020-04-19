@@ -80,16 +80,30 @@ app.post('/login', function(req, res){
     res.send("User "+ req.body.username +" exists")
 })
 
+app.get("/findAllMelodies", function(req, res){
+    //let result = []
+    //let result = "nixx"
+    dbo.collection("melody").find({}).toArray(function(err, result){
+        if(err) throw err;
+        //console.log(res)
+        //result = res
+        res.send(result)
+    })
+    //console.log(result)
+    //res.send(result)
+})
+
 app.post("/saveMelody", function(req, res){
     let melody = req.body
-    let result = "nixx"
+    let result = ""
     dbo.collection("melody").insertOne(melody, function(err, res){
         if(err) throw err;
         console.log("test passt: " + res)
         result = res.ops
         result = result[0]
     })
-    console.log(melody)
+    //console.log(melody)
+
     res.send(result)
 })
 

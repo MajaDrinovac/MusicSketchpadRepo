@@ -204,7 +204,7 @@ export class SketchpadComponent implements OnInit {
     //this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
     let json = JSON.stringify(this.sequence)
     let obj = JSON.parse(json)
-    this.httpService.saveMelody(obj).subscribe((res)=>{console.log(res)});
+    this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
     
   }
   

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../http.service';
 
 @Component({
   selector: 'app-bibliothek',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bibliothek.component.scss']
 })
 export class BibliothekComponent implements OnInit {
-
-  constructor() { }
+  public melodies
+  constructor(private httpService:HttpService) { }
 
   ngOnInit() {
+    //this.melodies = this.httpService.findAllMelodies()
   }
 
+  displayMelodies(){
+    this.httpService.findAllMelodies().subscribe((res)=>{console.log(res)})
+  }
 }
