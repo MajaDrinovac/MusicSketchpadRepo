@@ -5,8 +5,8 @@
     </mat-grid-tile>
     <mat-grid-tile colspan="4" rowspan="1"></mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1" id="drawContr-btn">
-        <button mat-fab id="saveBtn" (click)="saveMelodie()"><mat-icon>save</mat-icon></button>
         <button mat-fab [matMenuTriggerFor]="colors" [color]="colorBtnEdit" (click)="onConvertToDrawMode()" id="edit"><mat-icon>edit</mat-icon></button>
+        <button mat-fab id="saveBtn" [color]="none"><mat-icon>save</mat-icon></button>
         <button mat-fab [color]="colorBtnGrid" id="grid-btn" (click)="onConvertToEditMode()"><mat-icon>grid_on</mat-icon></button>
     </mat-grid-tile>
     <mat-grid-tile colspan="2" rowspan="1"></mat-grid-tile>
