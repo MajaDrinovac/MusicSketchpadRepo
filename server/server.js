@@ -80,6 +80,34 @@ app.post('/login', function(req, res){
     res.send("User "+ req.body.username +" exists")
 })
 
+app.get("/deleteMel", function(req, res){
+    dbo.collection("melody").drop(function(err, delOk){
+        if(err) throw err;
+        if(delOk) console.log("ok")
+    })
+})
+
+app.get("/findAllMelodies", function(req, res){
+    dbo.collection("melody").find({}).toArray(function(err, result){
+        if(err) throw err;
+        res.send(result)
+    })
+})
+
+app.post("/saveMelody", function(req, res){
+    let melody = req.body
+    let result = ""
+    dbo.collection("melody").insertOne(melody, function(err, res){
+        if(err) throw err;
+        console.log("test passt: " + res)
+        result = res.ops
+        result = result[0]
+    })
+    //console.log(melody)
+
+    res.send(result)
+})
+
 //Server is listening on port 3000
 app.listen(3000, function (){
     console.log('Server listening on port 3000')

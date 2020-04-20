@@ -7,7 +7,7 @@
     </mat-grid-tile>
     <mat-grid-tile class="content" colspan="8">
 
-
+<!--
 
         <div class="kreis">
 
@@ -31,7 +31,12 @@
                 <h2>Hover</h2>
             </div>
         </div>
-
+    -->
+    <mat-list>
+        <mat-list-item *ngFor="let melody of melodies; index as i">
+            <p><b>Title: </b> {{melody.title}} <b>Duration: </b> {{melody.totalTime}} <button mat-button (click)="playMelody(melody)">Play</button></p>
+        </mat-list-item>
+    </mat-list>
     </mat-grid-tile>
 
 

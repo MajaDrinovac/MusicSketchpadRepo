@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
-import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer } from '@magenta/music/es6'
+import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer, INoteSequence } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
 import {MatDialog, MatDialogConfig} from '@angular/material'
 import { DialogComponent } from './dialog/dialog.component';
 import { IconService } from '../icon.service';
+import { HttpService } from '../http.service';
+import { MelodyTitleComponent } from '../melody-title/melody-title.component';
 
 @Component({
   selector: 'sketchpad',
@@ -67,7 +69,7 @@ export class SketchpadComponent implements OnInit {
   public colorWhite = "#fff"
   public instrumentIcons = ['add', 'add', 'add']
 
-  constructor(private iconService:IconService,private dialog: MatDialog) { 
+  constructor(private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -110,6 +112,15 @@ export class SketchpadComponent implements OnInit {
         this.instrumentIcons[2] = "drum"
         this.colorThird = this.color
       }
+    })
+  }
+
+  openTitleDialog(){
+      this.createINoteSequence()
+      this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
+      this.sequence.title = data
+      //console.log(this.sequence)
+      this.saveMelody()
     })
   }
 
@@ -180,6 +191,7 @@ export class SketchpadComponent implements OnInit {
       }else{
         this.targetLabel = s.key.toUpperCase()
       }
+
     }
     s.mouseReleased = async () =>{
       //this.isDrawed = true
@@ -195,6 +207,15 @@ export class SketchpadComponent implements OnInit {
         }
       //console.log(this.resultArray)
     } 
+  }
+
+  public saveMelody(){
+    //this.createINoteSequence()
+    //this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
+    let json = JSON.stringify(this.sequence)
+    let obj = JSON.parse(json)
+    this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
+    
   }
   
   private whileTraining(epoch, loss){
@@ -297,6 +318,8 @@ export class SketchpadComponent implements OnInit {
     let notes = 0
     delete this.sequence
     this.sequence = {
+        title: "",
+        instrument: this.inst,
         notes: [],
         totalTime: 0
     }

@@ -39,6 +39,7 @@ import { ColorSwatchesModule } from 'ngx-color/swatches'; // <color-swatches></c
 import { ColorChromeModule } from 'ngx-color/chrome';
 import { RegistrierenComponent } from './registrieren/registrieren.component';
 import { ProfilComponent } from './profil/profil.component';
+import { MelodyTitleComponent } from './melody-title/melody-title.component';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -69,7 +70,8 @@ const appRoutes: Routes = [
     NavComponent,
     DialogComponent,
     RegistrierenComponent,
-    ProfilComponent
+    ProfilComponent,
+    MelodyTitleComponent
   ],
   imports: [
     BrowserModule,
@@ -105,6 +107,6 @@ const appRoutes: Routes = [
   ],
   providers: [ HttpService ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent]
+  entryComponents: [DialogComponent, MelodyTitleComponent]
 })
 export class AppModule { }
