@@ -18,6 +18,7 @@ export class ControlsComponent implements OnInit {
   @Output() changed = new EventEmitter<Number>()
   @Output() opened = new EventEmitter()
   @Output() changedLine = new EventEmitter<Number>()
+  @Output() savedMelody = new EventEmitter()
 
   public instrumentNr
 
@@ -52,7 +53,7 @@ export class ControlsComponent implements OnInit {
     this.changedLine.emit(value);
   }
 
-  public saveMelodie() {
-
+  public saveMelody() {
+    this.savedMelody.emit()
   }
 }
