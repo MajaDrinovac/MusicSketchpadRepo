@@ -8,7 +8,7 @@ import { EventEmitter } from '@angular/core';
 })
 export class ControlsComponent implements OnInit {
 
-  @Input() colorBtnEdit 
+  @Input() colorBtnEdit
   @Input() colorBtnGrid
   @Input() melodyCreated
   @Input() instruments
@@ -24,31 +24,35 @@ export class ControlsComponent implements OnInit {
   //public colorBtnEdit = "accent"
   //public colorBtnGrid = ""
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  onOpenDialog(){
+  onOpenDialog() {
     this.opened.emit()
   }
 
-  public onChange(value){
+  public onChange(value) {
     this.changed.emit(value)
   }
 
-  public onConvertToEditMode(){
+  public onConvertToEditMode() {
     this.toEditMode.emit()
   }
 
-  public onConvertToDrawMode(){
+  public onConvertToDrawMode() {
     this.toDrawMode.emit()
   }
 
-  public onPlayed(){
+  public onPlayed() {
     this.played.emit()
   }
 
-  public changeLineWeight(value){
+  public changeLineWeight(value) {
     this.changedLine.emit(value);
+  }
+
+  public saveMelodie() {
+
   }
 }
