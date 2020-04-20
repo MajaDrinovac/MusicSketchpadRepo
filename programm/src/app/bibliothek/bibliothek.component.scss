@@ -2,9 +2,11 @@ $width-sketchpad: 80vw;
 $height-sketchpad: 100vh;
 
 
+
 #canv-grid{
     width: 100vw;
     height: 100vh;
+    overflow-y: hidden;
 }
 
 
@@ -24,15 +26,28 @@ mat-grid-list {
   
   .content{
     background-color: #F6F6F6;
+
+  
+  }
+
+  .buttonRight{
+    float: right;
+    background-color: rgba(255, 65, 125, 1);
+    color: white;
+   
+  }
+
+  .contentList{
+    border-radius: 2px;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+   
   }
   
   .grid{
     height: 100%;
   }
   
-  .contentListItem{
-    background: red;
-  }
 
 
   #kreis{

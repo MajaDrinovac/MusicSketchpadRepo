@@ -5,12 +5,18 @@
 
 
     </mat-grid-tile>
+
+
     <mat-grid-tile class="content" colspan="8">
-        <mat-list>
-            <mat-list-item class="contentListItem">
-                Test
-            </mat-list-item> 
-            </mat-list>
+        <mat-card class="contentList"  *ngFor="let melody of melodies; index as i">
+            <p><b>Title: </b> {{melody.title}}<br><br> <b>Duration: </b> {{melody.totalTime}} <br><button mat-button (click)="playMelody(melody)" class="buttonRight" >Play</button></p>
+        </mat-card>
+    </mat-grid-tile>
+      
+      <!--    <mat-card class="contentList">
+                <p><b>Title: </b> Alinas Melodie<br><br> <b>Duration: </b> 10 sek <br><button mat-button class="buttonRight" >Play</button></p>
+            </mat-card>
+        -->
 <!--
 
         <div class="kreis">
@@ -36,12 +42,14 @@
             </div>
         </div>
     -->
-    <mat-list>
-        <mat-list-item *ngFor="let melody of melodies; index as i">
+   
+   
+
+      <!-- 
+           <mat-list> <mat-list-item>
             <p><b>Title: </b> {{melody.title}} <b>Duration: </b> {{melody.totalTime}} <button mat-button (click)="playMelody(melody)">Play</button></p>
         </mat-list-item>
     </mat-list>
     </mat-grid-tile>
+-->
 
-
-</mat-grid-list>
