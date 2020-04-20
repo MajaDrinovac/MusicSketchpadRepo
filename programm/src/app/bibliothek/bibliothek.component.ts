@@ -33,7 +33,7 @@ export class BibliothekComponent implements OnInit {
     console.log(this.sequence)
     let q = this.soundfont_player.loadSamples(this.sequence)
     this.sequence.notes.forEach(element => {
-      element.program = 1
+      element.program = melody.instrument
     });
     this.soundfont_player.start(this.sequence)
   }

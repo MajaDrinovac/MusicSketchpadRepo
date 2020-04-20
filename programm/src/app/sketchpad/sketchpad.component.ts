@@ -319,6 +319,7 @@ export class SketchpadComponent implements OnInit {
     delete this.sequence
     this.sequence = {
         title: "",
+        instrument: this.inst,
         notes: [],
         totalTime: 0
     }
