@@ -32,16 +32,16 @@ mat-grid-list {
 
   .buttonRight{
     float: right;
-    background-color: rgba(255, 65, 125, 1);
-    color: white;
-   
   }
 
   .contentList{
     border-radius: 2px;
     width: 100%;
     font-family: 'Montserrat', sans-serif;
-   
+  }
+
+  .item{
+    margin-top: 4vh;
   }
   
   .grid{
