@@ -65,6 +65,8 @@
                             </button>
                         </div>
                     </mat-list-item>
+                    <mat-list-item class="instr-item">
+                    </mat-list-item>
                 </mat-list>
                 <!--<button mat-fab id="addInstrument"><mat-icon>add</mat-icon></button>-->
             </mat-sidenav>
@@ -76,7 +78,7 @@
                             <controls (opened)="openDialog()" [melodyCreated]="melodyCreated"
                                 [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments"
                                 (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()"
-                                (changedLine)="changeLineWeight($event)" (toDrawMode)="convertToDrawMode()"
+                                (changedLine)="changeLineWeight($event)" (toDrawMode)="convertToDrawMode()" (savedMelody)="openTitleDialog()"
                                 (played)="playMelody()"></controls>
                         </mat-grid-tile>
                         <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
