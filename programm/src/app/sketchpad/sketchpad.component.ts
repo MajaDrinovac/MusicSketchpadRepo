@@ -54,7 +54,6 @@ export class SketchpadComponent implements OnInit {
   private fillColor = [113, 134, 235]
   public color = "#7186EB"
   public melodyCreated:Boolean = false
-  private midi_player:MIDIPlayer
   private soundfont_player:SoundFontPlayer
   public deleteOption:Boolean = false
   private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn")
@@ -341,7 +340,19 @@ export class SketchpadComponent implements OnInit {
     this.sequence.notes.forEach(element => {
       element.program =  this.inst
     });
+    
+    this.playMoreMelodies()
+    //this.soundfont_player.start(this.sequence)
+  }
+  private playMoreMelodies(){
+    let seq = Object.assign({}, this.sequence)
+    this.soundfont_player.loadAllSamples()
+    seq.notes.forEach(element => {
+      element.program = 62
+    });
+    console.log(this.sequence)
     this.soundfont_player.start(this.sequence)
+    this.soundfont_player.start(seq)
   }
   private inst = 1
   public changeInstrument(value){
