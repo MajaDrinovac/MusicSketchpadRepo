@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
-import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer, INoteSequence } from '@magenta/music/es6'
+import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer, INoteSequence, BasePlayer } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
 import {MatDialog, MatDialogConfig} from '@angular/material'
@@ -67,6 +67,7 @@ export class SketchpadComponent implements OnInit {
   public colorBtnGrid = ""
   public colorWhite = "#fff"
   public instrumentIcons = ['add', 'add', 'add']
+  private tracks = []
 
   constructor(private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
@@ -78,6 +79,7 @@ export class SketchpadComponent implements OnInit {
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
+    this.soundfont_player.loadAllSamples()
   }
 
   ngOnInit() {
@@ -103,6 +105,9 @@ export class SketchpadComponent implements OnInit {
     this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
       this.state = "prediction"
       this.color = result.color
+      let seq = this.createINoteSequence()
+      this.tracks.push(seq)
+      console.log(this.tracks)
       this.inst = result.instrument
       if(pos == "second"){
         this.instrumentIcons[1] = 'guitar'
@@ -115,7 +120,8 @@ export class SketchpadComponent implements OnInit {
   }
 
   openTitleDialog(){
-      this.createINoteSequence()
+      let seq = this.createINoteSequence()
+      this.tracks.push(seq)
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
       this.sequence.title = data
       //console.log(this.sequence)
@@ -316,11 +322,17 @@ export class SketchpadComponent implements OnInit {
     let lastNumber = 0
     let notes = 0
     delete this.sequence
-    this.sequence = {
+    /*this.sequence = {
         title: "",
         instrument: this.inst,
         notes: [],
         totalTime: 0
+    }*/
+    let sequence = {
+      title: "",
+      instrument: this.inst,
+      notes: [],
+      totalTime: 0
     }
     for(let i = 0; i < this.resultArray.length; i++){
         if(i != 0){
@@ -331,12 +343,17 @@ export class SketchpadComponent implements OnInit {
                 let dur = (countNotes%10)*0.1
                 let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur}
                 lastNumber = lastNumber + dur
-                this.sequence.notes.push(x)
-                this.sequence.totalTime = x.endTime
+                sequence.notes.push(x)
+                sequence.totalTime = x.endTime
             }
         }
     }
+    let q = this.soundfont_player.loadSamples(sequence)
+    sequence.notes.forEach(element => {
+      element.program =  this.inst
+    });
     this.melodyCreated = true
+    return sequence
   }
 
   public convertHex2Rgb(){
@@ -357,29 +374,38 @@ export class SketchpadComponent implements OnInit {
 
   public playMelody(){
     if(!this.editModeVisible){
-      this.createINoteSequence()
+      let seq = this.createINoteSequence()
+      this.tracks.push(seq)
     }
-    let q = this.soundfont_player.loadSamples(this.sequence)
-    this.sequence.notes.forEach(element => {
-      element.program =  this.inst
-    });
+    //for each track play player
     
     this.playMoreMelodies()
     //this.soundfont_player.start(this.sequence)
   }
   private playMoreMelodies(){
-    let seq = Object.assign({}, this.sequence)
-    this.soundfont_player.loadAllSamples()
-    seq.notes.forEach(element => {
-      element.program = 62
+    let demo_player = new SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus')
+    let players = []
+    let index = 0
+    this.tracks.forEach(track => {
+      //this.soundfont_player.start(track)
+      players.push(new SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus'))
+      players[index].loadSamples(track)
+      index++
     });
-    console.log(this.sequence)
-    this.soundfont_player.start(this.sequence)
-    this.soundfont_player.start(seq)
+    for(let i = 0; i < this.tracks.length; i++){
+      players[i].start(this.tracks[i])
+    }
+    //this.soundfont_player.start(this.sequence)
+    //demo_player.start(seq)
+    //this.soundfont_player.start(seq)
   }
   private inst = 1
   public changeInstrument(value){
+    let seq = this.createINoteSequence()
+    this.tracks.push(seq)
     this.inst = value
+    console.log("hello")
+    console.log(this.tracks)
   }
   private lineWeight = 20
   public changeLineWeight(value){

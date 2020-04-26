@@ -17,13 +17,6 @@ export class DialogComponent implements OnInit {
   private colorPrev
 
   constructor(private dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data) { 
-    let options = {
-      inputs: ['r', 'g', 'b'],
-      output: ['label'],
-      task: 'classification'
-    }
-    this.model = ml5.neuralNetwork(options)
-    this.model.load("../assets/model_color/model.json", this.modelLoaded)
   }
   private modelLoaded(){
     console.log("model loaded")
@@ -56,18 +49,6 @@ public convertHex2Rgb(hex){
     g: g,
     b: b
   }
-  //console.log(inputs)
-  this.model.classify(inputs, (err, results)=>{
-    if(err){
-      console.error(err)
-      return;
-    }
-    if(results[0].label == "white"){
-      this.fontColor = '#eee'
-    }else{
-      this.fontColor = '#222'
-    }
-  })
 }
 
   public next(){
