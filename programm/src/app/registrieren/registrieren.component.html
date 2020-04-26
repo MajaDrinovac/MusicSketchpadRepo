@@ -13,13 +13,13 @@
                 <div class="registrierenForm">
                 <h2>Registriere dich</h2>
                 <br>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Benutzername</mat-label>
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label >Benutzername</mat-label>
                     <input id="benutzername" [(ngModel)]="benutzername" matInput type="text">
                 </mat-form-field>
 
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Email</mat-label>
                     <input id="email" matInput  [formControl]="emailFormControl" [(ngModel)]="email" name="email" placeholder="example@mail.com">
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -30,12 +30,12 @@
                     </mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort</mat-label>
                     <input id="passwort1" [(ngModel)]="passw1" matInput type="password">
                 </mat-form-field>
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort wiederholen</mat-label>
                     <input id="passwort2" [(ngModel)]="passw2" matInput type="password">
                 </mat-form-field>
