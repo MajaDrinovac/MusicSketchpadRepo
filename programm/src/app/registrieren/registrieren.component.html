@@ -16,6 +16,9 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label >Benutzername</mat-label>
                     <input id="benutzername" [(ngModel)]="benutzername" matInput type="text">
+                    <mat-error *ngIf="benutzernameFormControl.hasError('required')">
+                        Benutzername muss angegeben werden
+                    </mat-error>
                 </mat-form-field>
 
                 <br>
@@ -23,10 +26,10 @@
                     <mat-label>Email</mat-label>
                     <input id="email" matInput  [formControl]="emailFormControl" [(ngModel)]="email" name="email" placeholder="example@mail.com">
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                        Please enter a valid email address
+                        Email muss richtig sein
                     </mat-error>
                     <mat-error *ngIf="emailFormControl.hasError('required')">
-                        Email is <strong>required</strong>
+                        Email muss angegeben werden
                     </mat-error>
                 </mat-form-field>
                 <br>

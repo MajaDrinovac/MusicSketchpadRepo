@@ -26,6 +26,10 @@ export class RegistrierenComponent implements OnInit {
     Validators.email,
   ]);
 
+  benutzernameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
   createJson() {
     console.log("hallo");
     if (this.benutzername != "" && this.benutzername.length >= 6 && this.email != "" && this.validateEmail(this.email) && this.passw1 != "" && this.passw1.length >= 8 && this.passw2 != "" && this.passw2.length >= 8 && this.passw1 == this.passw2) {
