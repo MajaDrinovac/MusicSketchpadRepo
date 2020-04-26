@@ -53,7 +53,19 @@
             <mat-list-item *ngFor="let melody of melodies; index as i" class="item">
                 <mat-card class="contentList">
                     <mat-card-content>
-                        <p class="txt"><b>Title: </b> {{melody.title}} <b>Duration: </b> {{melody.totalTime}} <button mat-icon-button (click)="playMelody(melody)" class="buttonRight"><mat-icon>play_arrow</mat-icon></button></p>
+                        <p class="txt"><b>Title: </b> {{melody.title}} <b>Duration: </b> {{melody.totalTime}}
+                            <button mat-icon-button (click)="playMelody(melody)" class="buttonRight">
+                                <mat-icon>play_arrow</mat-icon>
+                            </button>
+                        <a routerLink="/editMelody" routerLinkActive="active">
+                            <button mat-icon-button>
+                                <mat-icon>create</mat-icon>
+                            </button>
+                        </a>
+                        {{melody.notes[i]}}
+                        </p>
+                        
+                          
                     </mat-card-content>
                 </mat-card>
             </mat-list-item>
