@@ -29,7 +29,6 @@ export class HttpService {
     return this.http.post<String>('http://localhost:3000/findUser', user);
   }
 
-  saveMelody(melody:INoteSequence){
   saveMelody(melody:Melody){
     console.log(melody)
     return this.http.post<String>("http://localhost:3000/saveMelody", melody);
