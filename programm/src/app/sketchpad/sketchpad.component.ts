@@ -289,6 +289,7 @@ export class SketchpadComponent implements OnInit {
 
   //create grid in editmode
   private createGrid(width, height, p5sketch){
+    console.log("grid")
     let offset = Math.round(height/7)
     let xOffset = Math.round(width/7)
     let x = Math.round(width/7)

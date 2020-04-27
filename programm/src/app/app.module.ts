@@ -40,6 +40,7 @@ import { ColorChromeModule } from 'ngx-color/chrome';
 import { RegistrierenComponent } from './registrieren/registrieren.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MelodyTitleComponent } from './melody-title/melody-title.component';
+import { EditMelodyComponent } from './edit-melody/edit-melody.component';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -50,6 +51,7 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'nav', component: NavComponent },
   { path: 'profil', component: ProfilComponent },
+  { path: 'editMelody', component: EditMelodyComponent},
   {
     path: '',
     redirectTo: '/landingpage',
@@ -71,7 +73,8 @@ const appRoutes: Routes = [
     DialogComponent,
     RegistrierenComponent,
     ProfilComponent,
-    MelodyTitleComponent
+    MelodyTitleComponent,
+    EditMelodyComponent
   ],
   imports: [
     BrowserModule,
