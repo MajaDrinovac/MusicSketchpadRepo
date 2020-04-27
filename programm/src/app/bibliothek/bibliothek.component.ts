@@ -25,16 +25,15 @@ export class BibliothekComponent implements OnInit {
   }
 
   playMelody(melody){
-    console.log(melody)
-    this.sequence = {
-      notes: melody.notes,
-      totalTime: melody.totalTime
-    }
-    console.log(this.sequence)
-    let q = this.soundfont_player.loadSamples(this.sequence)
-    this.sequence.notes.forEach(element => {
-      element.program = melody.instrument
+    let players = []
+    let index = 0
+    melody.melody.forEach(track => {
+      players.push(new SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus'))
+      players[index].loadSamples(track)
+      index++
     });
-    this.soundfont_player.start(this.sequence)
+    for(let i = 0; i < melody.melody.length; i++){
+      players[i].start(melody.melody[i])
+    }
   }
 }

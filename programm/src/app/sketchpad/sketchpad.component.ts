@@ -80,7 +80,6 @@ export class SketchpadComponent implements OnInit {
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
-    this.soundfont_player.loadAllSamples()
   }
 
   ngOnInit() {
@@ -125,8 +124,9 @@ export class SketchpadComponent implements OnInit {
       this.tracks.push(seq)
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
       //this.sequence.title = data
-      //console.log(this.sequence)
+      alert(data)
       let melody = new Melody(this.tracks, data)
+      console.log(melody)
       this.saveMelody(melody)
     })
   }
@@ -163,43 +163,7 @@ export class SketchpadComponent implements OnInit {
         })
       }
     }
-    s.mouseClicked = ()=>{
-      let inputs = {
-        x: s.mouseX,
-        y: s.mouseY
-      }
-      if(this.state == "collection"){
-        let target = {
-          label: this.targetLabel
-        }
-        this.model.addData(inputs, target)
-        s.noFill()
-        s.stroke(0)
-        s.circle(s.mouseX, s.mouseY, 20)
-        s.fill(0)
-        s.noStroke()
-        s.textAlign(s.CENTER, s.CENTER)
-        s.text(this.targetLabel, s.mouseX, s.mouseY)
-      }
-    }
-    s.keyPressed = ()=>{
-      /*if(s.key == "t"){
-        this.state = "training"
-        this.model.normalizeData()
-        let options = {
-          epochs: 300
-        }
-        this.model.train(options, this.whileTraining, () =>{
-          console.log("finished training")
-          this.state = "prediction"
-          this.drawp5.background(208, 208, 208)
-          this.model.save()
-        })
-      }else{
-        this.targetLabel = s.key.toUpperCase()
-      }*/
 
-    }
     s.mouseReleased = async () =>{
       //this.isDrawed = true
         //this.createINoteSequence()
@@ -385,7 +349,6 @@ export class SketchpadComponent implements OnInit {
     //this.soundfont_player.start(this.sequence)
   }
   private playMoreMelodies(){
-    let demo_player = new SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus')
     let players = []
     let index = 0
     this.tracks.forEach(track => {
