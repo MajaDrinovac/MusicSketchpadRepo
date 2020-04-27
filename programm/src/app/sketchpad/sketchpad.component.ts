@@ -11,6 +11,7 @@ import { IconService } from '../icon.service';
 import { HttpService } from '../http.service';
 import { MelodyTitleComponent } from '../melody-title/melody-title.component';
 import { Melody } from '../melody';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'sketchpad',
@@ -70,7 +71,7 @@ export class SketchpadComponent implements OnInit {
   public instrumentIcons = ['add', 'add', 'add']
   private tracks = []
 
-  constructor(private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
+  constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -83,10 +84,16 @@ export class SketchpadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.drawp5 = new p5(this.sketch)
     this.iconService.registerIcons();
     this.instrumentIcons[0] = 'piano'
+  }
+
+  ngAfterViewInit(){
+    this.drawp5 = new p5(this.sketch)
     this.editp5 = new p5(this.editSketch)
+    if(this.data.edit == true){
+      this.convertToEditMode()
+    }
   }
 
   public colorFirst = this.color
@@ -336,15 +343,29 @@ export class SketchpadComponent implements OnInit {
     this.lineWeight = value
   }
 
+  public openEditMode(){
+    this.drawp5.remove()
+  }
+
   public convertToEditMode(){
-    if(!this.editModeVisible){
+    if(!this.editModeVisible && this.data.edit == false){
       this.editModeVisible = true
-      this.drawp5.remove()
       this.editp5 = new p5(this.editSketch, document.getElementById("canv"))
-      this.createINoteSequence()
+     // this.createINoteSequence()
       let el = document.getElementById("canv")
       this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
       this.displayMelody(this.sequence, this.editp5)
+      this.colorBtnEdit = ""
+      this.colorBtnGrid = "accent"
+      this.activateEditMode()
+    }
+
+    if(this.data.edit == true){
+      this.editModeVisible = true
+      this.editp5 = new p5(this.editSketch, document.getElementById("canv"))
+      let el = document.getElementById("canv")
+      this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
+      this.displayMelody(this.data.editMelody.melody[0], this.editp5)
       this.colorBtnEdit = ""
       this.colorBtnGrid = "accent"
       this.activateEditMode()

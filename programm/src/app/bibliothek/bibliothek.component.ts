@@ -3,6 +3,7 @@ import { HttpService } from '../http.service';
 import { SoundFontPlayer, INoteSequence } from '@magenta/music/es6';
 import * as mm from '@magenta/music/es6'
 import { Router } from '@angular/router';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-bibliothek',
@@ -13,7 +14,7 @@ export class BibliothekComponent implements OnInit {
   public melodies
   private sequence:INoteSequence
   private soundfont_player:SoundFontPlayer
-  constructor(public router:Router,private httpService:HttpService) { 
+  constructor(public router:Router,private httpService:HttpService, private data:DataService) { 
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
   }
 
@@ -39,7 +40,8 @@ export class BibliothekComponent implements OnInit {
   }
 
   openEditMode(melody){
-    
+    this.data.edit = true
+    this.data.editMelody = melody
     this.router.navigate(['/sketchpad'])
   }
 }

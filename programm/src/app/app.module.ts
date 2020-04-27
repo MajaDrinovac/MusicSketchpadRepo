@@ -40,6 +40,7 @@ import { ColorChromeModule } from 'ngx-color/chrome';
 import { RegistrierenComponent } from './registrieren/registrieren.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MelodyTitleComponent } from './melody-title/melody-title.component';
+import { DataService } from './data.service';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
