@@ -8,6 +8,9 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  public email:string = ""
+  public passwort:string = ""
+
   constructor() { }
 
   ngOnInit() {
@@ -16,6 +19,10 @@ export class LoginComponent implements OnInit {
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
+  ]);
+
+  passwortFormControl = new FormControl('', [
+    Validators.required
   ]);
 
   createJSON() {
