@@ -10,12 +10,12 @@
 
 
             <!--<form class="registrierenForm">-->
-                <div class="registrierenForm">
+            <div class="registrierenForm">
                 <h2>Registriere dich</h2>
                 <br>
                 <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label >Benutzername</mat-label>
-                    <input id="benutzername" [(ngModel)]="benutzername" matInput type="text">
+                    <mat-label>Benutzername</mat-label>
+                    <input id="benutzername" matInput [formControl]="benutzernameFormControl" [(ngModel)]="benutzername" name="benutzername" type="text">
                     <mat-error *ngIf="benutzernameFormControl.hasError('required')">
                         Benutzername muss angegeben werden
                     </mat-error>
@@ -24,7 +24,8 @@
                 <br>
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Email</mat-label>
-                    <input id="email" matInput  [formControl]="emailFormControl" [(ngModel)]="email" name="email" placeholder="example@mail.com">
+                    <input id="email" matInput [formControl]="emailFormControl" [(ngModel)]="email" name="email"
+                        placeholder="example@mail.com">
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                         Email muss richtig sein
                     </mat-error>
@@ -43,7 +44,8 @@
                     <input id="passwort2" [(ngModel)]="passw2" matInput type="password">
                 </mat-form-field>
                 <br>
-                <button class="buttonSend" mat-raised-button color="accent" (click)="createJson()">Registriere dich</button>
+                <button class="buttonSend" mat-raised-button color="accent" (click)="createJson()">Registriere
+                    dich</button>
                 <br>
                 <a routerLink="/login">
                     <h5>Schon Mitglied?<br>Melde dich an</h5>
