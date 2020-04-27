@@ -77,7 +77,7 @@
                         <mat-grid-tile colspan="12" rowspan="1">
                             <controls (opened)="openDialog()" [melodyCreated]="melodyCreated"
                                 [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments"
-                                (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()"
+                                (changed)="changeInstrument($event)" (toEditMode)="openEditMode()"
                                 (changedLine)="changeLineWeight($event)" (toDrawMode)="convertToDrawMode()" (savedMelody)="openTitleDialog()"
                                 (played)="playMelody()"></controls>
                         </mat-grid-tile>

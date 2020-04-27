@@ -90,6 +90,7 @@ app.get("/deleteMel", function (req, res) {
         if (err) throw err;
         if (delOk) console.log("ok")
     })
+res.send("deleted")
 })
 
 app.get("/findAllMelodies", function (req, res) {
