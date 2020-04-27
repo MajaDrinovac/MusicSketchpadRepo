@@ -7,9 +7,6 @@ import { INoteSequence } from '@magenta/music/es6';
   providedIn: 'root'
 })
 export class HttpService {
-  findUser() {
-    throw new Error("Method not implemented.");
-  }
 
   http: HttpClient;
 
@@ -24,6 +21,11 @@ export class HttpService {
   insertUser(user:User) {
     console.log(user)
     return this.http.post<String>('http://localhost:3000/createUser', user);
+  }
+
+  findUser(user:User) {
+    console.log(user);
+    return this.http.post<String>('http://localhost:3000/findUser', user);
   }
 
   saveMelody(melody:INoteSequence){

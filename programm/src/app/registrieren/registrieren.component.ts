@@ -26,13 +26,31 @@ export class RegistrierenComponent implements OnInit {
     Validators.email,
   ]);
 
+  benutzernameFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6)
+  ]);
+
+  passwort1FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8)
+  ]);
+
+  passwort2FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8)
+  ]);
+
   createJson() {
     console.log("hallo");
     if (this.benutzername != "" && this.benutzername.length >= 6 && this.email != "" && this.validateEmail(this.email) && this.passw1 != "" && this.passw1.length >= 8 && this.passw2 != "" && this.passw2.length >= 8 && this.passw1 == this.passw2) {
       let user = new User(this.benutzername, this.email, this.passw1)
       console.log(user)
       this.httpService.insertUser(user).subscribe((res)=>{ this.router.navigate(['/profil']) }
-    )}
+    )} else if (this.benutzername != "" && this.benutzername.length >= 6 && this.email != "" && this.validateEmail(this.email) && this.passw1 != "" && this.passw1.length >= 8 && this.passw2 != "" && this.passw2.length >= 8){
+      const fehler: String = (<HTMLInputElement>document.getElementById("errorPasswort")).innerText = "Passwörter stimmen nicht überein!";
+    }
+
   }
 
   validateEmail(email: any) {
