@@ -14,7 +14,7 @@
                 <h2>Melde dich an</h2>
 
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Email</mat-label>
                     <input id="emailAdresse" matInput [formControl]="emailFormControl" [(ngModel)]="email" placeholder="example@mail.com">
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
@@ -25,7 +25,7 @@
                     </mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort</mat-label>
                     <input id="passwort" matInput [formControl]="passwortFormControl" [(ngModel)]="passwort" type="password">
                     <mat-error *ngIf="passwortFormControl.hasError('required')">
