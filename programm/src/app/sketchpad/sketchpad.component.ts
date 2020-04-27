@@ -10,6 +10,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { IconService } from '../icon.service';
 import { HttpService } from '../http.service';
 import { MelodyTitleComponent } from '../melody-title/melody-title.component';
+import { Melody } from '../melody';
 
 @Component({
   selector: 'sketchpad',
@@ -123,9 +124,10 @@ export class SketchpadComponent implements OnInit {
       let seq = this.createINoteSequence()
       this.tracks.push(seq)
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
-      this.sequence.title = data
+      //this.sequence.title = data
       //console.log(this.sequence)
-      this.saveMelody()
+      let melody = new Melody(this.tracks, data)
+      this.saveMelody(melody)
     })
   }
 
@@ -181,7 +183,7 @@ export class SketchpadComponent implements OnInit {
       }
     }
     s.keyPressed = ()=>{
-      if(s.key == "t"){
+      /*if(s.key == "t"){
         this.state = "training"
         this.model.normalizeData()
         let options = {
@@ -195,7 +197,7 @@ export class SketchpadComponent implements OnInit {
         })
       }else{
         this.targetLabel = s.key.toUpperCase()
-      }
+      }*/
 
     }
     s.mouseReleased = async () =>{
@@ -214,12 +216,12 @@ export class SketchpadComponent implements OnInit {
     } 
   }
 
-  public saveMelody(){
+  public saveMelody(melody){
     //this.createINoteSequence()
     //this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
-    let json = JSON.stringify(this.sequence)
-    let obj = JSON.parse(json)
-    this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
+    //let json = JSON.stringify(this.tracks)
+    //let obj = JSON.parse(json)
+    this.httpService.saveMelody(melody).subscribe((res)=>{console.log(res)});
     
   }
   
