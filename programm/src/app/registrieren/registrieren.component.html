@@ -19,6 +19,9 @@
                     <mat-error *ngIf="benutzernameFormControl.hasError('required')">
                         Benutzername muss angegeben werden
                     </mat-error>
+                    <mat-error *ngIf="benutzernameFormControl.hasError('minlength') && !benutzernameFormControl.hasError('required')">
+                        Benutzername muss 6 Zeichen haben
+                    </mat-error>
                 </mat-form-field>
 
                 <br>
@@ -36,12 +39,24 @@
                 <br>
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort</mat-label>
-                    <input id="passwort1" [(ngModel)]="passw1" matInput type="password">
+                    <input id="passwort1" [formControl]="passwort1FormControl" [(ngModel)]="passw1" matInput type="password">
+                    <mat-error *ngIf="passwort1FormControl.hasError('required')">
+                        Passwort muss angegeben werden
+                    </mat-error>
+                    <mat-error *ngIf="passwort1FormControl.hasError('minlength') && !passwort1FormControl.hasError('required')">
+                        Passwort muss 8 Zeichen haben
+                    </mat-error>
                 </mat-form-field>
                 <br>
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort wiederholen</mat-label>
-                    <input id="passwort2" [(ngModel)]="passw2" matInput type="password">
+                    <input id="passwort2" [formControl]="passwort2FormControl" [(ngModel)]="passw2" matInput type="password">
+                    <mat-error *ngIf="passwort2FormControl.hasError('required')">
+                        Passwort muss angegeben werden
+                    </mat-error>
+                    <mat-error *ngIf="passwort2FormControl.hasError('minlength') && !passwort1FormControl.hasError('required')">
+                        Passwort muss 8 Zeichen haben
+                    </mat-error>
                 </mat-form-field>
                 <br>
                 <button class="buttonSend" mat-raised-button color="accent" (click)="createJson()">Registriere

@@ -27,7 +27,18 @@ export class RegistrierenComponent implements OnInit {
   ]);
 
   benutzernameFormControl = new FormControl('', [
-    Validators.required
+    Validators.required,
+    Validators.minLength(6)
+  ]);
+
+  passwort1FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8)
+  ]);
+
+  passwort2FormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(8)
   ]);
 
   createJson() {
