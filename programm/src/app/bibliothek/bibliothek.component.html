@@ -7,56 +7,25 @@
     </mat-grid-tile>
 
 
-   <mat-grid-tile class="content" colspan="8">
-        <!--<mat-list>
-            <mat-list-item *ngFor="let melody of melodies; index as i">
-                   5 <p><b>Title: </b> {{melody.title}}<br><br> <b>Duration: </b> {{melody.totalTime}} <br><button mat-button (click)="playMelody(melody)" class="buttonRight" color="primary">Play</button></p>
-                
-            </mat-list-item>
-        </mat-list>
-    </mat-grid-tile>
--->
-      <!--    <mat-card class="contentList">
-                <p><b>Title: </b> Alinas Melodie<br><br> <b>Duration: </b> 10 sek <br><button mat-button class="buttonRight" >Play</button></p>
-            </mat-card>
-        -->
-<!--
+    <mat-grid-tile class="content" colspan="8">
 
-        <div class="kreis">
+        <mat-card id="nomelody">
 
-            <div class="post-s">
-                <h2>Hover</h2>
-            </div>
-
-        </div>
+        </mat-card>
 
 
-
-        <div class="kreis">
-            <div class="post-s">
-                <h2>Hover</h2>
-            </div>
-        </div>
-
-
-        <div class="kreis">
-            <div class="post-s">
-                <h2>Hover</h2>
-            </div>
-        </div>
-    -->
-   
-   
-
-      
-        <mat-list> 
+        <mat-list>
             <mat-list-item *ngFor="let melody of melodies; index as i" class="item">
                 <mat-card class="contentList">
                     <mat-card-content>
-                        <p class="txt"><b>Title: </b> {{melody.title}} <button mat-button (click)="playMelody(melody)" class="buttonRight"><mat-icon>play_arrow</mat-icon></button><button mat-button (click)="openEditMode(melody)"><mat-icon>edit</mat-icon></button></p>
+                        <p class="txt"><b>Title: </b> {{melody.title}} <button mat-button (click)="playMelody(melody)"
+                                class="buttonRight">
+                                <mat-icon>play_arrow</mat-icon>
+                            </button><button mat-button (click)="openEditMode(melody)">
+                                <mat-icon>edit</mat-icon>
+                            </button></p>
                     </mat-card-content>
                 </mat-card>
             </mat-list-item>
-         </mat-list>
+        </mat-list>
     </mat-grid-tile>
-
