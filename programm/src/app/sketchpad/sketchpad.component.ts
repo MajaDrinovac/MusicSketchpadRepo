@@ -86,6 +86,12 @@ export class SketchpadComponent implements OnInit {
   ngOnInit() {
     this.iconService.registerIcons();
     this.instrumentIcons[0] = 'piano'
+    this.loadInstruments()
+  }
+
+  private async loadInstruments(){
+    const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
+    this.instruments = Object.values(response.instruments);
   }
 
   ngAfterViewInit(){
@@ -171,8 +177,6 @@ export class SketchpadComponent implements OnInit {
         if(this.state == "prediction"){
           this.melodyCreated = true
           this.deleteOption = true
-          const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
-          this.instruments = Object.values(response.instruments);
         }
     } 
   }
@@ -348,24 +352,13 @@ export class SketchpadComponent implements OnInit {
   }
 
   public convertToEditMode(){
-    if(!this.editModeVisible && this.data.edit == false){
+    if(!this.editModeVisible){
       this.editModeVisible = true
       this.editp5 = new p5(this.editSketch, document.getElementById("canv"))
      // this.createINoteSequence()
       let el = document.getElementById("canv")
       this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
       this.displayMelody(this.sequence, this.editp5)
-      this.colorBtnEdit = ""
-      this.colorBtnGrid = "accent"
-      this.activateEditMode()
-    }
-
-    if(this.data.edit == true){
-      this.editModeVisible = true
-      this.editp5 = new p5(this.editSketch, document.getElementById("canv"))
-      let el = document.getElementById("canv")
-      this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
-      this.displayMelody(this.data.editMelody.melody[0], this.editp5)
       this.colorBtnEdit = ""
       this.colorBtnGrid = "accent"
       this.activateEditMode()
