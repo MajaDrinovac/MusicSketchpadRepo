@@ -24,6 +24,9 @@ export class BibliothekComponent implements OnInit {
   }
   displayMelodies(){
     console.log(this.melodies)
+    if(this.melodies == null || this.melodies == 0) {
+      
+    }
   }
 
   playMelody(melody){
@@ -44,4 +47,6 @@ export class BibliothekComponent implements OnInit {
     this.data.editMelody = melody
     this.router.navigate(['/sketchpad'])
   }
+
+
 }
