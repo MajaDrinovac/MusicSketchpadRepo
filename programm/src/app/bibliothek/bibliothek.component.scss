@@ -101,15 +101,25 @@ mat-grid-list {
     width: 75%;
     height: 75%;
     font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    position: absolute;
+    //align-items: center;
   }
 
   #nomelody p {
     text-align: center;
     vertical-align: middle;
+    margin-top: 25%;
   }
 
   #sketchpadBtn {
     text-align: center;
+    align-items: center;
+    margin: 0px auto;
+  }
+
+  #txt {
+    width: 150%;
   }
 
   
