@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
@@ -12,6 +12,8 @@ import { HttpService } from '../http.service';
 import { MelodyTitleComponent } from '../melody-title/melody-title.component';
 import { Melody } from '../melody';
 import { DataService } from '../data.service';
+import { OverlayConfig, Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'sketchpad',
@@ -71,7 +73,7 @@ export class SketchpadComponent implements OnInit {
   public instrumentIcons = ['add', 'add', 'add']
   private tracks = []
 
-  constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
+  constructor(private data:DataService, public overlay:Overlay,public viewContainerRef: ViewContainerRef , private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -87,6 +89,10 @@ export class SketchpadComponent implements OnInit {
     this.iconService.registerIcons();
     this.instrumentIcons[0] = 'piano'
     this.loadInstruments()
+  }
+
+  close(){
+    this.editModeVisible = !this.editModeVisible
   }
 
   private async loadInstruments(){
@@ -346,9 +352,10 @@ export class SketchpadComponent implements OnInit {
   public changeLineWeight(value){
     this.lineWeight = value
   }
-
+  nextPosition: number = 0;
   public openEditMode(){
-    this.drawp5.remove()
+    //this.drawp5.remove()
+    this.editModeVisible = true
   }
 
   public convertToEditMode(){

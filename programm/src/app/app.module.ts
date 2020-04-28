@@ -41,6 +41,10 @@ import { RegistrierenComponent } from './registrieren/registrieren.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MelodyTitleComponent } from './melody-title/melody-title.component';
 import { DataService } from './data.service';
+import { OverlayModule, OverlayConfig, Overlay } from '@angular/cdk/overlay';
+import { PlatformModule } from '@angular/cdk/platform';
+import { PortalModule } from '@angular/cdk/portal';
+import { ScrollDispatchModule } from '@angular/cdk/scrolling';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -101,6 +105,10 @@ const appRoutes: Routes = [
     ColorSwatchesModule,
     ColorChromeModule,
     MatListModule,
+    OverlayModule,
+    PlatformModule,
+    PortalModule,
+    ScrollDispatchModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only

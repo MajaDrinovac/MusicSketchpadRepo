@@ -1,3 +1,5 @@
+<div id="backdrop" *ngIf="editModeVisible" (click)="close()"></div>
+<div id="edit-overlay" *ngIf="editModeVisible"></div>
 <mat-grid-list cols="100" class="grid" rowHeight="fit">
     <mat-grid-tile rows="5" class="nav" colspan="5" id="test">
 
