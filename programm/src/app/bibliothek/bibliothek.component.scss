@@ -36,7 +36,7 @@ mat-grid-list {
 
   .contentList{
     border-radius: 2px;
-    width: 100%;
+    width: 150%;
     font-family: 'Montserrat', sans-serif;
   }
 
@@ -100,8 +100,25 @@ mat-grid-list {
   #nomelody {
     width: 75%;
     height: 75%;
-    background-color: #F6F6F6;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    position: absolute;
+    //align-items: center;
   }
+
+  #nomelody p {
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 25%;
+  }
+
+  #sketchpadBtn {
+    text-align: center;
+    align-items: center;
+    margin: 0px auto;
+  }
+
+
 
   
   /*#profil{

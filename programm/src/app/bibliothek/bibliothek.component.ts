@@ -14,6 +14,8 @@ export class BibliothekComponent implements OnInit {
   public melodies
   private sequence:INoteSequence
   private soundfont_player:SoundFontPlayer
+  //(<HTMLInputElement>document.getElementById("nomelody"));
+
   constructor(public router:Router,private httpService:HttpService, private data:DataService) { 
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
   }
@@ -24,6 +26,11 @@ export class BibliothekComponent implements OnInit {
   }
   displayMelodies(){
     console.log(this.melodies)
+    if(this.melodies == null || this.melodies == 0) {
+      (<HTMLInputElement>document.getElementById("nomelody")).style.visibility='visible';
+    } else {
+      (<HTMLInputElement>document.getElementById("nomelody")).style.visibility='hidden';
+    }
   }
 
   playMelody(melody){
@@ -44,4 +51,6 @@ export class BibliothekComponent implements OnInit {
     this.data.editMelody = melody
     this.router.navigate(['/sketchpad'])
   }
+
+
 }
