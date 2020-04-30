@@ -91,6 +91,7 @@ app.get("/findAllMelodies", function(req, res){
     dbo.collection("melody").find({}).toArray(function(err, result){
         if(err) throw err;
         res.send(result)
+        console.log(result)
     })
 })
 

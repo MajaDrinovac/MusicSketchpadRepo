@@ -30,12 +30,8 @@
 
         </div>
 
-<<<<<<< Updated upstream
-
-=======
         <mat-card id="nomelody">
         </mat-card>
->>>>>>> Stashed changes
 
         <div class="kreis">
             <div class="post-s">
@@ -55,6 +51,7 @@
 
       
         <mat-list> 
+          
             <mat-list-item *ngFor="let melody of melodies; index as i" class="item">
                 <mat-card class="contentList">
                     <mat-card-content>
@@ -63,7 +60,7 @@
                                 <mat-icon>play_arrow</mat-icon>
                             </button>
                         <a routerLink="/editMelody" routerLinkActive="active">
-                            <button mat-icon-button>
+                            <button (click)="sendMelody(melody)" mat-icon-button>
                                 <mat-icon>create</mat-icon>
                             </button>
                         </a>
