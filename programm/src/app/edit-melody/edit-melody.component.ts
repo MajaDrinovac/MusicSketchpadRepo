@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-edit-melody',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditMelodyComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dataService:DataService) {
+
+   }
+   
 
   ngOnInit() {
+   console.log("melodie" + this.dataService.melody)
   }
 
 }

@@ -56,5 +56,11 @@ export class BibliothekComponent implements OnInit {
     this.router.navigate(['/sketchpad'])
   }
 
+  sendMelody(melody){
+    console.log("melodie:" + melody)
+    this.data.melody = melody;
+  }
 
 }
+
+
