@@ -14,6 +14,7 @@ export class BibliothekComponent implements OnInit {
   public melodies
   private sequence:INoteSequence
   private soundfont_player:SoundFontPlayer
+  show: boolean;
   //(<HTMLInputElement>document.getElementById("nomelody"));
 
   constructor(public router:Router,private httpService:HttpService, private data:DataService) { 
@@ -22,14 +23,17 @@ export class BibliothekComponent implements OnInit {
 
   ngOnInit() {
     this.httpService.findAllMelodies().subscribe((res)=>{this.melodies = res; this.displayMelodies()})
+    //this.show = true;
     //console.log(this.melodies)
   }
   displayMelodies(){
     console.log(this.melodies)
     if(this.melodies == null || this.melodies == 0) {
-      (<HTMLInputElement>document.getElementById("nomelody")).style.visibility='visible';
+      this.show = true;
+      //(<HTMLInputElement>document.getElementById("nomelody")).style.visibility='visible';
     } else {
-      (<HTMLInputElement>document.getElementById("nomelody")).style.visibility='hidden';
+      this.show = false;
+      //(<HTMLInputElement>document.getElementById("nomelody")).style.visibility='hidden';
     }
   }
 
