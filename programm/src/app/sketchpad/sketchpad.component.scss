@@ -83,9 +83,9 @@ mat-grid-list {
   .addInstrument{
     /*margin-left: 5vw;
     margin-right: 5vw;
-    margin-top: 8vh;*/
+    margin-top: 8vh;
     width: 4vw;
-    margin-left: 1.8vw;
+    margin-left: 1.8vw;*/
     margin-top: 4.5vh;
   }
 
@@ -202,9 +202,7 @@ mat-grid-list {
     background-color: rgb(108, 140, 156);
   }
 
-  #header{
-    margin-left: 1.8vw;
-  }
+
 
 .instrument-placeholder{
   width: 8vw;
@@ -213,6 +211,7 @@ mat-grid-list {
   border: 2px dotted;
   opacity: 0.8;
   align-items: center;
+  text-align: center;
 }
 
 .instr-item{
