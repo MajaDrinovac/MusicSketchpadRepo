@@ -54,7 +54,7 @@ export class BibliothekComponent implements OnInit {
 
   sendMelody(melody){
     console.log("melodie:" + melody)
-    this.data.melody = melody;
+    //this.data.melody = melody;
   }
 
 }
