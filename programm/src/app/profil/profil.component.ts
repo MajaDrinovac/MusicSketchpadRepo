@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-profil',
@@ -8,7 +9,9 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class ProfilComponent implements OnInit {
 
-  constructor() { }
+  
+
+  constructor(public dataservice:DataService) { }
 
   ngOnInit() {
   }
