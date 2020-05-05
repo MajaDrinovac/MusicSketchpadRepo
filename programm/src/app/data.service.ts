@@ -15,6 +15,7 @@ export class DataService {
   public editMelody: Melody
   public edit: Boolean = false
   public user: User = new User('test', 'test1', 'test2')
+  public eingeloggt: Boolean = false
 
 }
 
