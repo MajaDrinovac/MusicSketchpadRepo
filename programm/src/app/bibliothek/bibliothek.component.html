@@ -20,7 +20,8 @@
             <mat-list-item *ngFor="let melody of melodies; index as i" class="item">
                 <mat-card class="contentList">
                     <mat-card-content>
-                        <p class="txt"><b>Title: </b> {{melody.title}} <button mat-button (click)="playMelody(melody)"
+                        <p class="txt"><b>Title: </b> {{melody.title}} 
+                            <button mat-button (click)="playMelody(melody)"
                                 class="buttonRight">
                                 <mat-icon>play_arrow</mat-icon>
                             </button>
@@ -31,7 +32,7 @@
                 Muss noch rausfinden wie i de Anfangspunkte usw auslesen kann und ob des dann ah wirklich so umsetzbar ist-->
                             <a routerLink="/editMelody" routerLinkActive="active">
                                 <button (click)="sendMelody(melody)" mat-icon-button>
-                                    <mat-icon>create</mat-icon>
+                                    <mat-icon>edit</mat-icon>
                                 </button>
                             </a>
                             {{melody.notes[i]}}
