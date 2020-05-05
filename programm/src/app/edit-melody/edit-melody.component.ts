@@ -13,7 +13,8 @@ export class EditMelodyComponent implements OnInit {
    
 
   ngOnInit() {
-   console.log("melodie" + this.data.melody)
   }
+
+  
 
 }
