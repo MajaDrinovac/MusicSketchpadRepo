@@ -8,13 +8,13 @@ import { DataService } from '../data.service';
 })
 export class EditMelodyComponent implements OnInit {
 
-  constructor(public dataService:DataService) {
-
+  constructor(public data:DataService) {
    }
    
 
   ngOnInit() {
-   console.log("melodie" + this.dataService.melody)
   }
+
+  
 
 }

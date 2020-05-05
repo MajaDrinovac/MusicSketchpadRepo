@@ -53,12 +53,7 @@ export class BibliothekComponent implements OnInit {
   openEditMode(melody){
     this.data.edit = true
     this.data.editMelody = melody
-    this.router.navigate(['/sketchpad'])
-  }
-
-  sendMelody(melody){
-    console.log("melodie:" + melody)
-    this.data.melody = melody;
+    this.router.navigate(['/editMelody'])
   }
 
 }

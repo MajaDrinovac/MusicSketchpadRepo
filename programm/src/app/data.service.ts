@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Melody } from './melody';
 import { INoteSequence } from '@magenta/music/es6';
 import { HttpService } from './http.service';
+import { User } from './user';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class DataService {
   public melody: Array<Object>;
   public editMelody:Melody
   public edit:Boolean = false
+  public user: User;
 }
 
 
