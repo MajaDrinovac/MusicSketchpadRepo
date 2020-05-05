@@ -21,4 +21,8 @@ export class ProfilComponent implements OnInit {
     Validators.email,
   ]);
 
+  ausloggen() {
+    
+  }
+
 }
