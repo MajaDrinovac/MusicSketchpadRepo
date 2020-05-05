@@ -30,12 +30,12 @@
                 übergeben werden und so soll dann die Melodie auf der edit-Melody Seite rekonstruiert werden können
             
                 Muss noch rausfinden wie i de Anfangspunkte usw auslesen kann und ob des dann ah wirklich so umsetzbar ist-->
-                            <a routerLink="/editMelody" routerLinkActive="active">
-                                <button (click)="sendMelody(melody)" mat-icon-button>
-                                    <mat-icon>edit</mat-icon>
-                                </button>
-                            </a>
-                            {{melody.notes[i]}}
+                          <!--  <a routerLink="/editMelody" routerLinkActive="active">
+                                
+                            </a>-->
+                            <button mat-button (click)="openEditMode(melody)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
                         </p>
 
 
