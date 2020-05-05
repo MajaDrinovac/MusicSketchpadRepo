@@ -9,12 +9,13 @@ import { User } from './user';
 })
 export class DataService {
 
-  constructor(public httpService:HttpService) { }
+  constructor(public httpService: HttpService) { }
 
   public melody: Array<Object>;
-  public editMelody:Melody
-  public edit:Boolean = false
-  public user: User;
+  public editMelody: Melody
+  public edit: Boolean = false
+  public user: User = new User('test', 'test1', 'test2')
+
 }
 
 
