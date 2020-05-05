@@ -19,22 +19,26 @@ export class HttpService {
     return this.http.get<User[]>('http://localhost:3000/findAllUsers');
   }
 
-  insertUser(user:User) {
+  insertUser(user: User) {
     console.log(user)
     return this.http.post<String>('http://localhost:3000/createUser', user);
   }
 
-  findUser(user:User) {
+  findUser(user: User) {
     console.log(user);
     return this.http.post<String>('http://localhost:3000/findUser', user);
   }
 
-  saveMelody(melody:Melody){
+  saveMelody(melody: Melody) {
     console.log(melody)
     return this.http.post<String>("http://localhost:3000/saveMelody", melody);
   }
 
-  findAllMelodies(){
+  findAllMelodies() {
     return this.http.get<[]>("http://localhost:3000/findAllMelodies");
+  }
+
+  deleteMelody(melody: Melody) {
+    return this.http.post<String>("http://localhost:3000/deleteMel", melody);
   }
 }
