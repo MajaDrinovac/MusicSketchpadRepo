@@ -1,6 +1,37 @@
 <mat-grid-list cols="100" class="grid" rowHeight="fit">
     <mat-grid-tile rows="5" class="nav" colspan="5" id="test">
 
+        <div class="sidenav">
+            <!--<section class="titel">
+                MUSIC SKETCHPAD
+            </section>-->
+
+            <a routerLink="/login">
+                <section class="naveintraege">
+                    <!--<div id="profil"><mat-icon id="person">person</mat-icon><br>Profil</div>-->
+                    <mat-icon id="person">person_outline</mat-icon><br>
+                </section>
+            </a>
+
+            <a routerLink="/dashboard">
+                <section class="naveintraege">
+                    <mat-icon>dashboard_outline</mat-icon>
+                </section>
+            </a>
+
+            <a routerLink="/sketchpad">
+                <section id="activeEintrag" class="naveintraege">
+                    <mat-icon>gesture</mat-icon>
+                </section>
+            </a>
+
+
+            <a routerLink="/bibliothek">
+                <section class="naveintraege">
+                    <mat-icon>folder_outline</mat-icon>
+                </section>
+            </a>
+        </div>
         
     </mat-grid-tile>
 
