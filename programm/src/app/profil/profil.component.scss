@@ -93,6 +93,7 @@ mat-grid-list {
       padding-right: 10%;
       padding-top: 3%;
       padding-bottom: 6%;
+      width: 30%;
       font-family: 'Montserrat', sans-serif;
   }
 
@@ -100,55 +101,19 @@ mat-grid-list {
       text-align: center;
   }
 
-  h2 {
-      font-size: 2.5vw;
-      font-weight: 400;
-      margin-top: 2vw;
+  h3 {
+    font-weight: 300;
   }
 
-  a {
-    color: #c2bcbc;
-    text-decoration: none;
-  }
 
-  .example-full-width {
-    width: 100%;
-  }
 
   .buttonSend{
     width: 100%;
   }
 
-  h5 {
-    color: rgba(255, 65, 125, 0.79);
-    font-weight: 300;
-    margin-top: 0;
-  }
-
-  div#profilBild {
-    width: 10vw;
-    height: 10vw;
-    border-radius: 100%;
-    border: 1px solid black;
-    margin: 0px auto;
-  }
 
   #ausloggenButton {
     background-color: rgba(255, 65, 125, 0.79);
     color: white;
   }
 
-  ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
-    padding: 0.4em 0px !important;
-  }
-  ::ng-deep .mat-form-field-label-wrapper {
-    top: -1.5em;
-  }
-  
-  ::ng-deep
-    .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
-    .mat-form-field-label {
-    transform: translateY(-1.1em) scale(0.75);
-    width: 133.33333%;
-    font-family: "Montserrat", sans-serif;
-  }
