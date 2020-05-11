@@ -12,23 +12,24 @@ import { DataService } from '../data.service';
 })
 export class BibliothekComponent implements OnInit {
   public melodies
-  private sequence:INoteSequence
-  private soundfont_player:SoundFontPlayer
+  private sequence: INoteSequence
+  private soundfont_player: SoundFontPlayer
   show: boolean;
   //(<HTMLInputElement>document.getElementById("nomelody"));
 
-  constructor(public router:Router,private httpService:HttpService, private data:DataService) { 
+  constructor(public router: Router, private httpService: HttpService, private data: DataService) {
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
   }
 
   ngOnInit() {
-    this.httpService.findAllMelodies().subscribe((res)=>{this.melodies = res; this.displayMelodies()})
+    this.httpService.findAllMelodies().subscribe((res) => { this.melodies = res; this.displayMelodies() })
     //this.show = true;
     //console.log(this.melodies)
   }
-  displayMelodies(){
+
+  displayMelodies() {
     console.log(this.melodies)
-    if(this.melodies == null || this.melodies == 0) {
+    if (this.melodies == null || this.melodies == 0) {
       this.show = true;
       //(<HTMLInputElement>document.getElementById("nomelody")).style.visibility='visible';
     } else {
@@ -37,7 +38,7 @@ export class BibliothekComponent implements OnInit {
     }
   }
 
-  playMelody(melody){
+  playMelody(melody) {
     let players = []
     let index = 0
     melody.melody.forEach(track => {
@@ -45,12 +46,12 @@ export class BibliothekComponent implements OnInit {
       players[index].loadSamples(track)
       index++
     });
-    for(let i = 0; i < melody.melody.length; i++){
+    for (let i = 0; i < melody.melody.length; i++) {
       players[i].start(melody.melody[i])
     }
   }
 
-  openEditMode(melody){
+  openEditMode(melody) {
     this.data.edit = true
     this.data.editMelody = melody
     this.router.navigate(['/editMelody'])
