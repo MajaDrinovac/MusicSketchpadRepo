@@ -10,38 +10,69 @@
 
 
             <!--<form class="registrierenForm">-->
-                <div class="registrierenForm">
+            <div class="registrierenForm">
                 <h2>Registriere dich</h2>
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Benutzername</mat-label>
-                    <input id="benutzername" [(ngModel)]="benutzername" matInput type="text">
+                    <input id="benutzername" matInput [formControl]="benutzernameFormControl" [(ngModel)]="benutzername"
+                        name="benutzername" type="text">
+                    <mat-error *ngIf="benutzernameFormControl.hasError('required')">
+                        Benutzername muss angegeben werden
+                    </mat-error>
+                    <mat-error
+                        *ngIf="benutzernameFormControl.hasError('minlength') && !benutzernameFormControl.hasError('required')">
+                        Benutzername muss 6 Zeichen haben
+                    </mat-error>
                 </mat-form-field>
 
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Email</mat-label>
-                    <input id="email" matInput  [formControl]="emailFormControl" [(ngModel)]="email" name="email" placeholder="example@mail.com">
+                    <input id="email" matInput [formControl]="emailFormControl" [(ngModel)]="email" name="email"
+                        placeholder="example@mail.com">
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                        Please enter a valid email address
+                        Email muss gültig sein
                     </mat-error>
                     <mat-error *ngIf="emailFormControl.hasError('required')">
-                        Email is <strong>required</strong>
+                        Email muss angegeben werden
                     </mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort</mat-label>
-                    <input id="passwort1" [(ngModel)]="passw1" matInput type="password">
+                    <input id="passwort1" [formControl]="passwort1FormControl" [(ngModel)]="passw1" matInput
+                        type="password">
+                    <mat-error *ngIf="passwort1FormControl.hasError('required')">
+                        Passwort muss angegeben werden
+                    </mat-error>
+                    <mat-error
+                        *ngIf="passwort1FormControl.hasError('minlength') && !passwort1FormControl.hasError('required')">
+                        Passwort muss 8 Zeichen haben
+                    </mat-error>
                 </mat-form-field>
                 <br>
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort wiederholen</mat-label>
-                    <input id="passwort2" [(ngModel)]="passw2" matInput type="password">
+                    <input id="passwort2" [formControl]="passwort2FormControl" [(ngModel)]="passw2" matInput
+                        type="password">
+                    <mat-error *ngIf="passwort2FormControl.hasError('required')">
+                        Passwort muss angegeben werden
+                    </mat-error>
+                    <mat-error
+                        *ngIf="passwort2FormControl.hasError('minlength') && !passwort2FormControl.hasError('required')">
+                        Passwort muss 8 Zeichen haben
+                    </mat-error>
                 </mat-form-field>
+                <div id="errorPasswort">
+
+                </div>
                 <br>
-                <button class="buttonSend" mat-raised-button color="accent" (click)="createJson()">Registriere dich</button>
+
+                <button class="buttonSend" mat-raised-button color="accent" (click)="createJson()">Registriere
+                    dich</button>
                 <br>
+
                 <a routerLink="/login">
                     <h5>Schon Mitglied?<br>Melde dich an</h5>
                 </a>

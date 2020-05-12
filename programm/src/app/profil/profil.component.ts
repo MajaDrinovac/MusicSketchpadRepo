@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profil',
@@ -8,7 +10,8 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class ProfilComponent implements OnInit {
 
-  constructor() { }
+  
+  constructor(public dataservice:DataService, public router:Router) { }
 
   ngOnInit() {
   }
@@ -17,5 +20,10 @@ export class ProfilComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
+
+  ausloggen() {
+    this.dataservice.eingeloggt = false;
+    this.router.navigate(['/login']);
+  }
 
 }

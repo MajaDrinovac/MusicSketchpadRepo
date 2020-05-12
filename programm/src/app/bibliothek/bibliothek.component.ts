@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { SoundFontPlayer, INoteSequence } from '@magenta/music/es6';
 import * as mm from '@magenta/music/es6'
+import { Router } from '@angular/router';
 import { DataService } from '../data.service';
 
 @Component({
@@ -11,36 +12,50 @@ import { DataService } from '../data.service';
 })
 export class BibliothekComponent implements OnInit {
   public melodies
-  private sequence:INoteSequence
-  private soundfont_player:SoundFontPlayer
-  constructor(private httpService:HttpService, public dataService:DataService) { 
+  private sequence: INoteSequence
+  private soundfont_player: SoundFontPlayer
+  show: boolean;
+  //(<HTMLInputElement>document.getElementById("nomelody"));
+
+  constructor(public router: Router, private httpService: HttpService, private data: DataService) {
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
   }
 
   ngOnInit() {
-    this.httpService.findAllMelodies().subscribe((res)=>{this.melodies = res; this.displayMelodies()})
-    //console.log(this.melodies)
+    this.httpService.findAllMelodies().subscribe((res) => { this.melodies = res; this.displayMelodies() })
+    //this.show = true;
   }
-  displayMelodies(){
+
+  displayMelodies() {
     console.log(this.melodies)
-  }
-
-  playMelody(melody){
-    console.log(melody)
-    this.sequence = {
-      notes: melody.notes,
-      totalTime: melody.totalTime
+    if (this.melodies == null || this.melodies == 0) {
+      this.show = true;
+      //(<HTMLInputElement>document.getElementById("nomelody")).style.visibility='visible';
+    } else {
+      this.show = false;
+      //(<HTMLInputElement>document.getElementById("nomelody")).style.visibility='hidden';
     }
-    console.log(this.sequence)
-    let q = this.soundfont_player.loadSamples(this.sequence)
-    this.sequence.notes.forEach(element => {
-      element.program = melody.instrument
-    });
-    this.soundfont_player.start(this.sequence)
   }
 
-  sendMelody(melody){
-    console.log("melodie:" + melody)
-    this.dataService.melody = melody;
+  playMelody(melody) {
+    let players = []
+    let index = 0
+    melody.melody.forEach(track => {
+      players.push(new SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus'))
+      players[index].loadSamples(track)
+      index++
+    });
+    for (let i = 0; i < melody.melody.length; i++) {
+      players[i].start(melody.melody[i])
+    }
   }
+
+  openEditMode(melody) {
+    this.data.edit = true
+    this.data.editMelody = melody
+    this.router.navigate(['/editMelody'])
+  }
+
 }
+
+

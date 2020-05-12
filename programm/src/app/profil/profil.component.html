@@ -11,35 +11,16 @@
 
 
             <form class="loginForm">
-                <div id="profilBild">
+                
 
-                </div>
+                <h3>Benutzername: {{dataservice.user.benutzername}}</h3>
 
-                <h2>Benutzername</h2>
-
+                <h3>Email: {{dataservice.user.email}}</h3>
                 <br>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Email</mat-label>
-                    <input matInput [formControl]="emailFormControl" placeholder="example@mail.com">
-                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                        Please enter a valid email address
-                    </mat-error>
-                    <mat-error *ngIf="emailFormControl.hasError('required')">
-                        Email is <strong>required</strong>
-                    </mat-error>
-                </mat-form-field>
-                <br>
-                <mat-form-field class="example-full-width">
-                    <mat-label>Passwort</mat-label>
-                    <input matInput type="password">
-                </mat-form-field>
-                <br>
-                <h5>Passwort ändern</h5>
-                <br>
-                <button class="buttonSend" mat-raised-button color="accent">Neue Melodie</button>
+                <a routerLink="/sketchpad"><button class="buttonSend" mat-raised-button color="accent">Neue Melodie</button></a>
                 <br>
                 <br>
-                <button id="ausloggenButton" class="buttonSend" mat-raised-button>Ausloggen</button>
+                <button id="ausloggenButton" class="buttonSend" (click)="ausloggen()" mat-raised-button>Ausloggen</button>
 
             </form>
 

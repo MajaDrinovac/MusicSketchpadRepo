@@ -1,17 +1,40 @@
 <mat-grid-list cols="10" class="grid" rowHeight="fit">
     <mat-grid-tile rows="3" class="nav" colspan="2">
 
-       <app-nav class="nav"></app-nav>
- 
+        <app-nav class="nav"></app-nav>
+
 
     </mat-grid-tile>
     <mat-grid-tile class="content" colspan="8">
 
-        <div id="kreis"></div>
-        <div id="kreis"></div>
-        <div id="kreis"></div>
+        <mat-list>
+            <mat-list-item *ngFor="let melody of melodies; index as i" class="item">
+                <mat-card class="contentList">
+                    <mat-card-content>
+                        <p class="txt"><b>Title: </b> {{melody.title}}
+                            <button mat-button (click)="playMelody(melody)" class="buttonRight">
+                                <mat-icon>play_arrow</mat-icon>
+                            </button>
+
+                            <!--Edit Melody: Noten der Melodie(Anfangspunkt, Endpunkt, Dauer) sollen mit dem click auf den create button
+                übergeben werden und so soll dann die Melodie auf der edit-Melody Seite rekonstruiert werden können
+            
+                Muss noch rausfinden wie i de Anfangspunkte usw auslesen kann und ob des dann ah wirklich so umsetzbar ist-->
+                            <!--  <a routerLink="/editMelody" routerLinkActive="active">
+                                
+                            </a>-->
+                            <button mat-button (click)="openEditMode(melody)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                        </p>
+
+
+                    </mat-card-content>
+                </mat-card>
+            </mat-list-item>
+        </mat-list>
 
     </mat-grid-tile>
-  
+
 
 </mat-grid-list>

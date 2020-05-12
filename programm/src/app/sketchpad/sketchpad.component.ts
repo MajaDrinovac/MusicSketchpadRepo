@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as p5 from 'p5'
 import * as mm from '@magenta/music/es6'
 import WebMidi from 'webmidi'
-import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer, INoteSequence } from '@magenta/music/es6'
+import { MusicRNN, Player, MIDIPlayer, SoundFontPlayer, INoteSequence, BasePlayer } from '@magenta/music/es6'
 import { core } from '@angular/compiler';
 declare let ml5:any
 import {MatDialog, MatDialogConfig} from '@angular/material'
@@ -10,6 +10,8 @@ import { DialogComponent } from './dialog/dialog.component';
 import { IconService } from '../icon.service';
 import { HttpService } from '../http.service';
 import { MelodyTitleComponent } from '../melody-title/melody-title.component';
+import { Melody } from '../melody';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'sketchpad',
@@ -56,7 +58,6 @@ export class SketchpadComponent implements OnInit {
   private fillColor = [113, 134, 235]
   public color = "#7186EB"
   public melodyCreated:Boolean = false
-  private midi_player:MIDIPlayer
   private soundfont_player:SoundFontPlayer
   public deleteOption:Boolean = false
   private mRNN = new MusicRNN("https://storage.googleapis.com/magentadata/js/checkpoints/music_rnn/basic_rnn")
@@ -68,8 +69,9 @@ export class SketchpadComponent implements OnInit {
   public colorBtnGrid = ""
   public colorWhite = "#fff"
   public instrumentIcons = ['add', 'add', 'add']
+  private tracks = []
 
-  constructor(private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
+  constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
       inputs: ['x', 'y'],
       output: ['label'],
@@ -82,10 +84,16 @@ export class SketchpadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.drawp5 = new p5(this.sketch)
     this.iconService.registerIcons();
     this.instrumentIcons[0] = 'piano'
+  }
+
+  ngAfterViewInit(){
+    this.drawp5 = new p5(this.sketch)
     this.editp5 = new p5(this.editSketch)
+    if(this.data.edit == true){
+      this.convertToEditMode()
+    }
   }
 
   public colorFirst = this.color
@@ -104,6 +112,9 @@ export class SketchpadComponent implements OnInit {
     this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
       this.state = "prediction"
       this.color = result.color
+      let seq = this.createINoteSequence()
+      this.tracks.push(seq)
+      console.log(this.tracks)
       this.inst = result.instrument
       if(pos == "second"){
         this.instrumentIcons[1] = 'guitar'
@@ -116,11 +127,18 @@ export class SketchpadComponent implements OnInit {
   }
 
   openTitleDialog(){
-      this.createINoteSequence()
+      let seq = this.createINoteSequence()
+      this.tracks.push(seq)
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
-      this.sequence.title = data
-      //console.log(this.sequence)
-      this.saveMelody()
+      //this.sequence.title = data
+      //save Image
+      let img = document.getElementById("drawCanv").toDataURL("image/jpeg", 0.1)
+      let link = document.getElementById("link")
+      link.setAttribute('download', 'MintyPaper.png');
+      link.setAttribute('href', img);
+      link.click();
+      let melody = new Melody(this.tracks, data, img)
+      this.saveMelody(melody)
     })
   }
 
@@ -137,8 +155,6 @@ export class SketchpadComponent implements OnInit {
   private sketch = (s) =>{
     s.setup = () =>{
       let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("drawCanv").parent(document.getElementById("canv"))
-      //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth*2/5, document.getElementsByClassName("content")[0].clientHeight*2/3).id("drawCanv").parent(document.getElementById("canv"))
-      //s.background(208, 208, 208)
       s.background(255, 255, 255)
     }
 
@@ -151,71 +167,22 @@ export class SketchpadComponent implements OnInit {
         }
         this.model.classify(inputs, (err, results)=>{
           this.drawLine(err, results)
-          //s.strokeWeight(20)
-          //s.line(s.mouseX, s.mouseY, s.pmouseX, s.pmouseY)
         })
       }
     }
-    s.mouseClicked = ()=>{
-      let inputs = {
-        x: s.mouseX,
-        y: s.mouseY
-      }
-      if(this.state == "collection"){
-        let target = {
-          label: this.targetLabel
-        }
-        this.model.addData(inputs, target)
-        s.noFill()
-        s.stroke(0)
-        s.circle(s.mouseX, s.mouseY, 20)
-        s.fill(0)
-        s.noStroke()
-        s.textAlign(s.CENTER, s.CENTER)
-        s.text(this.targetLabel, s.mouseX, s.mouseY)
-      }
-    }
-    s.keyPressed = ()=>{
-      if(s.key == "t"){
-        this.state = "training"
-        this.model.normalizeData()
-        let options = {
-          epochs: 300
-        }
-        this.model.train(options, this.whileTraining, () =>{
-          console.log("finished training")
-          this.state = "prediction"
-          this.drawp5.background(208, 208, 208)
-          this.model.save()
-        })
-      }else{
-        this.targetLabel = s.key.toUpperCase()
-      }
 
-    }
     s.mouseReleased = async () =>{
-      //this.isDrawed = true
-        //this.createINoteSequence()
         if(this.state == "prediction"){
           this.melodyCreated = true
-          //this.state = "controls"
           this.deleteOption = true
           const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
           this.instruments = Object.values(response.instruments);
-    //const select = document.getElementById("select") as HTMLSelectElement
-    //select.innerHTML = this.instruments.map(i => `<option>${i}</option>`).join('');
         }
-      //console.log(this.resultArray)
     } 
   }
 
-  public saveMelody(){
-    //this.createINoteSequence()
-    //this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
-    let json = JSON.stringify(this.sequence)
-    let obj = JSON.parse(json)
-    this.httpService.saveMelody(this.sequence).subscribe((res)=>{console.log(res)});
-    
+  public saveMelody(melody){
+    this.httpService.saveMelody(melody).subscribe((res)=>{console.log(res)});
   }
   
   private whileTraining(epoch, loss){
@@ -229,7 +196,6 @@ export class SketchpadComponent implements OnInit {
     }
     console.log(this.color)
     this.drawp5.strokeWeight(this.lineWeight)
-    //this.drawp5.stroke(this.fillColor[0], this.fillColor[1], this.fillColor[2])
     this.drawp5.stroke(this.color)
     this.drawp5.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
     this.resultArray.push(results[0].label);
@@ -238,19 +204,8 @@ export class SketchpadComponent implements OnInit {
   private editSketch = (s) =>{
     s.setup = () =>{
       let canvElement = document.getElementById("canv")
-      console.log(document.getElementById("canv-g").clientWidth)
-      //let canv = s.createCanvas(document.getElementsByClassName("content")[0].clientWidth/2, document.getElementsByClassName("content")[0].clientHeight*2/3).parent(document.getElementById("canvEditMode"))
       let canv = s.createCanvas(canvElement.clientWidth, canvElement.clientHeight)
-      //s.background(0, 0, 0)
       this.createDictionary(canvElement.clientHeight)
-      //this.createGrid(canvElement.clientWidth,canvElement.clientHeight)
-      /*let offset = Math.round(canvElement.clientHeight/7)
-      for(let i = 1; i < 7; i++){
-        s.strokeWeight(1)
-        s.stroke(200)
-        s.line(0, i*offset, canvElement.clientWidth, i*offset)
-      }*/
-      //alert(canvElement.clientHeight + ", " + Math.floor(canvElement.clientHeight/7))
     }
   }
 
@@ -271,7 +226,6 @@ export class SketchpadComponent implements OnInit {
 
     let anz = displaySequence.length
     let getSteps = displaySequence[anz-1].quantizedEndStep
-    console.log("steps: " + getSteps + " res: " + Math.floor(document.getElementById("canv").clientWidth/getSteps))
     let res = Math.floor(document.getElementById("canv").clientWidth/getSteps)
     for(let i = 0; i < displaySequence.length; i++){
       let pitch = displaySequence[i].pitch
@@ -281,7 +235,6 @@ export class SketchpadComponent implements OnInit {
       p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
       let x = {xStart: durPrev*res, yStart: this.y_notes[pitch], width: dur*res, height: res, pitch: pitch}
       this.displayArr.push(x)
-      console.log("displayarr" + this.displayArr[i])
       //durPrev is offset for the next rect
       durPrev += dur
   }
@@ -289,7 +242,6 @@ export class SketchpadComponent implements OnInit {
 
   //create grid in editmode
   private createGrid(width, height, p5sketch){
-    console.log("grid")
     let offset = Math.round(height/7)
     let xOffset = Math.round(width/7)
     let x = Math.round(width/7)
@@ -318,11 +270,11 @@ export class SketchpadComponent implements OnInit {
     let lastNumber = 0
     let notes = 0
     delete this.sequence
-    this.sequence = {
-        title: "",
-        instrument: this.inst,
-        notes: [],
-        totalTime: 0
+    let sequence = {
+      title: "",
+      instrument: this.inst,
+      notes: [],
+      totalTime: 0
     }
     for(let i = 0; i < this.resultArray.length; i++){
         if(i != 0){
@@ -333,12 +285,17 @@ export class SketchpadComponent implements OnInit {
                 let dur = (countNotes%10)*0.1
                 let x = {pitch: this.noten_midi[this.resultArray[i]], startTime: lastNumber, endTime: (lastNumber)+dur}
                 lastNumber = lastNumber + dur
-                this.sequence.notes.push(x)
-                this.sequence.totalTime = x.endTime
+                sequence.notes.push(x)
+                sequence.totalTime = x.endTime
             }
         }
     }
+    let q = this.soundfont_player.loadSamples(sequence)
+    sequence.notes.forEach(element => {
+      element.program =  this.inst
+    });
     this.melodyCreated = true
+    return sequence
   }
 
   public convertHex2Rgb(){
@@ -359,16 +316,24 @@ export class SketchpadComponent implements OnInit {
 
   public playMelody(){
     if(!this.editModeVisible){
-      this.createINoteSequence()
+      let seq = this.createINoteSequence()
+      this.tracks.push(seq)
     }
-    let q = this.soundfont_player.loadSamples(this.sequence)
-    this.sequence.notes.forEach(element => {
-      element.program =  this.inst
+    let players = []
+    let index = 0
+    this.tracks.forEach(track => {
+      players.push(new SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus'))
+      players[index].loadSamples(track)
+      index++
     });
-    this.soundfont_player.start(this.sequence)
+    for(let i = 0; i < this.tracks.length; i++){
+      players[i].start(this.tracks[i])
+    }
   }
   private inst = 1
   public changeInstrument(value){
+    let seq = this.createINoteSequence()
+    this.tracks.push(seq)
     this.inst = value
   }
   private lineWeight = 20
@@ -376,15 +341,29 @@ export class SketchpadComponent implements OnInit {
     this.lineWeight = value
   }
 
+  public openEditMode(){
+    this.drawp5.remove()
+  }
+
   public convertToEditMode(){
-    if(!this.editModeVisible){
+    if(!this.editModeVisible && this.data.edit == false){
       this.editModeVisible = true
-      this.drawp5.remove()
       this.editp5 = new p5(this.editSketch, document.getElementById("canv"))
-      this.createINoteSequence()
+     // this.createINoteSequence()
       let el = document.getElementById("canv")
       this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
       this.displayMelody(this.sequence, this.editp5)
+      this.colorBtnEdit = ""
+      this.colorBtnGrid = "accent"
+      this.activateEditMode()
+    }
+
+    if(this.data.edit == true){
+      this.editModeVisible = true
+      this.editp5 = new p5(this.editSketch, document.getElementById("canv"))
+      let el = document.getElementById("canv")
+      this.createGrid(el.clientWidth, el.clientHeight, this.editp5)
+      this.displayMelody(this.data.editMelody.melody[0], this.editp5)
       this.colorBtnEdit = ""
       this.colorBtnGrid = "accent"
       this.activateEditMode()
@@ -393,10 +372,6 @@ export class SketchpadComponent implements OnInit {
 
   public convertToDrawMode(){
     if(this.editModeVisible){
-      /*this.editModeVisible = false
-      delete this.sequence
-      this.editp5.remove()
-      this.drawp5 = new p5(this.sketch, document.getElementById("canv"))*/
       this.delete()
       this.colorBtnEdit = "accent"
       this.colorBtnGrid = ""
@@ -450,7 +425,6 @@ export class SketchpadComponent implements OnInit {
     //this.drawp5.remove()
 
     this.canvElement= document.getElementById("canv")
-    //this.displayEditable()
     this.editMelody()
   }
   public coord
@@ -483,14 +457,11 @@ export class SketchpadComponent implements OnInit {
         }
         
       }
-      //console.log("x: " +actX+ ", y: " + actY)
     }
 
     this.editp5.mouseReleased = ()=>{
       if(melodyEdited){
         this.canvElement = document.getElementById("canv")
-
-        //actX = this.editp5.mouseX - m[0].diffx
         actY = this.editp5.mouseY - m[0].diffy
 
         this.editp5.fill(255)
@@ -500,9 +471,6 @@ export class SketchpadComponent implements OnInit {
         draggedRect.yStart = actY
 
         actY = this.off * Math.round(actY/this.off)
-        
-        //alert("pitch: " + draggedRect.pitch + " y: " + this.y_notes[draggedRect.pitch] + " newy: " + actY + " off: " + this.off)
-
         draggedRect.pitch = this.changeMelody(draggedRect, arrNumber, actY)
 
         this.displayArr[arrNumber] = draggedRect

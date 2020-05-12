@@ -41,6 +41,7 @@ import { RegistrierenComponent } from './registrieren/registrieren.component';
 import { ProfilComponent } from './profil/profil.component';
 import { MelodyTitleComponent } from './melody-title/melody-title.component';
 import { EditMelodyComponent } from './edit-melody/edit-melody.component';
+import { DataService } from './data.service';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },

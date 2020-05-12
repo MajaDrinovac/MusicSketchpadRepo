@@ -1,7 +1,6 @@
 <mat-grid-list cols="100" class="grid" rowHeight="fit">
     <mat-grid-tile rows="5" class="nav" colspan="5" id="test">
 
-
         <div class="sidenav">
             <!--<section class="titel">
                 MUSIC SKETCHPAD
@@ -33,7 +32,7 @@
                 </section>
             </a>
         </div>
-
+        
     </mat-grid-tile>
 
     <mat-grid-tile class="content" colspan="95">
@@ -77,11 +76,12 @@
                         <mat-grid-tile colspan="12" rowspan="1">
                             <controls (opened)="openDialog()" [melodyCreated]="melodyCreated"
                                 [colorBtnEdit]="colorBtnEdit" [colorBtnGrid]="colorBtnGrid" [instruments]="instruments"
-                                (changed)="changeInstrument($event)" (toEditMode)="convertToEditMode()"
+                                (changed)="changeInstrument($event)" (toEditMode)="openEditMode()"
                                 (changedLine)="changeLineWeight($event)" (toDrawMode)="convertToDrawMode()" (savedMelody)="openTitleDialog()"
                                 (played)="playMelody()"></controls>
                         </mat-grid-tile>
                         <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
+                            <a id="link"></a>
                         </mat-grid-tile>
 
                         <mat-grid-tile colspan="8" rowspan="8" id="canv-g">

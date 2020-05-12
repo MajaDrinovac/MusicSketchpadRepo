@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DataService } from '../data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +12,7 @@ export class NavComponent implements OnInit {
   @Input() dashboardMenue: String = "#607D8B";
   @Input() bibliothekMenue: String = "#607D8B";
 
-  constructor() { }
+  constructor(public dataservice: DataService, public router: Router) { }
 
   ngOnInit() {
     if (this.getWebServerRelativeUrl() == "/dashboard") {
@@ -32,6 +34,14 @@ export class NavComponent implements OnInit {
       return window.location.pathname.replace(/\/$/, "");
     }
     return null;
+  }
+
+  navigateTo() {
+    if (this.dataservice.eingeloggt) {
+      this.router.navigate(['/profil']);
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 
 }

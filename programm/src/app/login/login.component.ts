@@ -29,15 +29,15 @@ export class LoginComponent implements OnInit {
     Validators.email,
   ]);
 
+  passwortFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
   createJSON() {
-    const email: String = (<HTMLInputElement>document.getElementById("emailAdresse")).value;
-    const passwort: String = (<HTMLInputElement>document.getElementById("passwort")).value;
 
-    if(email != "" && this.validateEmail(email) && passwort != "" && passwort.length >= 8) {
-      const json: String = '{"email":"' + email + '","password":"' + passwort + '"}';
-
-      alert(json);
-
+    if(this.email != "" && this.validateEmail(this.email) && this.passw != "" && this.passw.length >= 8) {
+      const json: String = '{"email":"' + this.email + '","password":"' + this.passw + '"}';
+      
     }
 
    
