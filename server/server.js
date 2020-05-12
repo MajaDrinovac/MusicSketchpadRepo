@@ -60,6 +60,28 @@ app.post('/createUser', function (req, res) {
     res.send(result);
   });
 
+  //login
+app.post('/login', function(req, res){
+
+
+    let email = req.body.email
+    let password = req.body.password
+
+    console.log("hallo")
+
+    dbo.collection("users").find({email, password})(user, function(err, res){
+        if(err) throw err;
+        console.log("geht " +res)
+        res.send("User "+ req.body.username +" exists")
+    })
+    
+    console.log(res)
+
+    //TODO: Find in DB
+
+   
+})
+
 //nur zum testen
 app.post("/delete", function(req, res){
     let user = req.body
@@ -71,14 +93,7 @@ app.post("/delete", function(req, res){
     res.send("deleted")
 })
 
-//login
-app.post('/login', function(req, res){
-    let username = req.body.username
-    
-    //TODO: Find in DB
 
-    res.send("User "+ req.body.username +" exists")
-})
 
 app.get("/deleteMel", function(req, res){
     dbo.collection("melody").drop(function(err, delOk){

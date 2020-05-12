@@ -18,7 +18,13 @@ export class HttpService {
   }
 
   getUser() {
+    console.log("dha")
     return this.http.get<User[]>('http://localhost:3000/findAllUsers');
+  }
+
+  login(user: User){
+    console.log("da")
+    return this.http.post<String>('http://loclhost:3000/login', user)
   }
 
   insertUser(user:User) {

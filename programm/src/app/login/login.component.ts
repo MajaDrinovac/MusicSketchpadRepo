@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { HttpService } from '../http.service';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'login',
@@ -8,9 +10,18 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+
+  public email:string = ""
+  public passw:string = ""
+
+  constructor(public httpService : HttpService, public router:Router) { }
 
   ngOnInit() {
+    console.log("test")
+    this.httpService.getUser().subscribe(value => console.log(value), 
+    error => console.log('from sub ' + error), 
+    () => console.log('completed'))
+
   }
 
   emailFormControl = new FormControl('', [
@@ -30,6 +41,10 @@ export class LoginComponent implements OnInit {
     }
 
    
+  }
+
+  login(){
+    this.httpService.getUser().subscribe((res)=>{ this.router.navigate(['/profil'])})
   }
 
   validateEmail(email:any) {
