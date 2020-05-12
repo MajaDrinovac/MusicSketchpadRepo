@@ -131,9 +131,7 @@ export class SketchpadComponent implements OnInit {
       this.tracks.push(seq)
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
       //this.sequence.title = data
-      alert(data)
       let melody = new Melody(this.tracks, data)
-      console.log(melody)
       this.saveMelody(melody)
     })
   }
@@ -201,7 +199,6 @@ export class SketchpadComponent implements OnInit {
   private editSketch = (s) =>{
     s.setup = () =>{
       let canvElement = document.getElementById("canv")
-      console.log(document.getElementById("canv-g").clientWidth)
       let canv = s.createCanvas(canvElement.clientWidth, canvElement.clientHeight)
       this.createDictionary(canvElement.clientHeight)
     }
@@ -224,7 +221,6 @@ export class SketchpadComponent implements OnInit {
 
     let anz = displaySequence.length
     let getSteps = displaySequence[anz-1].quantizedEndStep
-    console.log("steps: " + getSteps + " res: " + Math.floor(document.getElementById("canv").clientWidth/getSteps))
     let res = Math.floor(document.getElementById("canv").clientWidth/getSteps)
     for(let i = 0; i < displaySequence.length; i++){
       let pitch = displaySequence[i].pitch
@@ -234,7 +230,6 @@ export class SketchpadComponent implements OnInit {
       p5sketch.rect(durPrev*res, this.y_notes[pitch], dur*res, res)
       let x = {xStart: durPrev*res, yStart: this.y_notes[pitch], width: dur*res, height: res, pitch: pitch}
       this.displayArr.push(x)
-      console.log("displayarr" + this.displayArr[i])
       //durPrev is offset for the next rect
       durPrev += dur
   }
@@ -242,7 +237,6 @@ export class SketchpadComponent implements OnInit {
 
   //create grid in editmode
   private createGrid(width, height, p5sketch){
-    console.log("grid")
     let offset = Math.round(height/7)
     let xOffset = Math.round(width/7)
     let x = Math.round(width/7)
@@ -336,8 +330,6 @@ export class SketchpadComponent implements OnInit {
     let seq = this.createINoteSequence()
     this.tracks.push(seq)
     this.inst = value
-    console.log("hello")
-    console.log(this.tracks)
   }
   private lineWeight = 20
   public changeLineWeight(value){
