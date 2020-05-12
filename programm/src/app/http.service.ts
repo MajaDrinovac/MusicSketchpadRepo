@@ -16,7 +16,7 @@ export class HttpService {
   }
 
   getUser() {
-    console.log("dha")
+    console.log("getUser")
     return this.http.get<User[]>('http://localhost:3000/findAllUsers');
   }
 

@@ -98,14 +98,14 @@ app.post("/delete", function (req, res) {
     res.send("deleted")
 })
 
-//login
+/*login
 app.post('/login', function (req, res) {
     let username = req.body.username
 
     //TODO: Find in DB
 
     res.send("User " + req.body.username + " exists")
-})
+})*/
 
 app.get("/deleteMel", function (req, res) {
     dbo.collection("melody").drop(function (err, delOk) {

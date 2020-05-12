@@ -42,7 +42,7 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort</mat-label>
                     <input id="passwort1" [formControl]="passwort1FormControl" [(ngModel)]="passw1" matInput
-                        type="password">
+                        type="password" name="pass">
                     <mat-error *ngIf="passwort1FormControl.hasError('required')">
                         Passwort muss angegeben werden
                     </mat-error>
@@ -55,7 +55,7 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Passwort wiederholen</mat-label>
                     <input id="passwort2" [formControl]="passwort2FormControl" [(ngModel)]="passw2" matInput
-                        type="password">
+                        type="password" name="passw">
                     <mat-error *ngIf="passwort2FormControl.hasError('required')">
                         Passwort muss angegeben werden
                     </mat-error>

@@ -132,13 +132,14 @@ export class SketchpadComponent implements OnInit {
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
       //this.sequence.title = data
       //save Image
-      let img = document.getElementById("drawCanv").toDataURL("image/jpeg", 0.1)
+      /*let img = document.getElementById("drawCanv").toDataURL("image/jpeg", 0.1)
       let link = document.getElementById("link")
       link.setAttribute('download', 'MintyPaper.png');
       link.setAttribute('href', img);
       link.click();
       let melody = new Melody(this.tracks, data, img)
       this.saveMelody(melody)
+      */
     })
   }
 

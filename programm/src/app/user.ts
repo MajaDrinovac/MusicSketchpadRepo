@@ -1,4 +1,8 @@
 export class User {
 
-    constructor(public benutzername:string, public email:string, public password:string){}
+    constructor(public benutzername:string, public email:string, public password:string){
+        benutzername = " ",
+        email = " ",
+        password = " "
+    }
 }

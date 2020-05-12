@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../http.service';
 import { RouterModule, Router } from '@angular/router';
+import { User } from '../user';
 
 @Component({
   selector: 'login',
@@ -11,8 +12,10 @@ import { RouterModule, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
 
-  public email:string = ""
+  public email: string = "" 
   public passw:string = ""
+
+  public user: User;
 
   constructor(public httpService : HttpService, public router:Router) { }
 
@@ -44,7 +47,11 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.httpService.getUser().subscribe((res)=>{ this.router.navigate(['/profil'])})
+    
+    console.log(this.email + " " +this.passw)
+   this.user.email = this.email
+    this.user.password = this.passw
+    this.httpService.login(this.user).subscribe((res)=>{ this.router.navigate(['/profil'])})
   }
 
   validateEmail(email:any) {
