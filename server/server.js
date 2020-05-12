@@ -69,15 +69,19 @@ app.get('/findUser', function (req, res) {
 app.post('/login', function(req, res){
 
 
-    let email = req.body.email
-    let password = req.body.password
+    let email = req.body.user.email
+    let password = req.body.user.password
 
     console.log("hallo")
 
     dbo.collection("users").find({email, password})(user, function(err, res){
-        if(err) throw err;
-        console.log("geht " +res)
-        res.send("User "+ req.body.username +" exists")
+        try{
+            console.log("geht " +res)
+            res.send("User "+ req.body.username +" exists")
+        }catch(err){
+            console.log(err)
+        }
+        
     })
     
     console.log(res)

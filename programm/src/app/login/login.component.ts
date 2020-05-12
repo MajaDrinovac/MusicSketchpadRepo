@@ -49,9 +49,12 @@ export class LoginComponent implements OnInit {
   login(){
     
     console.log(this.email + " " +this.passw)
-   this.user.email = this.email
     this.user.password = this.passw
-    this.httpService.login(this.user).subscribe((res)=>{ this.router.navigate(['/profil'])})
+    console.log(this.user.password)
+   //this.user.email = this.email
+ 
+    //this.user.password = this.passw
+  //  this.httpService.login(this.user).subscribe((res)=>{ this.router.navigate(['/profil'])})
   }
 
   validateEmail(email:any) {

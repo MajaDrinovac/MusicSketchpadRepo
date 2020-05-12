@@ -21,8 +21,8 @@ export class HttpService {
   }
 
   login(user: User){
-    console.log("da")
-    return this.http.post<String>('http://loclhost:3000/login', user)
+    console.log("login HTTPService")
+    return this.http.post<User>('http://localhost:3000/login', user)
   }
 
   insertUser(user:User) {
