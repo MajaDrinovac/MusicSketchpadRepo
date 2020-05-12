@@ -22,7 +22,7 @@ export class HttpService {
 
   login(user: User){
     console.log("da")
-    return this.http.post<String>('http://loclhost:3000/login', user)
+    return this.http.post<String>('http://localhost:3000/login', user);
   }
 
   insertUser(user:User) {
