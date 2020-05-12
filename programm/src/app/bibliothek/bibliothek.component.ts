@@ -24,7 +24,6 @@ export class BibliothekComponent implements OnInit {
   ngOnInit() {
     this.httpService.findAllMelodies().subscribe((res) => { this.melodies = res; this.displayMelodies() })
     //this.show = true;
-    //console.log(this.melodies)
   }
 
   displayMelodies() {

@@ -9,14 +9,14 @@
 
     <mat-grid-tile class="content" colspan="8">
 
-        <mat-card id="nomelody" *ngIf="this.melodies == null">
+        <mat-card id="nomelody" *ngIf="this.show">
             <p>Noch keine Melodie gespeichert...</p>
             <a routerLink="/sketchpad"><button id="sketchpadBtn" mat-raised-button color="accent">Neue Melodie
                     erstellen</button></a>
         </mat-card>
 
 
-        <mat-list>
+        <mat-list *ngIf="!this.show">
             <mat-list-item *ngFor="let melody of melodies; index as i" class="item">
                 <mat-card class="contentList">
                     <mat-card-content>
