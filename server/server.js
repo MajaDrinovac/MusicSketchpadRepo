@@ -65,26 +65,27 @@ app.get('/findUser', function (req, res) {
 
 });
 
-  //login
-app.post('/login', function(req, res){
+//login
+app.post('/login', function (req, res) {
 
+    console.log('server login')
 
     let email = req.body.email
     let password = req.body.password
 
     console.log("hallo")
 
-    dbo.collection("users").find({email, password})(user, function(err, res){
-        if(err) throw err;
-        console.log("geht " +res)
-        res.send("User "+ req.body.username +" exists")
+    dbo.collection("users").find({ email, password })(user, function (err, res) {
+        if (err) throw err;
+        console.log("geht " + res)
+        res.send("User " + req.body.username + " exists")
     })
-    
+
     console.log(res)
 
     //TODO: Find in DB
 
-   
+
 })
 
 //nur zum testen
@@ -112,7 +113,7 @@ app.get("/deleteMel", function (req, res) {
         if (err) throw err;
         if (delOk) console.log("ok")
     })
-res.send("deleted")
+    res.send("deleted")
 })
 
 app.get("/findAllMelodies", function (req, res) {
