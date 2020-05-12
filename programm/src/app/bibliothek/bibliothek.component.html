@@ -20,6 +20,7 @@
             <mat-list-item *ngFor="let melody of melodies; index as i" class="item">
                 <mat-card class="contentList">
                     <mat-card-content>
+                        <img [src]="melody.img" width="150px" height="100px">
                         <p class="txt"><b>Title: </b> {{melody.title}} 
                             <button mat-button (click)="playMelody(melody)"
                                 class="buttonRight">
@@ -37,8 +38,6 @@
                                 <mat-icon>edit</mat-icon>
                             </button>
                         </p>
-
-
                     </mat-card-content>
                 </mat-card>
             </mat-list-item>
