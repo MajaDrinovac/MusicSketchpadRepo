@@ -100,7 +100,7 @@ app.post('/login', async function(req, res){
         }
         
     })
-    
+
     console.log(res)
 */
 
@@ -132,7 +132,7 @@ app.get("/deleteMel", function (req, res) {
         if (err) throw err;
         if (delOk) console.log("ok")
     })
-res.send("deleted")
+    res.send("deleted")
 })
 
 app.get("/findAllMelodies", function (req, res) {
