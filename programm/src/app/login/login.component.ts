@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpService } from '../http.service';
 import { RouterModule, Router } from '@angular/router';
 import { User } from '../user';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'login',
@@ -12,18 +13,18 @@ import { User } from '../user';
 export class LoginComponent implements OnInit {
 
 
-  public email: string = "" 
-  public passw:string = ""
+  public email: string = ""
+  public passw: string = ""
 
-  public user: User;
+  public user: User = new User('','','');
 
-  constructor(public httpService : HttpService, public router:Router) { }
+  constructor(public httpService: HttpService, public router: Router, public dataservice: DataService) { }
 
   ngOnInit() {
     console.log("test")
-    this.httpService.getUser().subscribe(value => console.log(value), 
-    error => console.log('from sub ' + error), 
-    () => console.log('completed'))
+    this.httpService.getUser().subscribe(value => console.log(value),
+      error => console.log('from sub ' + error),
+      () => console.log('completed'))
 
   }
 
@@ -38,26 +39,28 @@ export class LoginComponent implements OnInit {
 
   createJSON() {
 
-    if(this.email != "" && this.validateEmail(this.email) && this.passw != "" && this.passw.length >= 8) {
+    if (this.email != "" && this.validateEmail(this.email) && this.passw != "" && this.passw.length >= 8) {
       const json: String = '{"email":"' + this.email + '","password":"' + this.passw + '"}';
-      
+
     }
 
-   
+
   }
 
-  login(){
+  login() {
+
+    console.log(this.email + " " + this.passw)
+  /*  this.user.email = this.email
+    this.user.password = this.passw*/
+    this.dataservice.datenspeichern(this.email, this.passw)
+   // this.dataservice.user.email = this.user.email
+   // this.dataservice.user.password = this.user.password
+    console.log(this.dataservice.user)
+    console.log('variablen gehen - login');
     
-    console.log(this.email + " " +this.passw)
-    this.user.password = this.passw
-    console.log(this.user.password)
-   //this.user.email = this.email
- 
-    //this.user.password = this.passw
-  //  this.httpService.login(this.user).subscribe((res)=>{ this.router.navigate(['/profil'])})
   }
 
-  validateEmail(email:any) {
+  validateEmail(email: any) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
