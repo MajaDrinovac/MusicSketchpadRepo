@@ -3,20 +3,30 @@ import { Melody } from './melody';
 import { INoteSequence } from '@magenta/music/es6';
 import { HttpService } from './http.service';
 import { User } from './user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor(public httpService: HttpService) { }
+  constructor(public httpService: HttpService, public router:Router) { }
 
   public melody: Array<Object>;
   public editMelody: Melody
   public edit: Boolean = false
-  public user: User = new User('test', 'test1', 'test2')
+  public user: User = new User('?', '?', '?')
   public eingeloggt: Boolean = false
 
-}
 
+
+  datenspeichern(email, password){
+    console.log(email + " " + password)
+    this.user.email = email
+    this.user.password = password
+
+    console.log(this.user.email + " " + this.user.password)
+   
+  }
+}
 

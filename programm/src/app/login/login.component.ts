@@ -57,8 +57,10 @@ export class LoginComponent implements OnInit {
    // this.dataservice.user.password = this.user.password
     console.log(this.dataservice.user)
     console.log('variablen gehen - login');
-    
-  }
+    if(this.httpService.login(this.dataservice.user).subscribe()){
+      this.router.navigate(['/profil'])
+      this.dataservice.eingeloggt = true;
+    }}
 
   validateEmail(email: any) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

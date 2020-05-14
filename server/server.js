@@ -14,9 +14,11 @@ var app = express();
 //damit man die JSON Files die mitgegeben werden lesen kann
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(express.json())
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
     next();
 });
 
@@ -34,7 +36,7 @@ app.get("/findAllUsers", function (req, res) {
 
     //TODO: Find users in DB
     dbo.collection("users").find({}).toArray(function (err, res) {
-        if (err) throw err;
+        if (err) throw err + "error";
         console.log(res)
     })
 
@@ -66,15 +68,30 @@ app.get('/findUser', function (req, res) {
 });
 
   //login
-app.post('/login', function(req, res){
+app.post('/login', async function(req, res){
+
+    console.log("login")
+
+    let user = req.body
+    let email = req.body.email
+    let password = req.body.password
 
 
-    let email = req.body.user.email
-    let password = req.body.user.password
+    dbo.collection("users").findOne({ email: email, password: password }, function(err, res){
+        if(err) res.send("Benutzer Daten nicht gefunden");
+        console.log(email + " " + password + " " + res.benutzername)
+       benutzername = res.benutzername
+       console.log(benutzername)
+        
+    })
+    
+    res.send("eingelogged")
+   
+    
+})
+   /* let user = req.body 
 
-    console.log("hallo")
-
-    dbo.collection("users").find({email, password})(user, function(err, res){
+    dbo.collection("users").find({email, password})(req.body, function(err, res){
         try{
             console.log("geht " +res)
             res.send("User "+ req.body.username +" exists")
@@ -85,11 +102,10 @@ app.post('/login', function(req, res){
     })
     
     console.log(res)
+*/
 
-    //TODO: Find in DB
 
    
-})
 
 //nur zum testen
 app.post("/delete", function (req, res) {
