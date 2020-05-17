@@ -23,6 +23,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  toSketchpad() {
+    this.router.navigate(['/sketchpad']);
+  }
+
 
 
 }
