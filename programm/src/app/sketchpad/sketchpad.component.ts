@@ -71,6 +71,7 @@ export class SketchpadComponent implements OnInit {
   public instrumentIcons = ['add', 'add', 'add']
   private tracks = []
   private color_instrument = [];
+  private testPoints = []
 
   constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
@@ -82,6 +83,7 @@ export class SketchpadComponent implements OnInit {
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
+   // this.testPoints[this.tracks.length] = []
   }
 
   ngOnInit() {
@@ -116,6 +118,7 @@ export class SketchpadComponent implements OnInit {
       this.color = result.color
       let seq = this.createINoteSequence()
       this.tracks.push(seq)
+      //this.testPoints[this.tracks.length] = []
       this.inst = result.instrument
       if(pos == "second"){
         this.instrumentIcons[1] = 'guitar'
@@ -136,10 +139,11 @@ export class SketchpadComponent implements OnInit {
       //save Image
       let canv = <HTMLCanvasElement> document.getElementById("drawCanv")
       let img = canv.toDataURL("image/jpeg", 0.1)
-      let link = document.getElementById("link")
-      link.setAttribute('download', 'MintyPaper.png');
-      link.setAttribute('href', img);
-      link.click();
+      //let img = canv.toDataURL("image/jpeg", 0.1)
+      //let link = document.getElementById("link")
+      //link.setAttribute('download', 'MintyPaper.png');
+      //link.setAttribute('href', img);
+      //link.click();
       let melody = new Melody(this.tracks, data, img, this.color_instrument)
       console.log(melody)
       this.saveMelody(melody)
@@ -169,6 +173,7 @@ export class SketchpadComponent implements OnInit {
           x: s.mouseX,
           y: s.mouseY
         }
+        //this.testPoints[this.tracks.length].push(inputs)
         this.model.classify(inputs, (err, results)=>{
           this.drawLine(err, results)
         })
@@ -186,6 +191,7 @@ export class SketchpadComponent implements OnInit {
   }
 
   public saveMelody(melody){
+    console.log(melody.img)
     this.httpService.saveMelody(melody).subscribe((res)=>{console.log(res)});
   }
   
