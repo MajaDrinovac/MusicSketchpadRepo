@@ -70,6 +70,7 @@ export class SketchpadComponent implements OnInit {
   public colorWhite = "#fff"
   public instrumentIcons = ['add', 'add', 'add']
   private tracks = []
+  private color_instrument = [];
 
   constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
@@ -111,10 +112,10 @@ export class SketchpadComponent implements OnInit {
 
     this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
       this.state = "prediction"
+      this.color_instrument.push({color: this.color, instrument: this.inst})
       this.color = result.color
       let seq = this.createINoteSequence()
       this.tracks.push(seq)
-      console.log(this.tracks)
       this.inst = result.instrument
       if(pos == "second"){
         this.instrumentIcons[1] = 'guitar'
@@ -128,6 +129,7 @@ export class SketchpadComponent implements OnInit {
 
   openTitleDialog(){
       let seq = this.createINoteSequence()
+      this.color_instrument.push({color: this.color, instrument: this.inst})
       this.tracks.push(seq)
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
       //this.sequence.title = data
@@ -138,7 +140,8 @@ export class SketchpadComponent implements OnInit {
       link.setAttribute('download', 'MintyPaper.png');
       link.setAttribute('href', img);
       link.click();
-      let melody = new Melody(this.tracks, data, img)
+      let melody = new Melody(this.tracks, data, img, this.color_instrument)
+      console.log(melody)
       this.saveMelody(melody)
     })
   }

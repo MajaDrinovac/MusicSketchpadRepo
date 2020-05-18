@@ -9,7 +9,12 @@ $height-sketchpad: 100vh;
     overflow-y: hidden;
 }
 
-
+mat-card{
+  padding: 0;
+  width: 63vw;
+  height: 77vh;
+  margin: 0;
+}
 
 
 mat-grid-list {

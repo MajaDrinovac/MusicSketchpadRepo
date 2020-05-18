@@ -9,12 +9,16 @@ import { DataService } from '../data.service';
 export class EditMelodyComponent implements OnInit {
 
   constructor(public data:DataService) {
-   }
+  }
    
 
   ngOnInit() {
+    this.displayMelody()
   }
 
+  private displayMelody(){
+    
+  }
   
 
 }
