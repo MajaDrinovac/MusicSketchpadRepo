@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import * as p5 from 'p5';
+declare let ml5:any
 
 @Component({
   selector: 'app-edit-melody',
@@ -11,14 +12,27 @@ export class EditMelodyComponent implements OnInit {
 
   private edit:p5
   public tracks
-  private state = "prediction"
+  private state = ""
   public color = ""
+  private trackNum
+  private model
 
   constructor(public data:DataService) {
     this.tracks = this.data.editMelody.melody
     console.log(this.tracks)
     this.color = this.data.editMelody.color_instrument[0].color
     console.log(this.color)
+    let options = {
+      inputs: ['x', 'y'],
+      output: ['label'],
+      task: 'classification'
+    }
+    this.model = ml5.neuralNetwork(options)
+    this.model.load("../assets/model/model.json", this.modelLoaded)
+  }
+
+  private modelLoaded(){
+    console.log("model loaded")
   }
    
 
@@ -33,6 +47,7 @@ export class EditMelodyComponent implements OnInit {
   }
 
   private displayMelodyPoints(){
+    this.data.editMelody.points[this.trackNum].pop()
     this.edit.clear()
     let index = 0
     let p
@@ -54,9 +69,10 @@ export class EditMelodyComponent implements OnInit {
   }
 
   displayTrack(num){
-    /*let canv = <HTMLCanvasElement> document.getElementById("editCanv")
-    let cvx = canv.getContext("2d")
-    cvx.clearRect(0,0,canv.width, canv.height)*/
+   // this.testPoints[this.tracks.length].pop()
+    this.data.editMelody.points[this.trackNum].pop()
+    this.state = "prediction"
+    this.trackNum = num
     let index = 0
     this.edit.clear()
     let p
@@ -101,10 +117,11 @@ export class EditMelodyComponent implements OnInit {
           x: s.mouseX,
           y: s.mouseY
         }
-       // this.testPoints[this.tracks.length].push(inputs)
-        /*this.model.classify(inputs, (err, results)=>{
+        this.data.editMelody.points[this.trackNum].push(inputs)
+        //this.testPoints[this.trackNum].push(inputs)
+        this.model.classify(inputs, (err, results)=>{
           this.drawLine(err, results)
-        })*/
+        })
       }
     }
 /*
@@ -123,9 +140,9 @@ export class EditMelodyComponent implements OnInit {
       return
     }
     //console.log(this.color)
-    //this.edit.strokeWeight(this.lineWeight)
-    //this.edit.stroke(this.color)
-    //this.edit.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
+    this.edit.strokeWeight(20)
+    this.edit.stroke(this.data.editMelody.color_instrument[this.trackNum].color)
+    this.edit.line(this.edit.mouseX, this.edit.mouseY, this.edit.pmouseX, this.edit.pmouseY)
     //this.resultArray.push(results[0].label);
   }
 }
