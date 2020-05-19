@@ -79,11 +79,11 @@ export class SketchpadComponent implements OnInit {
       output: ['label'],
       task: 'classification'
     }
+    this.testPoints[this.tracks.length] = []
     this.model = ml5.neuralNetwork(options)
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
-    this.testPoints[this.tracks.length] = []
   }
 
   ngOnInit() {
@@ -103,10 +103,12 @@ export class SketchpadComponent implements OnInit {
   public colorSecond = '#888'
   public colorThird = '#888'
 
-  openDialog(pos:string){
+  private inst_button = ["piano", "guitar", "drum"]
+
+  openDialog(pos){
     this.state = "color"
     const dialogConfig = new MatDialogConfig();
-
+    this.testPoints[this.tracks.length].pop()
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "20vw"
@@ -117,20 +119,28 @@ export class SketchpadComponent implements OnInit {
       this.color_instrument.push({color: this.color, instrument: this.inst})
       this.color = result.color
       let seq = this.createINoteSequence()
-      this.tracks.push(seq)
+      if(seq.notes.length > 0){
+        this.tracks.push(seq)
+      }
       this.testPoints[this.tracks.length] = []
       this.inst = result.instrument
-      if(pos == "second"){
+      console.log(result.instrument)
+      /*if(pos == "second"){
         this.instrumentIcons[1] = 'guitar'
         this.colorSecond = this.color
       }else{
         this.instrumentIcons[2] = "drum"
         this.colorThird = this.color
+      }*/
+      if(this.inst > 0){
+        this.instrumentIcons[pos] = this.inst_button[pos]
       }
     })
   }
 
   openTitleDialog(){
+      this.state = "save"
+      this.testPoints[this.tracks.length].pop()
       let seq = this.createINoteSequence()
       this.color_instrument.push({color: this.color, instrument: this.inst})
       this.tracks.push(seq)
@@ -325,6 +335,7 @@ export class SketchpadComponent implements OnInit {
   }
 
   public playMelody(){
+    this.testPoints[this.tracks.length].pop()
     if(!this.editModeVisible){
       let seq = this.createINoteSequence()
       this.tracks.push(seq)

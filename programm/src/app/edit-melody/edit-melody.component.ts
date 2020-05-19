@@ -10,8 +10,15 @@ import * as p5 from 'p5';
 export class EditMelodyComponent implements OnInit {
 
   private edit:p5
+  public tracks
+  private state = "prediction"
+  public color = ""
 
   constructor(public data:DataService) {
+    this.tracks = this.data.editMelody.melody
+    console.log(this.tracks)
+    this.color = this.data.editMelody.color_instrument[0].color
+    console.log(this.color)
   }
    
 
@@ -26,6 +33,7 @@ export class EditMelodyComponent implements OnInit {
   }
 
   private displayMelodyPoints(){
+    this.edit.clear()
     let index = 0
     let p
     for(let i = 0; i < this.data.editMelody.points.length; i++){
@@ -34,7 +42,7 @@ export class EditMelodyComponent implements OnInit {
           p = point
           
         }else{
-          this.edit.stroke(this.data.editMelody.color_insttument[i].color)
+          this.edit.stroke(this.data.editMelody.color_instrument[i].color)
           this.edit.strokeWeight(20)
           this.edit.line(p.x, p.y, point.x, point.y)
           p = point
@@ -43,6 +51,28 @@ export class EditMelodyComponent implements OnInit {
       });
       index = 0
     }
+  }
+
+  displayTrack(num){
+    /*let canv = <HTMLCanvasElement> document.getElementById("editCanv")
+    let cvx = canv.getContext("2d")
+    cvx.clearRect(0,0,canv.width, canv.height)*/
+    let index = 0
+    this.edit.clear()
+    let p
+    //this.edit = new p5(this.sketch)
+      this.data.editMelody.points[num].forEach(point => {
+        if(index == 0){
+          p = point
+        }else{
+          this.edit.stroke(this.data.editMelody.color_instrument[num].color)
+          this.edit.strokeWeight(20)
+          this.edit.line(p.x, p.y, point.x, point.y)
+          p = point
+        }
+        index++
+      });
+    
   }
 
   private displayMelodyImage(){
@@ -65,19 +95,19 @@ export class EditMelodyComponent implements OnInit {
     }
 
     //predict x/y to note
-    /*s.mouseDragged = ()=>{
+    s.mouseDragged = ()=>{
       if(this.state == "prediction"){
         let inputs = {
           x: s.mouseX,
           y: s.mouseY
         }
-        this.testPoints[this.tracks.length].push(inputs)
-        this.model.classify(inputs, (err, results)=>{
+       // this.testPoints[this.tracks.length].push(inputs)
+        /*this.model.classify(inputs, (err, results)=>{
           this.drawLine(err, results)
-        })
+        })*/
       }
     }
-
+/*
     s.mouseReleased = async () =>{
         if(this.state == "prediction"){
           this.melodyCreated = true
@@ -87,5 +117,15 @@ export class EditMelodyComponent implements OnInit {
         }
     } */
   }
-
+  private drawLine(err, results){
+    if (err) {
+      console.log(err)
+      return
+    }
+    //console.log(this.color)
+    //this.edit.strokeWeight(this.lineWeight)
+    //this.edit.stroke(this.color)
+    //this.edit.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
+    //this.resultArray.push(results[0].label);
+  }
 }

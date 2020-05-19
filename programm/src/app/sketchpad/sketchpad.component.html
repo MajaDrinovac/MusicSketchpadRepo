@@ -45,21 +45,21 @@
                 <mat-list>
                     <mat-list-item class="instr-item" [style.margin-top]="'5vh'">
                         <div class="instrument-placeholder" [style.border]="'2px dotted' + colorFirst" id="first">
-                            <button mat-raised-button class="addInstrument" (click)="openDialog('first')">
+                            <button mat-raised-button class="addInstrument" (click)="openDialog(0)">
                                 <mat-icon [svgIcon]="instrumentIcons[0]"></mat-icon>
                             </button>
                         </div>
                     </mat-list-item>
                     <mat-list-item class="instr-item">
                         <div class="instrument-placeholder" id="second" [style.border]="'2px dotted' + colorSecond">
-                            <button mat-raised-button class="addInstrument" (click)="openDialog('second')">
+                            <button mat-raised-button class="addInstrument" (click)="openDialog(1)">
                                 <mat-icon [svgIcon]="instrumentIcons[1]"></mat-icon>
                             </button>
                         </div>
                     </mat-list-item>
                     <mat-list-item class="instr-item">
                         <div class="instrument-placeholder" [style.border]="'2px dotted' + colorThird">
-                            <button mat-raised-button class="addInstrument" (click)="openDialog('third')">
+                            <button mat-raised-button class="addInstrument" (click)="openDialog(2)">
                                 <mat-icon [svgIcon]="instrumentIcons[2]"></mat-icon>
                             </button>
                         </div>
