@@ -9,24 +9,40 @@ import * as p5 from 'p5';
 })
 export class EditMelodyComponent implements OnInit {
 
-  private editp5:p5
+  private edit:p5
 
   constructor(public data:DataService) {
   }
    
 
   ngOnInit() {
-   // this.editp5 = new p5(this.sketch)
+   //this.editp5 = new p5(this.sketch)
   }
 
   ngAfterViewInit(){
-    this.editp5 = new p5(this.sketch)
+    this.edit = new p5(this.sketch)
     //this.displayMelodyImage()
     this.displayMelodyPoints()
   }
 
   private displayMelodyPoints(){
-    
+    let index = 0
+    let p
+    for(let i = 0; i < this.data.editMelody.points.length; i++){
+      this.data.editMelody.points[i].forEach(point => {
+        if(index == 0){
+          p = point
+          
+        }else{
+          this.edit.stroke(this.data.editMelody.color_insttument[i].color)
+          this.edit.strokeWeight(20)
+          this.edit.line(p.x, p.y, point.x, point.y)
+          p = point
+        }
+        index++
+      });
+      index = 0
+    }
   }
 
   private displayMelodyImage(){

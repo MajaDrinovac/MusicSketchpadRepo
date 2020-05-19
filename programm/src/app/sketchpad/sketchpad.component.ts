@@ -83,7 +83,7 @@ export class SketchpadComponent implements OnInit {
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
-   // this.testPoints[this.tracks.length] = []
+    this.testPoints[this.tracks.length] = []
   }
 
   ngOnInit() {
@@ -118,7 +118,7 @@ export class SketchpadComponent implements OnInit {
       this.color = result.color
       let seq = this.createINoteSequence()
       this.tracks.push(seq)
-      //this.testPoints[this.tracks.length] = []
+      this.testPoints[this.tracks.length] = []
       this.inst = result.instrument
       if(pos == "second"){
         this.instrumentIcons[1] = 'guitar'
@@ -144,7 +144,7 @@ export class SketchpadComponent implements OnInit {
       //link.setAttribute('download', 'MintyPaper.png');
       //link.setAttribute('href', img);
       //link.click();
-      let melody = new Melody(this.tracks, data, img, this.color_instrument)
+      let melody = new Melody(this.tracks, data, img, this.color_instrument, this.testPoints)
       console.log(melody)
       this.saveMelody(melody)
     })
@@ -173,7 +173,7 @@ export class SketchpadComponent implements OnInit {
           x: s.mouseX,
           y: s.mouseY
         }
-        //this.testPoints[this.tracks.length].push(inputs)
+        this.testPoints[this.tracks.length].push(inputs)
         this.model.classify(inputs, (err, results)=>{
           this.drawLine(err, results)
         })
