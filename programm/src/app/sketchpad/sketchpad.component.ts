@@ -157,7 +157,7 @@ export class SketchpadComponent implements OnInit {
       let melody = new Melody(this.tracks, data, img, this.color_instrument, this.testPoints)
       console.log(melody)
       this.saveMelody(melody)
-      */
+      
     })
   }
 
