@@ -47,7 +47,9 @@ export class EditMelodyComponent implements OnInit {
   }
 
   private displayMelodyPoints(){
-    this.data.editMelody.points[this.trackNum].pop()
+    if(this.state == "prediction"){
+      this.data.editMelody.points[this.trackNum].pop()
+    }
     this.edit.clear()
     let index = 0
     let p
@@ -70,7 +72,9 @@ export class EditMelodyComponent implements OnInit {
 
   displayTrack(num){
    // this.testPoints[this.tracks.length].pop()
+   if(this.state == "prediction"){
     this.data.editMelody.points[this.trackNum].pop()
+   }
     this.state = "prediction"
     this.trackNum = num
     let index = 0
