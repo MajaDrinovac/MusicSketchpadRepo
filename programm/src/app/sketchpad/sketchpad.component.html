@@ -85,7 +85,7 @@
                         </mat-grid-tile>
 
                         <mat-grid-tile colspan="8" rowspan="8" id="canv-g">
-                            <mat-card id="canv"></mat-card>
+                            <mat-card id="canv" (window:resize)="onResize($event)"></mat-card>
                         </mat-grid-tile>
                         <mat-grid-tile colspan="1" rowspan="8" class="sidebar">
                         </mat-grid-tile>

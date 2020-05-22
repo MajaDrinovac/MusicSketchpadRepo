@@ -14,8 +14,10 @@ export class EditMelodyComponent implements OnInit {
   public tracks
   private state = ""
   public color = ""
-  private trackNum
+  private trackNum = 0
   private model
+  private width
+  private height
 
   constructor(public data:DataService) {
     this.tracks = this.data.editMelody.melody
@@ -43,7 +45,8 @@ export class EditMelodyComponent implements OnInit {
   ngAfterViewInit(){
     this.edit = new p5(this.sketch)
     //this.displayMelodyImage()
-    this.displayMelodyPoints()
+    this.displayMelodyPoints(false)
+    console.log("beim laden width, height: " + document.getElementById("editCanv").clientWidth + ", " + document.getElementById("editCanv").clientHeight)
   }
 
   private displayMelodyPoints(){
@@ -68,6 +71,29 @@ export class EditMelodyComponent implements OnInit {
       });
       index = 0
     }
+  }
+
+  onResize(event){
+   let newWidth = event.target.innerWidth*0.63
+   let newHeight = event.target.innerHeight*0.77
+   //prozent ausrechnen
+   console.log("rechnung: (" +newWidth + "/" + this.width+")")
+    let wProzent = (newWidth / this.width)
+    let hProzent = (newHeight / this.height)
+   let points = this.data.editMelody.points
+   points.forEach(track => {
+    //array von {x,y}
+    track.forEach(pair => {
+      //prozent von punkt x,y
+      pair.x *= wProzent
+      pair.y *= hProzent
+    });
+   });
+    this.edit.clear()
+    delete this.edit
+    document.getElementById("canv").removeChild(document.getElementById("editCanv"))
+    this.edit = new p5(this.sketch)
+    this.displayMelodyPoints(false)
   }
 
   displayTrack(num){
@@ -110,10 +136,16 @@ export class EditMelodyComponent implements OnInit {
   
   private sketch = (s) =>{
     s.setup = () =>{
-      let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("editCanv").parent(document.getElementById("canv"))
-      s.background(255, 255, 255)
+      //let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("editCanv").parent(document.getElementById("canv"))
+      this.width = window.innerWidth * 0.63
+      this.height = window.innerHeight * 0.77
+      let canv = s.createCanvas(this.width,this.height).id("editCanv").parent(document.getElementById("canv"))
     }
-
+/*
+    s.draw = ()=>{
+      s.background(255,0,0)
+    }
+*/
     //predict x/y to note
     s.mouseDragged = ()=>{
       if(this.state == "prediction"){

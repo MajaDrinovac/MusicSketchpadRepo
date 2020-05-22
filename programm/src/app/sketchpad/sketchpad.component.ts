@@ -72,6 +72,8 @@ export class SketchpadComponent implements OnInit {
   private tracks = []
   private color_instrument = [];
   private testPoints = []
+  private width: number;
+  private height: number;
 
   constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
@@ -99,6 +101,54 @@ export class SketchpadComponent implements OnInit {
     }
   }
 
+  onResize(event){
+    let newWidth = event.target.innerWidth*0.63
+    let newHeight = event.target.innerHeight*0.77
+    //prozent ausrechnen
+    console.log("rechnung: (" +newWidth + "/" + this.width+")")
+      let wProzent = (newWidth / this.width)
+      let hProzent = (newHeight / this.height)
+    let points = this.testPoints
+    points.forEach(track => {
+      //array von {x,y}
+      track.forEach(pair => {
+        //prozent von punkt x,y
+        pair.x *= wProzent
+        pair.y *= hProzent
+      });
+    });
+      this.drawp5.clear()
+      delete this.drawp5
+      document.getElementById("canv").removeChild(document.getElementById("drawCanv"))
+      this.drawp5 = new p5(this.sketch)
+      this.displayMelodyPoints(false)
+  }
+
+  private displayMelodyPoints(pop){
+    //if(pop){
+      //this.data.editMelody.points[this.trackNum].pop()
+    //}
+    this.drawp5.clear()
+    let index = 0
+    let p
+    for(let i = 0; i < this.testPoints.length; i++){
+      this.testPoints[i].forEach(point => {
+        if(index == 0){
+          p = point
+          
+        }else{
+          console.log(this.color_instrument)
+          this.drawp5.stroke(this.color_instrument[i].color)
+          this.drawp5.strokeWeight(20)
+          this.drawp5.line(p.x, p.y, point.x, point.y)
+          p = point
+        }
+        index++
+      });
+      index = 0
+    }
+  }
+
   public colorFirst = this.color
   public colorSecond = '#888'
   public colorThird = '#888'
@@ -116,8 +166,8 @@ export class SketchpadComponent implements OnInit {
 
     this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
       this.state = "prediction"
-      this.color_instrument.push({color: this.color, instrument: this.inst})
       this.color = result.color
+      this.color_instrument.push({color: this.color, instrument: this.inst})
       let seq = this.createINoteSequence()
       if(seq.notes.length > 0){
         this.tracks.push(seq)
@@ -173,8 +223,9 @@ export class SketchpadComponent implements OnInit {
   //create drawsketch
   private sketch = (s) =>{
     s.setup = () =>{
-      let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("drawCanv").parent(document.getElementById("canv"))
-      s.background(255, 255, 255)
+      this.width = window.innerWidth * 0.63
+      this.height = window.innerHeight * 0.77
+      let canv = s.createCanvas(this.width, this.height).id("drawCanv").parent(document.getElementById("canv"))
     }
 
     //predict x/y to note
@@ -183,6 +234,9 @@ export class SketchpadComponent implements OnInit {
         let inputs = {
           x: s.mouseX,
           y: s.mouseY
+        }
+        if(this.color_instrument.length == 0){
+          this.color_instrument.push({color: this.color, instrument: this.inst})
         }
         this.testPoints[this.tracks.length].push(inputs)
         this.model.classify(inputs, (err, results)=>{
@@ -215,7 +269,6 @@ export class SketchpadComponent implements OnInit {
       console.log(err)
       return
     }
-    console.log(this.color)
     this.drawp5.strokeWeight(this.lineWeight)
     this.drawp5.stroke(this.color)
     this.drawp5.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
