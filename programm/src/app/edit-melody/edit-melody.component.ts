@@ -49,8 +49,8 @@ export class EditMelodyComponent implements OnInit {
     console.log("beim laden width, height: " + document.getElementById("editCanv").clientWidth + ", " + document.getElementById("editCanv").clientHeight)
   }
 
-  private displayMelodyPoints(){
-    if(this.state == "prediction"){
+  private displayMelodyPoints(pop){
+    if(pop){
       this.data.editMelody.points[this.trackNum].pop()
     }
     this.edit.clear()
