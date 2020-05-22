@@ -74,26 +74,18 @@ export class EditMelodyComponent implements OnInit {
   }
 
   onResize(event){
-    //console.log(event.target.innerHeight + ", " + this.height + ", " + document.getElementById("editCanv").clientHeight)
-   //console.log("w: " + event.target.innerWidth / this.width + " h: " + event.target.innerHeight / this.height)
-   //let faktor = (this.width - event.target.innerWidth) / (this.height - event.target.innerHeight) 
-   let faktor = event.target.innerWidth / event.target.innerHeight
    let newWidth = event.target.innerWidth*0.63
    let newHeight = event.target.innerHeight*0.77
-   //um wie viel prozent ist die breite kleiner geworden?
+   //prozent ausrechnen
    console.log("rechnung: (" +newWidth + "/" + this.width+")")
     let wProzent = (newWidth / this.width)
     let hProzent = (newHeight / this.height)
-    console.log("um prozent kleiner geworden: ", wProzent)
    let points = this.data.editMelody.points
    points.forEach(track => {
     //array von {x,y}
     track.forEach(pair => {
-      //prozent von punkt x
-      //let pWidth = pair.x * wProzent
+      //prozent von punkt x,y
       pair.x *= wProzent
-
-      //let pHeight = pair.y * hProzent
       pair.y *= hProzent
     });
    });
@@ -102,8 +94,6 @@ export class EditMelodyComponent implements OnInit {
     document.getElementById("canv").removeChild(document.getElementById("editCanv"))
     this.edit = new p5(this.sketch)
     this.displayMelodyPoints(false)
-
-    console.log("neue width, height: " + document.getElementById("editCanv").clientWidth + ", " + document.getElementById("editCanv").clientHeight)
   }
 
   displayTrack(num){
