@@ -42,6 +42,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { MelodyTitleComponent } from './melody-title/melody-title.component';
 import { EditMelodyComponent } from './edit-melody/edit-melody.component';
 import { DataService } from './data.service';
+import { HelpComponent } from './help/help.component';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -75,7 +76,8 @@ const appRoutes: Routes = [
     RegistrierenComponent,
     ProfilComponent,
     MelodyTitleComponent,
-    EditMelodyComponent
+    EditMelodyComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
