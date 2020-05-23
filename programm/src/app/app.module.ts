@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { HttpService } from './http.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -53,7 +53,8 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'nav', component: NavComponent },
   { path: 'profil', component: ProfilComponent },
-  { path: 'editMelody', component: EditMelodyComponent},
+  { path: 'editMelody', component: EditMelodyComponent },
+  { path: 'help', component: HelpComponent },
   {
     path: '',
     redirectTo: '/landingpage',
@@ -111,7 +112,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
   ],
-  providers: [ HttpService ],
+  providers: [HttpService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent, MelodyTitleComponent]
 })

@@ -4,7 +4,7 @@
     </section>
 
     <section class="profil" (click)="navigateTo()">
-        
+
         <mat-icon id="person">person_outline</mat-icon><br>
         <div id="profilBez">Profil</div>
     </section>
@@ -28,6 +28,12 @@
         <section [style.backgroundColor]="bibliothekMenue" class="naveintraege" id="bibliothekMenue">
             <mat-icon>folder_outline</mat-icon>
             <a routerLink="/bibliothek">Bibliothek</a>
+        </section>
+    </a>
+
+    <a routerLink="/help">
+        <section id="helppage">
+            <mat-icon>help_outline</mat-icon>
         </section>
     </a>
 </div>
