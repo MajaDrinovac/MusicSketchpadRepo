@@ -70,6 +70,11 @@ export class SketchpadComponent implements OnInit {
   public colorWhite = "#fff"
   public instrumentIcons = ['add', 'add', 'add']
   private tracks = []
+  private color_instrument = [];
+  private testPoints = []
+  private width: number;
+  private height: number;
+  private filter = []
 
   constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
@@ -77,15 +82,26 @@ export class SketchpadComponent implements OnInit {
       output: ['label'],
       task: 'classification'
     }
+    this.testPoints[this.tracks.length] = []
     this.model = ml5.neuralNetwork(options)
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
+    //https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
   }
 
   ngOnInit() {
     this.iconService.registerIcons();
     this.instrumentIcons[0] = 'piano'
+    this.loadInstruments()
+  }
+
+  async loadInstruments() {
+    const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
+    this.instruments = Object.values(response.instruments);
+    this.filter[0] = this.instruments.slice(0, this.instruments.length/5)
+    this.filter[1] = this.instruments.slice(this.instruments.length/5, (this.instruments.length/5)*2)
+    this.filter[2] = this.instruments.slice(this.instruments.length/5*4, this.instruments.length)
   }
 
   ngAfterViewInit(){
@@ -96,50 +112,108 @@ export class SketchpadComponent implements OnInit {
     }
   }
 
+  onResize(event){
+    let newWidth = event.target.innerWidth*0.63
+    let newHeight = event.target.innerHeight*0.77
+    //prozent ausrechnen
+    console.log("rechnung: (" +newWidth + "/" + this.width+")")
+      let wProzent = (newWidth / this.width)
+      let hProzent = (newHeight / this.height)
+    let points = this.testPoints
+    points.forEach(track => {
+      //array von {x,y}
+      track.forEach(pair => {
+        //prozent von punkt x,y
+        pair.x *= wProzent
+        pair.y *= hProzent
+      });
+    });
+      this.drawp5.clear()
+      delete this.drawp5
+      document.getElementById("canv").removeChild(document.getElementById("drawCanv"))
+      this.drawp5 = new p5(this.sketch)
+      this.displayMelodyPoints(false)
+  }
+
+  private displayMelodyPoints(pop){
+    //if(pop){
+      //this.data.editMelody.points[this.trackNum].pop()
+    //}
+    this.drawp5.clear()
+    let index = 0
+    let p
+    for(let i = 0; i < this.testPoints.length; i++){
+      this.testPoints[i].forEach(point => {
+        if(index == 0){
+          p = point
+          
+        }else{
+          this.drawp5.stroke(this.color_instrument[i].color)
+          this.drawp5.strokeWeight(20)
+          this.drawp5.line(p.x, p.y, point.x, point.y)
+          p = point
+        }
+        index++
+      });
+      index = 0
+    }
+  }
+
   public colorFirst = this.color
   public colorSecond = '#888'
   public colorThird = '#888'
 
-  openDialog(pos:string){
+  private inst_button = ["piano", "guitar", "drum"]
+
+  openDialog(pos){
     this.state = "color"
     const dialogConfig = new MatDialogConfig();
-
+    this.testPoints[this.tracks.length].pop()
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "20vw"
-    dialogConfig.data = {instruments: this.instruments, color: this.color};
+    let x = this.instruments.length/5
+    let filter = this.instruments.slice(x*pos, x*(pos+1))
+    console.log("start:"+ x*pos + " ende: " + x*(pos+1))
+    dialogConfig.data = {instruments: this.filter[pos], color: this.color};
 
     this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
       this.state = "prediction"
       this.color = result.color
+      this.color_instrument.push({color: this.color, instrument: this.inst})
       let seq = this.createINoteSequence()
-      this.tracks.push(seq)
-      console.log(this.tracks)
+      if(seq.notes.length > 0){
+        this.tracks.push(seq)
+      }
+      this.testPoints[this.tracks.length] = []
       this.inst = result.instrument
-      if(pos == "second"){
-        this.instrumentIcons[1] = 'guitar'
-        this.colorSecond = this.color
-      }else{
-        this.instrumentIcons[2] = "drum"
-        this.colorThird = this.color
+      console.log(result.instrument)
+      if(this.inst > 0){
+        this.instrumentIcons[pos] = this.inst_button[pos]
       }
     })
   }
 
   openTitleDialog(){
+      this.state = "save"
+      this.testPoints[this.tracks.length].pop()
       let seq = this.createINoteSequence()
+      this.color_instrument.push({color: this.color, instrument: this.inst})
       this.tracks.push(seq)
       this.dialog.open(MelodyTitleComponent).afterClosed().subscribe(data=>{
       //this.sequence.title = data
       //save Image
-      /*let img = document.getElementById("drawCanv").toDataURL("image/jpeg", 0.1)
-      let link = document.getElementById("link")
-      link.setAttribute('download', 'MintyPaper.png');
-      link.setAttribute('href', img);
-      link.click();
-      let melody = new Melody(this.tracks, data, img)
+      let canv = <HTMLCanvasElement> document.getElementById("drawCanv")
+      let img = canv.toDataURL("image/jpeg", 0.1)
+      //let img = canv.toDataURL("image/jpeg", 0.1)
+      //let link = document.getElementById("link")
+      //link.setAttribute('download', 'MintyPaper.png');
+      //link.setAttribute('href', img);
+      //link.click();
+      let melody = new Melody(this.tracks, data, img, this.color_instrument, this.testPoints)
+      console.log(melody)
       this.saveMelody(melody)
-      */
+      
     })
   }
 
@@ -155,8 +229,10 @@ export class SketchpadComponent implements OnInit {
   //create drawsketch
   private sketch = (s) =>{
     s.setup = () =>{
-      let canv = s.createCanvas(document.getElementById("canv").clientWidth-1, document.getElementById("canv").clientHeight-1).id("drawCanv").parent(document.getElementById("canv"))
-      s.background(255, 255, 255)
+      this.width = window.innerWidth * 0.63
+      this.height = window.innerHeight * 0.77
+      let canv = s.createCanvas(this.width, this.height).id("drawCanv").parent(document.getElementById("canv"))
+      s.background(255,255,255)
     }
 
     //predict x/y to note
@@ -166,6 +242,10 @@ export class SketchpadComponent implements OnInit {
           x: s.mouseX,
           y: s.mouseY
         }
+        if(this.color_instrument.length == 0){
+          this.color_instrument.push({color: this.color, instrument: this.inst})
+        }
+        this.testPoints[this.tracks.length].push(inputs)
         this.model.classify(inputs, (err, results)=>{
           this.drawLine(err, results)
         })
@@ -176,13 +256,12 @@ export class SketchpadComponent implements OnInit {
         if(this.state == "prediction"){
           this.melodyCreated = true
           this.deleteOption = true
-          const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
-          this.instruments = Object.values(response.instruments);
         }
     } 
   }
 
   public saveMelody(melody){
+    console.log(melody.img)
     this.httpService.saveMelody(melody).subscribe((res)=>{console.log(res)});
   }
   
@@ -195,7 +274,6 @@ export class SketchpadComponent implements OnInit {
       console.log(err)
       return
     }
-    console.log(this.color)
     this.drawp5.strokeWeight(this.lineWeight)
     this.drawp5.stroke(this.color)
     this.drawp5.line(this.drawp5.mouseX, this.drawp5.mouseY, this.drawp5.pmouseX, this.drawp5.pmouseY)
@@ -316,6 +394,7 @@ export class SketchpadComponent implements OnInit {
   }
 
   public playMelody(){
+    this.testPoints[this.tracks.length].pop()
     if(!this.editModeVisible){
       let seq = this.createINoteSequence()
       this.tracks.push(seq)

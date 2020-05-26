@@ -1,12 +1,12 @@
 $width-sketchpad: 80vw;
 $height-sketchpad: 100vh;
+$item-height: 8vh;
 
 
 
 #canv-grid{
     width: 100vw;
-    height: 100vh;
-    overflow-y: hidden;
+    height: auto;
 }
 
 
@@ -14,6 +14,7 @@ $height-sketchpad: 100vh;
 
 mat-grid-list {
     font-family: 'Montserrat', sans-serif;
+    overflow: visible;
   }
   
   .nav{
@@ -39,9 +40,18 @@ mat-grid-list {
     width: 150%;
     font-family: 'Montserrat', sans-serif;
   }
+  
+  #melodyList{
+    width: 88vw;
+    height: 100vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+  }
 
   .item{
-    margin-top: 4vh;
+    
+    //height: $item-height;
+    //margin-top: #{$item-height * 3};
   }
   
   .grid{

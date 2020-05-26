@@ -6,7 +6,7 @@ mat-grid-list {
 }
 
 .sidenav {
-  height: 100%;
+  height: auto;
   width: 100%;
   background: #607d8b;
 }
@@ -110,6 +110,11 @@ a {
 #dashboardMenue:hover {
   cursor: pointer;
   background: rgb(103, 136, 153);
+}
+
+#helppage {
+  margin-left: 10px;
+  margin-top: 70%;
 }
 
 /*#profil{

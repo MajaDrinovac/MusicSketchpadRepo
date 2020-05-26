@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClientJsonpModule} from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { HttpService } from './http.service';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +42,7 @@ import { ProfilComponent } from './profil/profil.component';
 import { MelodyTitleComponent } from './melody-title/melody-title.component';
 import { EditMelodyComponent } from './edit-melody/edit-melody.component';
 import { DataService } from './data.service';
+import { HelpComponent } from './help/help.component';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'nav', component: NavComponent },
   { path: 'profil', component: ProfilComponent },
-  { path: 'editMelody', component: EditMelodyComponent},
+  { path: 'editMelody', component: EditMelodyComponent },
+  { path: 'help', component: HelpComponent },
   {
     path: '',
     redirectTo: '/landingpage',
@@ -75,7 +77,8 @@ const appRoutes: Routes = [
     RegistrierenComponent,
     ProfilComponent,
     MelodyTitleComponent,
-    EditMelodyComponent
+    EditMelodyComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +112,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
   ],
-  providers: [ HttpService ],
+  providers: [HttpService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent, MelodyTitleComponent]
 })
