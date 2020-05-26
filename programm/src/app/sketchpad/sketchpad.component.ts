@@ -225,6 +225,7 @@ export class SketchpadComponent implements OnInit {
       this.width = window.innerWidth * 0.63
       this.height = window.innerHeight * 0.77
       let canv = s.createCanvas(this.width, this.height).id("drawCanv").parent(document.getElementById("canv"))
+      s.background(255,255,255)
     }
 
     //predict x/y to note
