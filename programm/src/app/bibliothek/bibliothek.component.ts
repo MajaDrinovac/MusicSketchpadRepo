@@ -15,6 +15,7 @@ export class BibliothekComponent implements OnInit {
   private sequence: INoteSequence
   private soundfont_player: SoundFontPlayer
   show: boolean;
+  public imgWidth = 0
   //(<HTMLInputElement>document.getElementById("nomelody"));
 
   constructor(public router: Router, private httpService: HttpService, private data: DataService) {
@@ -24,6 +25,16 @@ export class BibliothekComponent implements OnInit {
   ngOnInit() {
     this.httpService.findAllMelodies().subscribe((res) => { this.melodies = res; this.displayMelodies() })
     //this.show = true;
+  }
+
+  ngAfterViewInit(){
+    let height = window.innerHeight
+    console.log(height)
+    
+    let w = document.getElementById("melodyList").clientWidth
+    console.log("w: ", w)
+    this.imgWidth = (w-20)/5
+    console.log(this.imgWidth)
   }
 
   displayMelodies() {
