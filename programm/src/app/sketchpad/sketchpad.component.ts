@@ -74,6 +74,7 @@ export class SketchpadComponent implements OnInit {
   private testPoints = []
   private width: number;
   private height: number;
+  private filter = []
 
   constructor(private data:DataService, private iconService:IconService,private dialog: MatDialog, private httpService:HttpService) { 
     let options = {
@@ -85,12 +86,22 @@ export class SketchpadComponent implements OnInit {
     this.model = ml5.neuralNetwork(options)
     this.model.load("../assets/model/model.json", this.modelLoaded)
     this.targetLabel = "C"
+    //https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus
     this.soundfont_player = new mm.SoundFontPlayer('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus');
   }
 
   ngOnInit() {
     this.iconService.registerIcons();
     this.instrumentIcons[0] = 'piano'
+    this.loadInstruments()
+  }
+
+  async loadInstruments() {
+    const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
+    this.instruments = Object.values(response.instruments);
+    this.filter[0] = this.instruments.slice(0, this.instruments.length/5)
+    this.filter[1] = this.instruments.slice(this.instruments.length/5, (this.instruments.length/5)*2)
+    this.filter[2] = this.instruments.slice(this.instruments.length/5*4, this.instruments.length)
   }
 
   ngAfterViewInit(){
@@ -137,7 +148,6 @@ export class SketchpadComponent implements OnInit {
           p = point
           
         }else{
-          console.log(this.color_instrument)
           this.drawp5.stroke(this.color_instrument[i].color)
           this.drawp5.strokeWeight(20)
           this.drawp5.line(p.x, p.y, point.x, point.y)
@@ -162,7 +172,10 @@ export class SketchpadComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = "20vw"
-    dialogConfig.data = {instruments: this.instruments, color: this.color};
+    let x = this.instruments.length/5
+    let filter = this.instruments.slice(x*pos, x*(pos+1))
+    console.log("start:"+ x*pos + " ende: " + x*(pos+1))
+    dialogConfig.data = {instruments: this.filter[pos], color: this.color};
 
     this.dialog.open(DialogComponent, dialogConfig).afterClosed().subscribe(result=>{
       this.state = "prediction"
@@ -175,13 +188,6 @@ export class SketchpadComponent implements OnInit {
       this.testPoints[this.tracks.length] = []
       this.inst = result.instrument
       console.log(result.instrument)
-      /*if(pos == "second"){
-        this.instrumentIcons[1] = 'guitar'
-        this.colorSecond = this.color
-      }else{
-        this.instrumentIcons[2] = "drum"
-        this.colorThird = this.color
-      }*/
       if(this.inst > 0){
         this.instrumentIcons[pos] = this.inst_button[pos]
       }
@@ -249,8 +255,6 @@ export class SketchpadComponent implements OnInit {
         if(this.state == "prediction"){
           this.melodyCreated = true
           this.deleteOption = true
-          const response = await (await fetch('https://storage.googleapis.com/magentadata/js/soundfonts/sgm_plus/soundfont.json')).json()
-          this.instruments = Object.values(response.instruments);
         }
     } 
   }
