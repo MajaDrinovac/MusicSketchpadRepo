@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 import * as p5 from 'p5';
+import { SaveDialogComponent } from '../save-dialog/save-dialog.component';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 declare let ml5:any
 
 @Component({
@@ -19,7 +21,7 @@ export class EditMelodyComponent implements OnInit {
   private width
   private height
 
-  constructor(public data:DataService) {
+  constructor(public data:DataService, private dialog:MatDialog) {
     this.tracks = this.data.editMelody.melody
     console.log(this.tracks)
     this.color = this.data.editMelody.color_instrument[0].color
@@ -47,6 +49,11 @@ export class EditMelodyComponent implements OnInit {
     //this.displayMelodyImage()
     this.displayMelodyPoints(false)
     console.log("beim laden width, height: " + document.getElementById("editCanv").clientWidth + ", " + document.getElementById("editCanv").clientHeight)
+  }
+
+  save(){
+    const dialogConfig = new MatDialogConfig()
+    this.dialog.open(SaveDialogComponent, dialogConfig)
   }
 
   private displayMelodyPoints(pop){

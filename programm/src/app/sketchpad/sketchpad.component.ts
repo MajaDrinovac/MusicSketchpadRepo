@@ -68,7 +68,8 @@ export class SketchpadComponent implements OnInit {
   public colorBtnEdit = "accent"
   public colorBtnGrid = ""
   public colorWhite = "#fff"
-  public instrumentIcons = ['add', 'add', 'add']
+  //public instrumentIcons = ['add', 'add', 'add']
+  public instrumentIcons = ['piano', 'guitar', 'drum']
   private tracks = []
   private color_instrument = [];
   private testPoints = []

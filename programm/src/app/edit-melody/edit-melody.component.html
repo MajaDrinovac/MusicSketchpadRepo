@@ -46,6 +46,21 @@
     </mat-grid-tile>
 
     <mat-grid-tile class="content" colspan="12">
-        <mat-card id="canv" (window:resize)="onResize($event)"></mat-card>
+        <div>
+            <mat-grid-list cols="5" rowHeight="fit" id="canv-grid">
+                <mat-grid-tile colspan="1" rowspan="7"></mat-grid-tile>
+                <mat-grid-tile colspan="3" rowspan="1">
+                    <div id="control">
+                        <button mat-fab [color]="none" (click)="play()" class="saveBtn"><mat-icon>play_arrow</mat-icon></button>
+                        <button mat-fab [color]="none" (click)="save()" class="saveBtn"><mat-icon>save</mat-icon></button>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="1" rowspan="7"></mat-grid-tile>
+                <mat-grid-tile colspan="3" rowspan="5">
+                    <mat-card id="canv" (window:resize)="onResize($event)"></mat-card>
+                </mat-grid-tile>
+                <mat-grid-tile colspan="3" rowspan="1"></mat-grid-tile>
+            </mat-grid-list>
+        </div>
     </mat-grid-tile>
 </mat-grid-list>

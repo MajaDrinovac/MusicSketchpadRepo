@@ -43,6 +43,7 @@ import { MelodyTitleComponent } from './melody-title/melody-title.component';
 import { EditMelodyComponent } from './edit-melody/edit-melody.component';
 import { DataService } from './data.service';
 import { HelpComponent } from './help/help.component';
+import { SaveDialogComponent } from './save-dialog/save-dialog.component';
 
 const appRoutes: Routes = [
   { path: 'landingpage', component: LandingpageComponent },
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
     ProfilComponent,
     MelodyTitleComponent,
     EditMelodyComponent,
-    HelpComponent
+    HelpComponent,
+    SaveDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -114,6 +116,6 @@ const appRoutes: Routes = [
   ],
   providers: [HttpService],
   bootstrap: [AppComponent],
-  entryComponents: [DialogComponent, MelodyTitleComponent]
+  entryComponents: [DialogComponent, MelodyTitleComponent, SaveDialogComponent]
 })
 export class AppModule { }
