@@ -1,6 +1,10 @@
 mat-grid-list {
     font-family: "Montserrat", sans-serif;
   }
+
+  body {
+    overflow: hidden;
+  }
   
   .nav {
     height: 100%;
@@ -9,7 +13,7 @@ mat-grid-list {
   }
   
   .content {
-    background-image: url("Help-Page-Design.png");
+    background-image: url("Help-Page-Design_1.png");
     background-blend-mode: darken;
     background-size: 100%;
     background-position: center;
