@@ -15,8 +15,8 @@ export class DataService {
   public melody: Array<Object>;
   public editMelody: Melody
   public edit: Boolean = false
-  public user: User = new User('?', '?', '?')
-  public eingeloggt: Boolean = false
+  public user: User = new User('Maja', '?', '?')
+  public eingeloggt: Boolean
 
 
 
@@ -24,6 +24,7 @@ export class DataService {
     console.log(email + " " + password)
     this.user.email = email
     this.user.password = password
+    
 
     console.log(this.user.email + " " + this.user.password)
    

@@ -67,8 +67,8 @@ app.get('/findUser', function (req, res) {
 
 });
 
-  //login
-app.post('/login', async function(req, res){
+//login
+app.post('/login', async function (req, res) {
 
     console.log("login")
 
@@ -77,35 +77,35 @@ app.post('/login', async function(req, res){
     let password = req.body.password
 
 
-    dbo.collection("users").findOne({ email: email, password: password }, function(err, res){
-        if(err) res.send("Benutzer Daten nicht gefunden");
+    dbo.collection("users").findOne({ email: email, password: password }, function (err, res) {
+        if (err) res.send("Benutzer Daten nicht gefunden");
         console.log(email + " " + password + " " + res.benutzername)
-       benutzername = res.benutzername
-       console.log(benutzername)
-        
+        benutzername = res.benutzername
+        console.log(benutzername)
+
     })
-    
-    res.send("eingelogged")
-   
-    
+
+    res.send(user)
+
+
 })
-   /* let user = req.body 
+/* let user = req.body 
 
-    dbo.collection("users").find({email, password})(req.body, function(err, res){
-        try{
-            console.log("geht " +res)
-            res.send("User "+ req.body.username +" exists")
-        }catch(err){
-            console.log(err)
-        }
-        
-    })
+ dbo.collection("users").find({email, password})(req.body, function(err, res){
+     try{
+         console.log("geht " +res)
+         res.send("User "+ req.body.username +" exists")
+     }catch(err){
+         console.log(err)
+     }
+     
+ })
 
-    console.log(res)
+ console.log(res)
 */
 
 
-   
+
 
 //nur zum testen
 app.post("/delete", function (req, res) {
