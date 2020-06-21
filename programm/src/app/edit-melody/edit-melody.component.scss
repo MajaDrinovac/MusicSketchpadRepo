@@ -9,6 +9,27 @@ $height-sketchpad: 100vh;
     overflow-y: hidden;
 }
 
+#sketchpad {
+  //margin-left: -90px;
+  height: $height-sketchpad;
+  width: $width-sketchpad;
+  background: #f6f6f6;
+}
+
+#control{
+  width: 100vw;
+  height: auto;
+}
+
+.saveBtn{
+  float:right;
+  margin-right: 2vw;
+}
+
+.controls{
+  align-content: flex-end;
+}
+
 mat-card{
   padding: 0;
   width: 63vw;
