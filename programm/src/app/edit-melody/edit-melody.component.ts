@@ -15,7 +15,7 @@ export class EditMelodyComponent implements OnInit {
   private edit:p5
   public tracks
   private state = ""
-  public color = ""
+  public color = "#000000"
   private trackNum = 0
   private model
   private width

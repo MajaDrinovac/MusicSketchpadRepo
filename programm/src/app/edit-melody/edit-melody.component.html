@@ -39,7 +39,7 @@
     <mat-grid-tile colspan="2">
         <mat-list>
             <mat-list-item *ngFor="let track of tracks; let i = index" class="btn">
-                <button mat-fab color="accent" (click)="displayTrack(i)">{{i}}</button>
+                <button mat-fab [style.color]="data.editMelody.color_instrument[i].color" color="" (click)="displayTrack(i)">{{i}}</button>
             </mat-list-item>
         </mat-list>
         <button mat-fab color="none" (click)="displayMelodyPoints()" id="allBtn">All</button>
